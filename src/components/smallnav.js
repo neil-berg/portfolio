@@ -21,12 +21,12 @@ const Nav = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px grey solid;
-    border-bottom: 1px grey solid;
+    border-top: 1px var(--grey) solid;
+    border-bottom: 1px var(--grey) solid;
 
     li {
       flex: 1;
-      color: grey;
+      color: var(--grey);
     }
 
     li a {
@@ -37,7 +37,7 @@ const Nav = styled.nav`
 
       .link-icon {
         font-size: 1.25rem;
-        color: grey;
+        color: var(--grey);
       }
 
       .link-icon.selected {
@@ -51,7 +51,7 @@ const Nav = styled.nav`
     }
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 650px) {
     display: none;
   }
 `

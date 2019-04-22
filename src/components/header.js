@@ -35,9 +35,10 @@ const StyledHeader = styled.header`
       li {
         padding: 0 0.5rem 0.25rem 0.5rem;
         margin: 0 0.5rem;
-        //font-weight: bold;
+        color: var(--white);
+        font-size: 1.3em;
         &:hover {
-          color: grey;
+          color: var(--grey);
         }
       }
 
@@ -58,14 +59,14 @@ const StyledHeader = styled.header`
     }
   }
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 650px) {
     h1 {
       text-align: left;
       &:hover {
         color: var(--red);
       }
       &:hover .slash {
-        color: var(--black);
+        color: var(--white);
       }
     }
 
