@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 
-import Dropdown from "./dropdown"
+import SmallNav from "./smallnav"
 import { StyledLink } from "../styles/link.css"
 
 const StyledHeader = styled.header`
@@ -29,21 +29,19 @@ const StyledHeader = styled.header`
     ul {
       display: flex;
       list-style-type: none;
-    }
 
-    ul li {
-      padding: 0 0.5rem 0.25rem 0.5rem;
-      margin: 0 0.5rem;
-      font-weight: bold;
-      transition: border 0.3s linear;
-      border-bottom: none;
-      &:hover {
+      li {
+        padding: 0 0.5rem 0.25rem 0.5rem;
+        margin: 0 0.5rem;
+        font-weight: bold;
+        &:hover {
+          color: grey;
+        }
+      }
+
+      li.selected {
         color: var(--red);
       }
-    }
-
-    ul li.selected {
-      border-bottom: 1px var(--red) solid;
     }
   }
 
@@ -87,6 +85,10 @@ const Header = ({ location }) => {
       path: "/blog",
     },
     {
+      name: "about",
+      path: "/about",
+    },
+    {
       name: "contact",
       path: "/contact",
     },
@@ -114,7 +116,7 @@ const Header = ({ location }) => {
           <ul>{renderNavList}</ul>
         </nav>
       </StyledHeader>
-      <Dropdown />
+      <SmallNav location={location} />
     </React.Fragment>
   )
 }
