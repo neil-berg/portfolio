@@ -38,11 +38,11 @@ module.exports = {
       options: {
         fonts: [
           {
-            family: "Open Sans",
+            family: "Noto Sans",
             variants: [`400`, `700`],
           },
           {
-            family: "Didact Gothic",
+            family: "Inconsolata",
             variants: [`400`],
           },
         ],

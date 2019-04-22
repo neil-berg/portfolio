@@ -7,7 +7,7 @@ const About = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="About" />
-      <h1>About Page</h1>
+      <h2>About Page</h2>
     </Layout>
   )
 }

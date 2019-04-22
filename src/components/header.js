@@ -11,9 +11,11 @@ const StyledHeader = styled.header`
   padding: 0.5rem 1rem;
   max-width: 800px;
   margin: 0 auto;
+  z-index: 999;
 
   h1 {
     color: var(--black);
+    color: var(--white);
     flex: 1;
     text-align: center;
   }
@@ -33,7 +35,7 @@ const StyledHeader = styled.header`
       li {
         padding: 0 0.5rem 0.25rem 0.5rem;
         margin: 0 0.5rem;
-        font-weight: bold;
+        //font-weight: bold;
         &:hover {
           color: grey;
         }

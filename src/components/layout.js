@@ -5,11 +5,11 @@ import Header from "./header"
 import Footer from "./footer"
 import "../styles/layout.css"
 
-const Layout = ({ children, location }) => (
+const Layout = ({ children, location, showFooter = true }) => (
   <div>
     <Header location={location} />
     <main>{children}</main>
-    <Footer />
+    {showFooter ? <Footer /> : null}
   </div>
 )
 

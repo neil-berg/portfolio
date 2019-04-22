@@ -1,8 +1,13 @@
 import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+
+const Container = styled.div`
+  background: var(--white);
+`
 
 const Blog = ({ location }) => {
   const data = useStaticQuery(graphql`
@@ -38,8 +43,10 @@ const Blog = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="Blog" />
-      <h2>Berg's Words</h2>
-      <ul>{postList}</ul>
+      <Container>
+        <h2>Berg's Words</h2>
+        <ul>{postList}</ul>
+      </Container>
     </Layout>
   )
 }

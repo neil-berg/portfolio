@@ -21,13 +21,12 @@ const Nav = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 1px var(--black) solid;
-    border-bottom: 1px var(--black) solid;
+    border-top: 1px grey solid;
+    border-bottom: 1px grey solid;
 
     li {
       flex: 1;
-      //font-weight: bold;
-      color: var(--black);
+      color: grey;
     }
 
     li a {
@@ -38,11 +37,16 @@ const Nav = styled.nav`
 
       .link-icon {
         font-size: 1.25rem;
-        color: var(--black);
+        color: grey;
       }
 
       .link-icon.selected {
-        color: var(--red);
+        color: var(--white);
+      }
+
+      .link-text.selected {
+        font-weight: bold;
+        color: var(--white);
       }
     }
   }
@@ -88,7 +92,15 @@ const SmallNav = ({ location }) => {
             }
             icon={item.icon}
           />
-          <span className="link-text">{item.name}</span>
+          <span
+            className={
+              item.path.split("/")[1] === currentPath
+                ? "link-text selected"
+                : "link-text"
+            }
+          >
+            {item.name}
+          </span>
         </StyledLink>
       </li>
     )
