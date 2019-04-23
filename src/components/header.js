@@ -14,14 +14,13 @@ const StyledHeader = styled.header`
   z-index: 999;
 
   h1 {
-    color: var(--black);
-    color: var(--white);
+    color: var(--oatmeal);
     flex: 1;
     text-align: center;
   }
 
   .slash {
-    color: var(--red);
+    color: var(--lightred);
     transition: color 0.2s linear;
   }
 
@@ -35,7 +34,7 @@ const StyledHeader = styled.header`
       li {
         padding: 0 0.5rem 0.25rem 0.5rem;
         margin: 0 0.5rem;
-        color: var(--white);
+        color: var(--oatmeal);
         font-size: 1.3em;
         &:hover {
           color: var(--grey);
@@ -43,7 +42,7 @@ const StyledHeader = styled.header`
       }
 
       li.selected {
-        color: var(--red);
+        color: var(--lightred);
       }
     }
   }
@@ -51,7 +50,6 @@ const StyledHeader = styled.header`
   .nav-small {
     display: block;
     width: 100vw;
-    border: 1px red solid;
 
     ul {
       display: flex;
@@ -63,10 +61,10 @@ const StyledHeader = styled.header`
     h1 {
       text-align: left;
       &:hover {
-        color: var(--red);
+        color: var(--lightred);
       }
       &:hover .slash {
-        color: var(--white);
+        color: var(--oatmeal);
       }
     }
 

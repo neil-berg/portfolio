@@ -41,12 +41,12 @@ const Nav = styled.nav`
       }
 
       .link-icon.selected {
-        color: var(--white);
+        color: var(--lightred);
       }
 
       .link-text.selected {
         font-weight: bold;
-        color: var(--white);
+        color: var(--lightred);
       }
     }
   }
