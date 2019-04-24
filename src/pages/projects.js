@@ -1,33 +1,64 @@
 import React from "react"
-import { Link } from "gatsby"
+import styled from "styled-components"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { data } from "../data/projects"
+import { StyledLink } from "../styles/link.css"
+import { data } from "../data/projectData"
+import { createSlug } from "../helper"
+
+const Container = styled.div`
+  border-top: 1px grey solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+
+  h2 {
+    font-size: 2.25em;
+    text-align: center;
+  }
+
+  ul {
+    list-style-type: none;
+    text-align: center;
+    padding: 1.5rem;
+    line-height: 1.5rem;
+
+    li {
+      display: inline;
+      margin: 0;
+      padding: 0 0.5rem;
+      border-right: 1px var(--white) solid;
+    }
+  }
+`
 
 const Projects = ({ location }) => {
   const projectList = data.map((project, idx) => {
-    const slug = project.title
-      .toLowerCase()
-      .split(" ")
-      .join("-")
+    const slug = createSlug(project)
     return (
-      <div key={idx}>
-        <Link to={`/projects/${slug}`}>
+      <Container key={idx}>
+        <StyledLink to={slug}>
           <h2>{project.title}</h2>
-          <ul>
-            {project.tools.map((tool, idx) => (
-              <li key={idx}>{tool}</li>
-            ))}
-          </ul>
-        </Link>
-      </div>
+        </StyledLink>
+        <ul>
+          {project.tools.map((tool, idx) => (
+            <li key={idx}>{tool}</li>
+          ))}
+        </ul>
+        <div className="links">
+          <a href={project.repoPath}>view code --></a>
+          <StyledLink to={slug}>learn more--></StyledLink>
+        </div>
+      </Container>
     )
   })
   return (
     <Layout location={location}>
       <SEO title="Projects" />
-      <h1>Project Page</h1>
+
       <div>{projectList}</div>
     </Layout>
   )

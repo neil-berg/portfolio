@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   z-index: 999;
 
   h1 {
-    color: var(--oatmeal);
+    color: var(--white);
     flex: 1;
     text-align: center;
   }
@@ -34,7 +34,7 @@ const StyledHeader = styled.header`
       li {
         padding: 0 0.5rem 0.25rem 0.5rem;
         margin: 0 0.5rem;
-        color: var(--oatmeal);
+        color: var(--white);
         font-size: 1.3em;
         &:hover {
           color: var(--grey);
@@ -64,7 +64,7 @@ const StyledHeader = styled.header`
         color: var(--lightred);
       }
       &:hover .slash {
-        color: var(--oatmeal);
+        color: var(--white);
       }
     }
 

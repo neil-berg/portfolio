@@ -1,7 +1,7 @@
 export const data = [
   {
     title: "Movie Mania",
-    date: "2019-04-10",
+    date: "2019-04-13",
     tools: ["React", "Redux", "Styled Components", "Axios", "React-Router"],
     repoPath: "https://github.com/neil-berg/movie-mania",
   },

@@ -5,9 +5,7 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Container = styled.div`
-  background: var(--white);
-`
+const Container = styled.div``
 
 const Blog = ({ location }) => {
   const data = useStaticQuery(graphql`
@@ -36,7 +34,10 @@ const Blog = ({ location }) => {
         <Link to={`/blog/${edge.node.fields.slug}`}>
           <h2>{edge.node.frontmatter.title}</h2>
         </Link>
-        <p>{edge.node.frontmatter.date}</p>
+        <p>
+          {edge.node.frontmatter.date} | {edge.node.timeToRead} mins{" "}
+        </p>
+        <p>{edge.node.excerpt}</p>
       </li>
     )
   })

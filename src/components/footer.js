@@ -12,7 +12,7 @@ const StyledFooter = styled.footer`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--black);
+  border-top: 1px grey solid;
 
   .email {
     text-decoration: none;

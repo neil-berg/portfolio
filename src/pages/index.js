@@ -7,7 +7,7 @@ import SEO from "../components/seo"
 
 const Container = styled.div`
   background: var(--black);
-  color: var(--oatmeal);
+  color: var(--white);
   display: flex;
   flex-direction: column;
   justify-content: center;

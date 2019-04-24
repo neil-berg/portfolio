@@ -13,6 +13,8 @@ export const query = graphql`
         date
       }
       html
+      excerpt
+      timeToRead
     }
   }
 `
@@ -27,8 +29,6 @@ const BlogTemplate = props => {
     <Layout location={props.location}>
       <SEO title={props.data.markdownRemark.frontmatter.title} />
       <h2>Berg's Words</h2>
-      <h3>{props.data.markdownRemark.frontmatter.title}</h3>
-      <p>{props.data.markdownRemark.frontmatter.date}</p>
       <StyledPost
         dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
       />
