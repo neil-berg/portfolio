@@ -42,12 +42,12 @@ const Nav = styled.nav`
       }
 
       .link-icon.selected {
-        color: var(--lightred);
+        color: var(--white);
       }
 
       .link-text.selected {
         font-weight: bold;
-        color: var(--lightred);
+        color: var(--white);
       }
     }
   }

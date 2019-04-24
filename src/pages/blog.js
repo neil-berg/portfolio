@@ -5,7 +5,17 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Container = styled.div``
+const Container = styled.div`
+  padding: 1rem;
+
+  ul {
+    list-style-type: none;
+
+    li {
+      padding: 1rem 0;
+    }
+  }
+`
 
 const Blog = ({ location }) => {
   const data = useStaticQuery(graphql`
