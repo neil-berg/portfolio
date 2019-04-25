@@ -55,7 +55,9 @@ const Blog = ({ location }) => {
     <Layout location={location}>
       <SEO title="Blog" />
       <Container>
-        <h2>Berg's Words</h2>
+        <h2 style={{ textAlign: "center", color: "var(--white)" }}>
+          Berg's Words
+        </h2>
         <ul>{postList}</ul>
       </Container>
     </Layout>
