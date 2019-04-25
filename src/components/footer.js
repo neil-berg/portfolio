@@ -18,7 +18,7 @@ const StyledFooter = styled.footer`
     text-decoration: none;
     color: var(--white);
     font-size: 1.25em;
-    padding: 0.5em 0;
+    padding: 1em 0;
   }
 
   ul {
@@ -30,7 +30,7 @@ const StyledFooter = styled.footer`
     li a {
       color: var(--white);
       font-size: 1.5em;
-      padding: 0.5em;
+      padding: 1em;
     }
   }
 `

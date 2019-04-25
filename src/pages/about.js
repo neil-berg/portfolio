@@ -4,22 +4,27 @@ import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Avatar from "../images/isabelle-wedding-pic.jpg"
+import Avatar from "../images/square_avatar.png"
 
 const Img = styled.img`
   display: block;
-  width: 300px;
+  width: 250px;
   height: auto;
   margin: 0 auto;
+  border-radius: 50%;
 `
 
 const Container = styled.div`
   padding: 1rem;
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 
   section {
     padding: 0.5rem 0;
+
+    p {
+      font-size: 1.2em;
+    }
   }
 
   a {
@@ -33,6 +38,12 @@ const Container = styled.div`
 
     li {
       line-height: 1.3em;
+      font-size: 1.2em;
+      padding: 0.5rem;
+
+      .strong {
+        font-weight: bold;
+      }
     }
   }
 
@@ -51,35 +62,39 @@ const Container = styled.div`
     padding: 0.5rem 0;
     line-height: 1.3em;
   }
+
+  @media screen and (min-width: 650px) {
+    .bio {
+      display: flex;
+      align-items: center;
+
+      .text {
+        padding-left: 2.5rem;
+      }
+    }
+  }
 `
 
 const About = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="About" />
-      <Img src={Avatar} alt="Profile Headshot of Neil Berg" />
       <Container>
         <section className="bio">
-          <h2>Bio</h2>
-          <p>
-            I'm an LA-based front end developer focusing on fast, functional,
-            and resiliant web sites and apps. After years as a climate scientist
-            diving deep into big datasets and creating geospatial
-            visualizations, I decided to blend my passions of coding and
-            communication with my interests in design and style, and pursue a
-            life in web development. Creating spaces in our digital world that
-            are accessible, enjoyale, and realiable has been my driving force
-            ever since. Yoga, guitar, and orange wine balance out my computer
-            time.
-          </p>
-        </section>
-
-        <section className="education">
-          <h2>Education</h2>
-          <ul>
-            <li>PhD Atmospheric and Oceanic Sciences, UCLA, 2015</li>
-            <li>BS Atmospheric and Oceanic Sciences, UW-Madison, 2009</li>
-          </ul>
+          <Img src={Avatar} alt="Profile Headshot of Neil Berg" />
+          <div className="text">
+            <h2>Bio</h2>
+            <p>
+              I'm an LA-based front end developer. After years as a climate
+              scientist crunching big datasets and creating geospatial
+              visualizations, I decided to blend my passions of coding and
+              communication with my interests in design and style, and pursue a
+              life in web development. Creating spaces in our digital world that
+              are accessible, enjoyale, and realiable has been my driving force
+              ever since. Yoga and guitar balance out my computer time.
+            </p>
+            <Link to="/cv">View CV</Link>
+          </div>
         </section>
 
         <section className="technical">
@@ -89,20 +104,36 @@ const About = ({ location }) => {
             currently using:
           </p>
           <ul>
-            <li>JavaScript: ES5/6+, React, Redux, React-Router, Gatsby, D3</li>
             <li>
-              HTML/CSS: HTML5, CSS3, CSS Grid, Flexbox, Styled Components,
-              Material UI, Semantic UI
+              <span className="strong">JavaScript: </span>ES5/6+, React, Redux,
+              React-Router, Gatsby, D3
             </li>
-            <li>Python: Pandas, Numpy, Scipy, Matplotlib, Xarray, Cartopy</li>
-            <li>Debugging: Chrome and Firefox Developer Tools</li>
-            <li>Text editor: VS Code and vim</li>
-            <li>Terminal: iterm2 + Z-shell</li>
+            <li>
+              <span className="strong">HTML/CSS: </span>HTML5, CSS3, CSS Grid,
+              Flexbox, Styled Components, Material UI
+            </li>
+            <li>
+              <span className="strong">Python: </span>Pandas, Numpy, Scipy,
+              Matplotlib, Xarray, Cartopy
+            </li>
+            <li>
+              <span className="strong">Database:</span> Firebase
+            </li>
+            <li>
+              <span className="strong">Debugging: </span> Chrome and Firefox
+              Developer Tools
+            </li>
+            <li>
+              <span className="strong">Text editor: </span> VS Code and vim
+            </li>
+            <li>
+              <span className="strong">Terminal: </span>iterm2 + Z-shell
+            </li>
           </ul>
         </section>
 
         <section className="communication">
-          <h2>Communication skills</h2>
+          <h2>Communication is key</h2>
           <p>
             I have communicated complex technical and quantitative topics to a
             range of audiences, from{" "}
@@ -132,19 +163,19 @@ const About = ({ location }) => {
             >
               several scientific papers
             </a>{" "}
-            and have been featured in national media outlets such as{" "}
+            and have appeared in national media outlets such as{" "}
             <a
               href="https://www.scpr.org/programs/take-two/2019/01/16/19327/"
               target="_blank"
             >
               NPR
             </a>
-            ,{" "}
+            , the{" "}
             <a
               href="https://www.latimes.com/local/lanow/la-me-ln-sierra-nevada-snowpack-20181211-story.html"
               target="_blank"
             >
-              the Los Angeles Times
+              Los Angeles Times
             </a>
             , and{" "}
             <a
