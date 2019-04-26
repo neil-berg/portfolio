@@ -58,7 +58,7 @@ const Container = styled.div`
 
 
     &:hover {
-      background-image: linear-gradient(var(--white) 35%, transparent),
+      background-image: linear-gradient(to right, transparent, var(--white), var(--white), transparent 100%),
        url(${props => props.background});
       background-position: bottom;
       background-size: cover;
