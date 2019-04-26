@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 
+import PageTransition from "gatsby-plugin-page-transitions"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -77,8 +78,9 @@ const Projects = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="Projects" />
-
-      <div>{projectList}</div>
+      <PageTransition>
+        <div>{projectList}</div>
+      </PageTransition>
     </Layout>
   )
 }

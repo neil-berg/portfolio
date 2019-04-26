@@ -17,23 +17,36 @@ module.exports.createPages = async ({ graphql, actions }) => {
   const blogTemplate = path.resolve("./src/templates/blog-template.js")
   const res = await graphql(`
     query {
-      allMarkdownRemark {
+      allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1000
+      ) {
         edges {
           node {
             fields {
               slug
+            }
+            frontmatter {
+              title
             }
           }
         }
       }
     }
   `)
-  res.data.allMarkdownRemark.edges.forEach(edge => {
+  // Create blog posts pages
+  const posts = res.data.allMarkdownRemark.edges
+
+  posts.forEach((post, index) => {
+    const previous = index === posts.length - 1 ? null : posts[index + 1].node
+    const next = index === 0 ? null : posts[index - 1].node
     createPage({
       component: blogTemplate,
-      path: `/blog/${edge.node.fields.slug}`,
+      path: `/blog/${post.node.fields.slug}`,
       context: {
-        slug: edge.node.fields.slug,
+        slug: post.node.fields.slug,
+        previous,
+        next,
       },
     })
   })

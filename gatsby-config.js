@@ -9,6 +9,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-page-transitions`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -46,6 +47,12 @@ module.exports = {
             variants: [`400`],
           },
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: "./src/images/peach-favicon.png",
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

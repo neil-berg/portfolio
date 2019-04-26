@@ -2,6 +2,7 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 
+import PageTransition from "gatsby-plugin-page-transitions"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -20,12 +21,12 @@ const Container = styled.div`
 const Blog = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark {
+      allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
         edges {
           node {
             frontmatter {
               title
-              date
+              date(formatString: "MMMM DD, YYYY")
             }
             html
             excerpt
@@ -54,12 +55,14 @@ const Blog = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="Blog" />
-      <Container>
-        <h2 style={{ textAlign: "center", color: "var(--white)" }}>
-          Berg's Words
-        </h2>
-        <ul>{postList}</ul>
-      </Container>
+      <PageTransition>
+        <Container>
+          <h2 style={{ textAlign: "center", color: "var(--white)" }}>
+            Berg's Words
+          </h2>
+          <ul>{postList}</ul>
+        </Container>
+      </PageTransition>
     </Layout>
   )
 }

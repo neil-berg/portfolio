@@ -24,6 +24,7 @@ const Nav = styled.nav`
     justify-content: space-between;
     border-top: 1px var(--grey) solid;
     border-bottom: 1px var(--grey) solid;
+    background: var(--black);
 
     li {
       flex: 1;

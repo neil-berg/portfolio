@@ -12,6 +12,7 @@ const StyledHeader = styled.header`
   max-width: 800px;
   margin: 0 auto;
   z-index: 999;
+  background: var(--black);
 
   h1 {
     color: var(--white);
@@ -105,7 +106,7 @@ const Header = ({ location }) => {
     )
   })
   return (
-    <React.Fragment>
+    <div style={{ width: "100vw", background: "var(--black)" }}>
       <StyledHeader>
         <h1>
           <StyledLink to="/">
@@ -118,7 +119,7 @@ const Header = ({ location }) => {
         </nav>
       </StyledHeader>
       <SmallNav location={location} />
-    </React.Fragment>
+    </div>
   )
 }
 
