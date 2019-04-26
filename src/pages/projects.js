@@ -8,6 +8,8 @@ import SEO from "../components/seo"
 import { StyledLink } from "../styles/link.css"
 import { data } from "../data/projectData"
 import { createSlug } from "../helper"
+import MovieManiaBackdrop from "../images/movie-mania-backdrop.jpg"
+import NewsFlashBackdrop from "../images/news-flash-backdrop.jpg"
 
 const Container = styled.div`
   border-top: 1px grey solid;
@@ -51,13 +53,38 @@ const Container = styled.div`
       border-bottom: 1px var(--white) solid;
     }
   }
+
+  @media screen and (min-width: 650px) {
+
+
+    &:hover {
+      background-image: linear-gradient(var(--white) 35%, transparent),
+       url(${props => props.background});
+      background-position: bottom;
+      background-size: cover;
+
+      a {
+        color: var(--black);
+      }
+
+      li {
+        color: var(--black);
+        border-right: 1px var(--black) solid;
+      }
+    }
 `
 
 const Projects = ({ location }) => {
   const projectList = data.map((project, idx) => {
     const slug = createSlug(project)
+    let background
+    if (project.title === "Movie Mania") {
+      background = MovieManiaBackdrop
+    } else if (project.title === "News Flash") {
+      background = NewsFlashBackdrop
+    }
     return (
-      <Container key={idx}>
+      <Container key={idx} background={background}>
         <a href={project.path} target="_blank" rel="noopener noreferrer">
           <h2>{project.title}</h2>
         </a>

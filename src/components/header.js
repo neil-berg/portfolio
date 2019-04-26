@@ -110,7 +110,9 @@ const Header = ({ location }) => {
       <StyledHeader>
         <h1>
           <StyledLink to="/">
-            neil <span className="slash">/</span> berg
+            neil
+            <span className="slash"> / </span>
+            berg
           </StyledLink>
         </h1>
 
