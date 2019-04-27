@@ -12,12 +12,17 @@ import MovieManiaBackdrop from "../images/movie-mania-backdrop.jpg"
 import NewsFlashBackdrop from "../images/news-flash-backdrop.jpg"
 
 const Container = styled.div`
-  border-top: 1px grey solid;
+  border-top: 0;
+  border-bottom: 1px grey solid;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+
+  &:last-child {
+    border-bottom: 0;
+  }
 
   h2 {
     font-size: 2.25em;
@@ -35,6 +40,7 @@ const Container = styled.div`
       margin: 0;
       padding: 0 0.5rem;
       border-right: 1px var(--white) solid;
+      transition: color 0.25s ease-in;
     }
 
     li:last-child {
@@ -51,11 +57,15 @@ const Container = styled.div`
       color: var(--white);
       padding-bottom: 2px;
       border-bottom: 1px var(--white) solid;
+      transition: all 0.25s ease-in;
     }
   }
 
   @media screen and (min-width: 650px) {
-
+    
+    &:first-child {
+      border-top: 1px grey solid;
+    }
 
     &:hover {
       background-image: linear-gradient(to right, transparent, var(--white), var(--white), transparent 100%),
@@ -63,13 +73,16 @@ const Container = styled.div`
       background-position: bottom;
       background-size: cover;
 
-      a {
-        color: var(--black);
-      }
-
       li {
         color: var(--black);
         border-right: 1px var(--black) solid;
+      }
+
+      .links {
+        a {
+          color: var(--black);
+          border-bottom: 1px var(--black) solid;
+        }
       }
     }
 `
@@ -77,14 +90,17 @@ const Container = styled.div`
 const Projects = ({ location }) => {
   const projectList = data.map((project, idx) => {
     const slug = createSlug(project)
-    let background
-    if (project.title === "Movie Mania") {
-      background = MovieManiaBackdrop
-    } else if (project.title === "News Flash") {
-      background = NewsFlashBackdrop
+
+    const backgrounds = {
+      "Movie Mania": MovieManiaBackdrop,
+      "News Flash": NewsFlashBackdrop,
     }
+
     return (
-      <Container key={idx} background={background}>
+      <Container
+        key={idx}
+        background={backgrounds[project.title] || MovieManiaBackdrop}
+      >
         <a href={project.path} target="_blank" rel="noopener noreferrer">
           <h2>{project.title}</h2>
         </a>

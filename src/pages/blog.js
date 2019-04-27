@@ -11,9 +11,19 @@ const Container = styled.div`
 
   ul {
     list-style-type: none;
+    max-width: 800px;
+    margin: 0 auto;
 
     li {
       padding: 1rem 0;
+
+      h2 {
+        font-size: 1.5em;
+      }
+
+      p.date-read {
+        padding: 0.25rem 0 1rem 0;
+      }
     }
   }
 `
@@ -27,6 +37,7 @@ const Blog = ({ location }) => {
             frontmatter {
               title
               date(formatString: "MMMM DD, YYYY")
+              description
             }
             html
             excerpt
@@ -45,10 +56,10 @@ const Blog = ({ location }) => {
         <Link to={`/blog/${edge.node.fields.slug}`}>
           <h2>{edge.node.frontmatter.title}</h2>
         </Link>
-        <p>
+        <p className="date-read">
           {edge.node.frontmatter.date} | {edge.node.timeToRead} mins{" "}
         </p>
-        <p>{edge.node.excerpt}</p>
+        <p className="description">{edge.node.frontmatter.description}</p>
       </li>
     )
   })

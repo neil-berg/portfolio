@@ -31,14 +31,15 @@ const Container = styled.div`
   a {
     color: var(--white);
     padding-bottom: 2px;
-    border-bottom: 1px white solid;
+    border-bottom: 1px var(--white) solid;
+    transition: all 0.25s linear;
   }
 
   ul {
     list-style-type: none;
 
     li {
-      line-height: 1.3em;
+      line-height: 1em;
       font-size: 1.2em;
       padding: 0.5rem;
 
@@ -73,6 +74,10 @@ const Container = styled.div`
         padding-left: 2.5rem;
       }
     }
+    a:hover {
+      color: var(--grey);
+      border-bottom: 1px var(--grey) solid;
+    }
   }
 `
 
@@ -95,7 +100,6 @@ const About = ({ location }) => {
                 that are accessible, enjoyale, and realiable has been my driving
                 force ever since. Yoga and guitar balance out my computer time.
               </p>
-              <Link to="/cv">View CV</Link>
             </div>
           </section>
 

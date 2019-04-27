@@ -15,7 +15,6 @@ library.add(faCode, faComments, faUserAstronaut, faPhone)
 
 const Nav = styled.nav`
   width: 100vw;
-  margin-bottom: 1rem;
 
   ul {
     list-style-type: none;
