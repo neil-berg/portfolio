@@ -2,6 +2,11 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import styled from "styled-components"
 import PageTransition from "gatsby-plugin-page-transitions"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faLongArrowAltRight,
+  faLongArrowAltLeft,
+} from "@fortawesome/free-solid-svg-icons"
 
 import { StyledLink } from "../styles/link.css"
 import SEO from "../components/SEO"
@@ -16,6 +21,27 @@ export const query = graphql`
       }
       html
     }
+  }
+`
+const NextLink = styled(Link)`
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  .link-icon {
+    margin: 0 0.5rem;
+  }
+`
+
+const PrevLink = styled(Link)`
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .link-icon {
+    margin: 0 0.5rem;
   }
 `
 
@@ -53,16 +79,24 @@ const BlogTemplate = props => {
         <Pagination>
           <li className="next">
             {next && (
-              <StyledLink to={`/blog/${next.fields.slug}`} rel="next">
-                {next.frontmatter.title} →
-              </StyledLink>
+              <NextLink to={`/blog/${next.fields.slug}`} rel="next">
+                <span className="link-text">{next.frontmatter.title}</span>
+                <FontAwesomeIcon
+                  className="link-icon"
+                  icon={faLongArrowAltRight}
+                />
+              </NextLink>
             )}
           </li>
           <li className="previous">
             {previous && (
-              <StyledLink to={`/blog/${previous.fields.slug}`} rel="prev">
-                ← {previous.frontmatter.title}
-              </StyledLink>
+              <PrevLink to={`/blog/${previous.fields.slug}`} rel="prev">
+                <FontAwesomeIcon
+                  className="link-icon"
+                  icon={faLongArrowAltLeft}
+                />
+                <span className="link-text">{previous.frontmatter.title}</span>
+              </PrevLink>
             )}
           </li>
         </Pagination>
