@@ -8,7 +8,7 @@ import {
   faLongArrowAltLeft,
 } from "@fortawesome/free-solid-svg-icons"
 
-import { StyledLink } from "../styles/link.css"
+import { StyledPost } from "../styles/post.css"
 import SEO from "../components/SEO"
 import Layout from "../components/layout"
 
@@ -43,12 +43,6 @@ const PrevLink = styled(Link)`
   .link-icon {
     margin: 0 0.5rem;
   }
-`
-
-const StyledPost = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
 `
 
 const Pagination = styled.ul`
