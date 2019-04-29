@@ -1,25 +1,24 @@
 ---
-title: "A Counter Four Ways"
-date: "2019-01-15"
-description: "A simple counter app served four ways: vanilla JS, React, React-Redux, and React-Context"
+title: "A Counter Three Ways"
+date: "2019-04-15"
+description: "A simple counter app served three ways: vanilla JS, React, and React-Redux"
 ---
 
-## A Counter Four Ways
+## A Counter Served Three Ways
 
-**January 15, 2019**
+**April 15, 2019**
 
 When learning new languages, frameworks, and other tools to build apps, I find it helpful to have side-by-side code comparisons of how to execute a given task. It doesn't have to be fancy, a simple counter app will do.
 
-As such, this post will demonstrate how to create a counter app in four methods:
+As such, this post will demonstrate how to create a counter app in three methods:
 
 1. Library-free vanilla JS
-2. React with no state management
-3. React with Redux state management
-4. React with Context (+ Hooks) state management
+2. React
+3. React + Redux
 
 ### 1. Library-free vanilla JS
 
-Accessing the DOM using plain old JavaScript is as easy and necessary as ever right now. No need for bulky libraries like jQuery anymore, we can reach into and manipulate the DOM using a wealth of interfaces, perhaps most commonly the [Document API](https://developer.mozilla.org/en-US/docs/Web/API/Document).
+Accessing the DOM using plain old JavaScript is as easy and necessary as ever right now. No need for bulky libraries like jQuery anymore, we can reach into and manipulate the DOM using a wealth of interfaces, critically the [Document API](https://developer.mozilla.org/en-US/docs/Web/API/Document).
 
 #### HTML
 
@@ -75,7 +74,7 @@ No need to create separate functions to increment and decrement the count. Inste
 
 Simple as that!
 
-### 2. React without state management
+### 2. React
 
 Let's first create a React class component called `App` where the count value and total number of clicks are maintained in state:
 
@@ -138,11 +137,11 @@ render() {
 
 Voila!
 
-### 3. React with Redux state management
+### 3. React + Redux
 
 Of course using Redux for something as simple as a counter is beyond overkill. However, creating a Redux store, dispatching actions, updating state with reducers, and connecting components to the store are still nicely illustrated here.
 
-First, install redux and the redux binder to react, react-redux, using `npm install --save redux react-redux`.
+First, install redux and the redux binder to react, [react-redux](https://react-redux.js.org/), using `npm install --save redux react-redux`.
 
 Let's also see the app's architecture to orient ourselves before diving into the code. There are many ways to organize your directories and files, but this is my preferred structure that scales easily as your app grows.
 
@@ -165,9 +164,9 @@ We have three sub-directions in `src`:
 
 2. `components` contains React components, but these components no longer need to maintain state (at least application-level state).
 
-3. `reducers` contains individual files pertaining to unique slices of the application state (e.g. `count` and `clicks`) and an `index.js` file to combine and export our reducers into a reducer to create the store.
+3. `reducers` contains individual files pertaining to unique slices of the application state (e.g. `count` and `clicks`) and an `index.js` file to combine and export our reducers into a single root reducer that creates the Redux store.
 
-`index.js` is the root file where we establish our Redux store and hook our `App` component up to the store. Let's take a look at that code:
+`index.js` is the root file where we define our Redux store and top-level `Provider` component:
 
 **-- index.js --**
 
@@ -192,13 +191,13 @@ ReactDOM.render(
 
 There are three new aspects of this code compared to a plain React app:
 
-1. `Provider` is a named exported component from `react-redux` that makes the Redux store (more on that below) available to any nested components wrapped with the `connect()` function (also more on that below). In this case, `<App />` is nested in `<Provider />`, allowing it (and if we had further nested components) access to the Redux store.
+1. `Provider` is a named exported component from react-redux that makes the Redux store available to any nested components wrapped with the `connect()` function. In this case, `<App />` is nested in `<Provider />`, allowing it (and if we had further nested components) access to the Redux store. [More details on Provider](https://react-redux.js.org/api/provider).
 
-2. `createStore` is a named exported function from `redux` that creates a Redux store holding all application state. This function takes in a `reducer` argument (and optionally other arguments, for instance when using middleware for async actions).
+2. `createStore` is a named exported function from redux that creates a [Redux store](https://redux.js.org/api/store) holding all application state. This function takes in a `reducer` argument (and optionally other arguments, for instance when using middleware for async actions). [More details on createStore.](https://redux.js.org/api/createstore)
 
 3. `rootReducer` is a default exported function from `index.js` in the `reducers` directory. This reducer is actually the combined reducer from individual reducers `countReducer.js` and `clicksReducer.js`.
 
-What exactly is a reducer? In Redux, they're functions that take in the state and an action describing how to change that state, and return a new state accordingly.
+What exactly is a [reducer](https://redux.js.org/faq/reducers)? In Redux, they're functions that take in the state and an action describing how to change that state, and return a new state accordingly.
 
 Before looking at the reducer code, let's see what actions are all about here.
 
@@ -268,9 +267,9 @@ export const clicksReducer = (state = 0, action) => {
 
 While a small app like this could have a single reducer to handle all the logic, this quickly becomes unmaintainable as the amount of state and logic grows. Therefore, we split logic in discrete reducers, where each reducer is responsible for handling a slice of state - a slice for the count and a slice for the clicks.
 
-Each reducer takes as arguments a slice of the current state and an action, then based on the action types, updates that slice of state (be careful not directly mutate state!). In case no action type is matched, we default to returning the current state. State is initialized in the arguments with `state = 0`, since both the count and clicks are zero to begin with.
+Each reducer takes as arguments a slice of the current state and an action, then based on the action types, updates that slice of state (be careful not to directly mutate state!). In case no action type is matched, we default to returning the current state. State is initialized in the arguments with `state = 0`, since both the count and clicks are zero to begin with.
 
-Finally, we need to combine each of these _slice reducers_ into a _root reducer_ that the Redux store will ingest, creating a complete state tree for our app. Redux provides a helper function `combineReducers` to do just that.
+Finally, we need to combine each of these _slice reducers_ into a _root reducer_ that the Redux store will ingest, creating a complete state tree for our app. Redux provides a [helper function `combineReducers`](https://redux.js.org/api/combinereducers) to do just that.
 
 **-- /reducers/index.js --**
 
@@ -289,7 +288,7 @@ export default combineReducers({
 
 The `combineReducers` function ingests each of our slice reducers and assigns their output to a property of the app state tree. We'll continue to use `count` and `clicks` as properties of state.
 
-Returning to `src/index.js` we more clearly see that the Redux store is formed by the exported root reducer from the `combineReducers` function. This generates a state object with `count` and `clicks` as properties, which are modified by the `countReducer` and `clicksReducer` once various actions are dispatched.
+Returning to src/index.js, we more clearly see that the Redux store is formed by the exported root reducer from the `combineReducers` function. This generates a state object with `count` and `clicks` as properties, which are modified by the `countReducer` and `clicksReducer` once various actions are dispatched.
 
 Where are those actions dispatched and how do we connect state in our store to our sole `App.js` component? Let's view the code behind `App.js` to answer those questions.
 
@@ -298,7 +297,7 @@ Where are those actions dispatched and how do we connect state in our store to o
 First, we need to import a few new items compared to a basic React component:
 
 - the `connect` function from the react-redux package
-- our three action items
+- our three action creators
 
 <!-- prettier-ignore -->
 ```javascript
@@ -311,10 +310,10 @@ class App extends React.Component {
 }
 ```
 
-We'll get to the rendered JSX and class methods shortly, first let's deal with the `connect` function. For our purposes, the `connect` function will take in two parameters:
+We'll get to the rendered JSX and class methods shortly, first let's deal with the [`connect` function](https://react-redux.js.org/api/connect). For our purposes, the `connect` function will take in two parameters:
 
-1. A function called `mapStateToProps` where its returned object contains the aspects of state we want made available to the connected component via props
-2. An object containing our actions items (if you wanted to manually dispatch actions, you'd pass in a "mapDispatchToProps" function).
+1. A function called `mapStateToProps` where its returned object contains the aspects of state we want available to the connected component via props
+2. An object containing our actions creators (if you wanted to manually dispatch actions, you'd pass in a "mapDispatchToProps" function).
 
 Here's what `mapStateToProps` and the `connect` function look like:
 
@@ -350,7 +349,7 @@ export default connect(
 
 There we go! `connect` - a higher-order function - takes in `mapStateToProps` and an object containing our action creators, returning another function that wraps our `App` component, ultimately providing `App` with props containing our state and action creators.
 
-With state and action creators available as props, we can create a slightly new `handleClick` method compared to the non-Redux case with nearly identical JSX from before:
+With state and action creators available as props, we can create a slightly modified `handleClick` method compared to the non-Redux case with nearly identical JSX from before:
 
 <!-- prettier-ignore -->
 ```javascript
@@ -402,6 +401,6 @@ export default connect(
 
 ```
 
-Only a few changes from the non-Redux example. First, the `handleClick` method calls our action creators that are then parsed by the root reducer to update state in our store. Second, we access the `count` and `clicks` slices of state via props and not a state object.
+Only a few changes from the non-Redux example. First, the `handleClick` method executes our action creators that are then parsed by the root reducer to update state in our store. Second, we access the `count` and `clicks` slices of state via props instead of a state object.
 
 No doubt that Redux requires a lot of boilerplate code to use, but this simple example shows the elegance and scalability of Redux for more complex uses. No need to prop-drill several layers deep to share state and methods to update state. All that's needed for new features are new actions and reducers, which can be selectively connected to components that need to access them.
