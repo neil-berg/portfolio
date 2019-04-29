@@ -212,58 +212,196 @@ Therefore, we'll need to have three actions that map to the state modification s
 
 **-- /actions/index.js --**
 
+<!-- prettier-ignore -->
 ```javascript
 export const incrementCount = () => {
   return {
-    type: "INCREMENT_COUNT",
-  }
-}
+    type: 'INCREMENT_COUNT'
+  };
+};
 
 export const decrementCount = () => {
   return {
-    type: "DECREMENT_COUNT",
-  }
-}
+    type: 'DECREMENT_COUNT'
+  };
+};
 
 export const incrementClicks = () => {
   return {
-    type: "INCREMENT_CLICKS",
-  }
-}
+    type: 'INCREMENT_CLICKS'
+  };
+};
+
 ```
 
 Here we have three action _creators_ (arrow functional expressions without any arguments in this case) that return _actions_, which are objects with at least a `type` property. The values of this property are capialized by convention and describe how we want to modify pieces of our application state. These actions are ingested by our reducers, so let's finally dive into their code.
 
 **-- /reducers/countReducer.js --**
 
+<!-- prettier-ignore -->
 ```javascript
 export const countReducer = (state = 0, action) => {
   switch (action.type) {
-    case "INCREMENT_COUNT":
-      return state + 1
-    case "DECREMENT_COUNT":
-      return state - 1
+    case 'INCREMENT_COUNT':
+      return state + 1;
+    case 'DECREMENT_COUNT':
+      return state - 1;
     default:
-      return state
+      return state;
   }
-}
+};
 ```
 
-A function `countReducer` is defined that takes in two arguments: `state` and an `action`. It can be confusing that `state` is used as the argument here - this refers to a slice of our application state, not the entire state tree itself. You could instead use something like `count = 0`, for instance, though `state` in frequently employed as the argument to reducers.
+**-- /reducers/clicksReducer.js --**
 
-An alternative approach is creating an `initialState` object that is then passed as the initial value to `state`.
-
+<!-- prettier-ignore -->
 ```javascript
-const initialState = {
-  count: 0,
-  clicks: 0
-}
-
-export const countReducer = (state = initialState, action) => {
+export const clicksReducer = (state = 0, action) => {
   switch (action.type) {
-    case "INCREMENT_COUNT"
-      return {...initialState, count: initialState.count + 1};
+    case 'INCREMENT_CLICKS':
+      return state + 1;
+    default:
+      return state;
+  }
+};
+```
+
+While a small app like this could have a single reducer to handle all the logic, this quickly becomes unmaintainable as the amount of state and logic grows. Therefore, we split logic in discrete reducers, where each reducer is responsible for handling a slice of state - a slice for the count and a slice for the clicks.
+
+Each reducer takes as arguments a slice of the current state and an action, then based on the action types, updates that slice of state (be careful not directly mutate state!). In case no action type is matched, we default to returning the current state. State is initialized in the arguments with `state = 0`, since both the count and clicks are zero to begin with.
+
+Finally, we need to combine each of these _slice reducers_ into a _root reducer_ that the Redux store will ingest, creating a complete state tree for our app. Redux provides a helper function `combineReducers` to do just that.
+
+**-- /reducers/index.js --**
+
+<!-- prettier-ignore -->
+```javascript
+import { combineReducers } from 'redux';
+
+import { countReducer } from './countReducer';
+import { clicksReducer } from './clicksReducer';
+
+export default combineReducers({
+  count: countReducer,
+  clicks: clicksReducer
+});
+```
+
+The `combineReducers` function ingests each of our slice reducers and assigns their output to a property of the app state tree. We'll continue to use `count` and `clicks` as properties of state.
+
+Returning to `src/index.js` we more clearly see that the Redux store is formed by the exported root reducer from the `combineReducers` function. This generates a state object with `count` and `clicks` as properties, which are modified by the `countReducer` and `clicksReducer` once various actions are dispatched.
+
+Where are those actions dispatched and how do we connect state in our store to our sole `App.js` component? Let's view the code behind `App.js` to answer those questions.
+
+**-- /components/App.js --**
+
+First, we need to import a few new items compared to a basic React component:
+
+- the `connect` function from the react-redux package
+- our three action items
+
+<!-- prettier-ignore -->
+```javascript
+import React from 'react';
+import { connect } from 'react-redux';
+import { incrementCount, decrementCount, incrementClicks } from '../actions';
+
+class App extends React.Component {
+  // ...
+}
+```
+
+We'll get to the rendered JSX and class methods shortly, first let's deal with the `connect` function. For our purposes, the `connect` function will take in two parameters:
+
+1. A function called `mapStateToProps` where its returned object contains the aspects of state we want made available to the connected component via props
+2. An object containing our actions items (if you wanted to manually dispatch actions, you'd pass in a "mapDispatchToProps" function).
+
+Here's what `mapStateToProps` and the `connect` function look like:
+
+<!-- prettier-ignore -->
+```javascript
+
+class App extends React.Component {
+
+  // placeholder for handleClick method
+  
+  render() {
+    return (
+      // placeholder for JSX
+    )
+  }
+
+const mapStateToProps = state => {
+  return {
+    count: state.count,
+    clicks: state.clicks
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    incrementCount,
+    decrementCount,
+    incrementClicks
+  }
+)(App);
+```
+
+There we go! `connect` - a higher-order function - takes in `mapStateToProps` and an object containing our action creators, returning another function that wraps our `App` component, ultimately providing `App` with props containing our state and action creators.
+
+With state and action creators available as props, we can create a slightly new `handleClick` method compared to the non-Redux case with nearly identical JSX from before:
+
+<!-- prettier-ignore -->
+```javascript
+class App extends React.Component {
+  handleClick = e => {
+    e.target.classList.contains('increment')
+      ? this.props.incrementCount()
+      : this.props.decrementCount();
+
+    this.props.incrementClicks();
+  };
+
+  render() {
+    return (
+      <div className="container">
+        <h2>Counter: React-Redux</h2>
+        <div className="counter">
+          <button className="btn decrement" onClick={this.handleClick}>
+            -
+          </button>
+          <span className="count">{this.props.count}</span>
+          <button className="btn increment" onClick={this.handleClick}>
+            +
+          </button>
+        </div>
+        <p>
+          Total clicks: <span className="click-count">{this.props.clicks}</span>
+        </p>
+      </div>
+    );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    count: state.count,
+    clicks: state.clicks
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {
+    incrementCount,
+    decrementCount,
+    incrementClicks
+  }
+)(App);
+
 ```
+
+Only a few changes from the non-Redux example. First, the `handleClick` method calls our action creators that are then parsed by the root reducer to update state in our store. Second, we access the `count` and `clicks` slices of state via props and not a state object.
+
+No doubt that Redux requires a lot of boilerplate code to use, but this simple example shows the elegance and scalability of Redux for more complex uses. No need to prop-drill several layers deep to share state and methods to update state. All that's needed for new features are new actions and reducers, which can be selectively connected to components that need to access them.

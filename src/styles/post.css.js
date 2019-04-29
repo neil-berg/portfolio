@@ -25,7 +25,8 @@ export const StyledPost = styled.div`
     line-height: 1.3em;
   }
 
-  ol {
+  ol,
+  ul {
     margin-left: 2rem;
 
     li {
