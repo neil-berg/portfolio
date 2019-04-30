@@ -10,6 +10,7 @@ import { data } from "../data/projectData"
 import { createSlug } from "../helper"
 import MovieManiaBackdrop from "../images/movie-mania-backdrop.jpg"
 import NewsFlashBackdrop from "../images/news-flash-backdrop.jpg"
+import MeredithLackeyBackdrop from "../images/meredith-lackey-backdrop.jpg"
 
 const Container = styled.div`
   border-top: 0;
@@ -94,6 +95,7 @@ const Projects = ({ location }) => {
     const backgrounds = {
       "Movie Mania": MovieManiaBackdrop,
       "News Flash": NewsFlashBackdrop,
+      "Meredith Lackey": MeredithLackeyBackdrop,
     }
 
     return (

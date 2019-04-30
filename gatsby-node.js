@@ -36,12 +36,13 @@ module.exports.createPages = async ({ graphql, actions }) => {
   `)
 
   // Create blog posts pages
+  // Note: posts are in descending order
   const posts = res.data.allMarkdownRemark.edges
-  console.log(posts)
 
   posts.forEach((post, index) => {
     const previous = index === posts.length - 1 ? null : posts[index + 1].node
     const next = index === 0 ? null : posts[index - 1].node
+
     createPage({
       component: blogTemplate,
       path: `/blog/${post.node.fields.slug}`,
