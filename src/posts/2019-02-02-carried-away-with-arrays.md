@@ -30,7 +30,7 @@ const cart = [
 
 [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) is perhaps my most commonly used array method as it creates a new array based on a function applied to each item in the current array, going from left to right.
 
-**Example 1**: it's our lucky day and upon checking out on our site, we're notified that we get 10% off each item. How do we update our cart to reflect the new prices?
+**Example 1**: It's our lucky day and upon checking out, we're notified that we get 10% off each item. How do we update our cart to reflect the new prices?
 
 <!-- prettier-ignore -->
 ```javascript
@@ -38,7 +38,7 @@ const cartWithDiscount = cart.map(item =>
   ({...item, price: item.price * .90 }))
 ```
 
-We define and create a new array by mapping over each item in `cart` and returning a new object where the `price` property on each item is reduced by 10%. I'm making use of arrow functions with an implicit `return` statement here. And I'm also employing the [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to copy each object and then modify its `price` property.
+We declare and create a new array by mapping over each item in `cart` and applying a function that returns a new object where the value of the `price` property on each item is reduced by 10%. I'm making use of arrow functions with an implicit `return` statement here. And I'm also employing the [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to copy each object and then update values of the `price` property.
 
 **Example 2**: We have a coupon for \$5 off items from the "kitchen" department. How do we shave off five bucks from the bowls and plates in our cart?
 
@@ -75,4 +75,71 @@ const onlyClothing = cart.filter(function(item) {
 });
 ```
 
-We more clearly see that a callback function is applied on each `item` such that only items in the clothing department are returned to create a new array. In this case, the new array has a length of 2 since we have 2 clothing items in our original cart.
+We more clearly see that a callback function is applied on each `item` such that only items in the clothing department are returned in the new array. In this case, the new array has a length of 2 since we have 2 clothing items in our original cart.
+
+**Example 2:** We only have $10 to spend on this shopping trip, so how can we identify which items are $10 or less in our cart?
+
+<!-- prettier-ignore -->
+```javascript
+const tenDollarsOrLess = cart.filter(item => item.price <= 10);
+```
+
+As we saw in Example 1, we test each item on a condition - in this case, whether the item's price is $10 or less - and if the item passes that condition, we return it in a new array. Since we have two items that cost $10 or less (hat and frisbee), `tenDollarsOrLess` has a length of two.
+
+####Reduce
+
+As the name suggests, we use [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce) to shrink an array of items down to a single value. Specifically, we execute a defined "reducer" callback function on each array item where the reducer function takes at least these two arguments:
+
+1. Accumulator (often abbreviated as "acc") that gathers or accumulates return values from the callback
+2. Current value (often abbreviated as "curr") that represents the current item being processed in the array
+
+Optionally, the callback can also take arguments pertaining to the current index being processed and the source or original array that `reduce` was called upon.
+
+We also set the initial value of the accumulator in our callback. This can be a number (if we want to sum values in the array), an array itself (if we want to distill array items into another array), an object (if we want to copy array items into a new object), and so forth.
+
+**Example 1:** What is the total cost of items in our cart?
+
+<!-- prettier-ignore -->
+```javascript
+const totalCost = cart.reduce((acc, curr) => acc + curr.price, 0);
+```
+
+Let's break this down. We define our anonymous callback function with two arguments `(acc, curr)`, then execute that callback on each item, extracting the current item's price, and add it to the accumulated cost (which has an inital value of 0).
+
+**Example 2:** We are interested in counting the nunber of items in our cart based on their department value. How do we accomplish this using `reduce`?
+
+<!-- prettier-ignore -->
+```javascript
+const countInstances = cart.reduce((acc, curr) => {
+	if (acc.hasOwnProperty(curr.department)) {
+		acc[curr.department]++;
+	} else {
+		acc[curr.department] = 1;
+	}
+	return acc;
+}, {})
+
+// {clothing: 2, bedroom: 1, kitchen: 2, toys: 1}
+```
+
+Our reducer callback has the usual `acc` and `curr` arguments, though this time the accumulator is initialized as an empty object `{}`. The body of this arrow function is now multiple lines, requiring us to wrap it in curly braces and include an explicit `return` statement. The logic in the function checks whether `acc` (an empty object to start) has a property of the current item's department value. If that property exists (i.e. we already have an item from that department), then we increment the value of that property. If no property exists, we create a new property on `acc` with the current item's department and assign it a value of 1.
+
+**Example 3:** Let's say another piece of our code needs to have the cart transformed to a nested array where the inner array the item's description and price, e.g. `[ ['shirt', 17], ['hat', 8] ]`. How do we accomplish this using `reduce`?
+
+<!-- prettier-ignore -->
+```javascript
+const nestedCartArray = cart.reduce((acc, curr) => 
+  acc.concat([ [curr.description, curr.price] ]), [])
+```
+
+This time our accumulator is an empty array and we concatenate inner arrays to it via the return value in our callback reducer function.
+
+Alternatively, we could have simply used `map` for this transformation:
+
+<!-- prettier-ignore -->
+```javascript
+const nestedCartArrayWithMap = cart.map(item => 
+  [item.description, item.price])
+```
+
+Though this example demonstrates how powerful `reduce` is by containing `map` capabilities and so much more.
