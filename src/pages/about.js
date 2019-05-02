@@ -92,13 +92,14 @@ const About = ({ location }) => {
             <div className="text">
               <h2>Bio</h2>
               <p>
-                I'm an LA-based front end developer. After years as a climate
-                scientist crunching big datasets and creating geospatial
-                visualizations, I decided to blend my passions of coding and
+                I'm an LA-based front end developer. Building on a career in
+                climate science where I specialized in geospatial data analytics
+                and visualizations, I decided to blend my love of coding and
                 communication with my interests in design and style, and pursue
-                a life in web development. Creating spaces in our digital world
-                that are accessible, enjoyale, and realiable has been my driving
-                force ever since. Yoga and guitar balance out my computer time.
+                new opportunities in web development. Creating spaces in our
+                digital world that are accessible, enjoyable, and realiable has
+                become a passion ever since. Yoga and guitar balance out my
+                computer time.
               </p>
             </div>
           </section>
