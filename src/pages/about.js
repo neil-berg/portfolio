@@ -74,6 +74,9 @@ const Container = styled.div`
         padding-left: 2.5rem;
       }
     }
+  }
+
+  @media (hover: hover) {
     a:hover {
       color: var(--grey);
       border-bottom: 1px var(--grey) solid;

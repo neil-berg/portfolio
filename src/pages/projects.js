@@ -41,7 +41,6 @@ const Container = styled.div`
       margin: 0;
       padding: 0 0.5rem;
       border-right: 1px var(--white) solid;
-      transition: color 0.25s ease-in;
     }
 
     li:last-child {
@@ -58,7 +57,6 @@ const Container = styled.div`
       color: var(--white);
       padding-bottom: 2px;
       border-bottom: 1px var(--white) solid;
-      transition: all 0.25s ease-in;
     }
   }
 

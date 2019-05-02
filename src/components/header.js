@@ -61,16 +61,22 @@ const StyledHeader = styled.header`
   @media screen and (min-width: 650px) {
     h1 {
       text-align: left;
-      &:hover {
-        color: var(--lightred);
-      }
-      &:hover .slash {
-        color: var(--white);
-      }
     }
 
     .nav-large {
       display: block;
+    }
+  }
+
+  @media (hover: hover) {
+    h1 {
+      &:hover {
+        color: var(--lightred);
+      }
+
+      &:hover .slash {
+        color: var(--white);
+      }
     }
   }
 `
