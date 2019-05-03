@@ -8,12 +8,25 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-page-transitions`,
+    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/`,
+        name: `src`,
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+            },
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -24,14 +37,8 @@ module.exports = {
               noInlineHighlight: false,
             },
           },
+          `gatsby-remark-static-images`,
         ],
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
       },
     },
     {

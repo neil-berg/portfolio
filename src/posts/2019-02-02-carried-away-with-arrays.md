@@ -265,8 +265,8 @@ Often we'll ask questions on our arrays like "Does at least one item pass some c
 
 <!-- prettier-ignore -->
 ```javascript
-const itemAbove40 = cart.some(item => item.price > 40); // true
-const itemAbove50 = cart.some(item => item.price > 50); // false
+const anyAbove40 = cart.some(item => item.price > 40); // true
+const anyAbove50 = cart.some(item => item.price > 50); // false
 ```
 
 The `some` method uses a callback comparison function to test the truthiness of each item in the array. If _any_ item is truthy, then `true` is returned. If not, then `false` is returned.

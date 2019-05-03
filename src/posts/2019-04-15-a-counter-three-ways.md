@@ -168,7 +168,7 @@ We have three sub-directions in `src`:
 
 `index.js` is the root file where we define our Redux store and top-level `Provider` component:
 
-**-- index.js --**
+**index.js**
 
 ```javascript
 import React from "react"
@@ -191,7 +191,7 @@ ReactDOM.render(
 
 There are three new aspects of this code compared to a plain React app:
 
-1. `Provider` is a named exported component from react-redux that makes the Redux store available to any nested components wrapped with the `connect()` function. In this case, `<App />` is nested in `<Provider />`, allowing it (and if we had further nested components) access to the Redux store. [More details on Provider](https://react-redux.js.org/api/provider).
+1. `Provider` is a named exported component from react-redux that makes the Redux store available to any nested components wrapped with the `connect()` function. In this case, `<App />` is nested in `<Provider>`, allowing it (and if we had further nested components) access to the Redux store. [More details on Provider](https://react-redux.js.org/api/provider).
 
 2. `createStore` is a named exported function from redux that creates a [Redux store](https://redux.js.org/api/store) holding all application state. This function takes in a `reducer` argument (and optionally other arguments, for instance when using middleware for async actions). [More details on createStore.](https://redux.js.org/api/createstore)
 
@@ -209,7 +209,7 @@ Recall that our counter app modifies state in three ways:
 
 Therefore, we'll need to have three actions that map to the state modification statements above.
 
-**-- /actions/index.js --**
+**/actions/index.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -235,7 +235,7 @@ export const incrementClicks = () => {
 
 Here we have three action _creators_ (arrow functional expressions without any arguments in this case) that return _actions_, which are objects with at least a `type` property. The values of this property are capialized by convention and describe how we want to modify pieces of our application state. These actions are ingested by our reducers, so let's finally dive into their code.
 
-**-- /reducers/countReducer.js --**
+**/reducers/countReducer.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -251,7 +251,7 @@ export const countReducer = (state = 0, action) => {
 };
 ```
 
-**-- /reducers/clicksReducer.js --**
+**/reducers/clicksReducer.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -271,7 +271,7 @@ Each reducer takes as arguments a slice of the current state and an action, then
 
 Finally, we need to combine each of these _slice reducers_ into a _root reducer_ that the Redux store will ingest, creating a complete state tree for our app. Redux provides a [helper function `combineReducers`](https://redux.js.org/api/combinereducers) to do just that.
 
-**-- /reducers/index.js --**
+**/reducers/index.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -292,7 +292,7 @@ Returning to src/index.js, we more clearly see that the Redux store is formed by
 
 Where are those actions dispatched and how do we connect state in our store to our sole `App.js` component? Let's view the code behind `App.js` to answer those questions.
 
-**-- /components/App.js --**
+**/components/App.js**
 
 First, we need to import a few new items compared to a basic React component:
 

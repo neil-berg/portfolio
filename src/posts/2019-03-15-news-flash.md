@@ -14,6 +14,8 @@ Looking for a way to sharpen my React knowledge while maintaining a daily dose o
 
 [News Flash](https://news-flash.netlify.com/) is the outcome.
 
+![News Flash Overview](./post-assets/news-flash-overview.gif)
+
 ###Data source and fetching
 
 The [NYT API](https://developer.nytimes.com/) is free to any developer after registering for an API key on their site. The team manages about a dozen APIs, notably:
@@ -295,7 +297,7 @@ const Story = styled.div`
 `
 ```
 
-Back in our `TopStories` component, we first create a list of these story cards based on the data stored in state and then wrap that list of story cards in another stlyed component called `StoryWrapper`.
+Back in our `TopStories` component, we first create a list of these story cards based on the data stored in state and then wrap that list of story cards in another styled component called `StoryWrapper`.
 
 `StoryWrapper` is another grid that responsively lays out each story card by auto-fitting columns of fixed 300px. A screen width of 400px would yield a single column of story cards, a width of 650px would yields two columns, and so forth. It's amazing how much layout control you can get from these four lines of CSS in our styled component:
 
@@ -310,3 +312,5 @@ const StoryWrapper = styled.div`
 ```
 
 Since we force all of our grid items (story cards) to have a fixed width of 300px, the total size of the grid is often less than the size of its grid container (i.e it doesn't fill up the entire page width). Therefore, we use the `justify-content: center` property to center the grid within the page along the row axis.
+
+![News Flash Responsive Layout](./post-assets/news-flash-responsive-layout.gif)
