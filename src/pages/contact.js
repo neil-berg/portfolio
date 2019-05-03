@@ -27,10 +27,12 @@ const Container = styled.div`
     list-style-type: none;
     margin-top: 2rem;
 
-    li {
+    li a {
+      color: var(--white);
       padding: 1rem 0;
       display: flex;
       align-items: center;
+      transition: color 0.2s linear;
 
       .contact-icon {
         font-size: 1.5em;
@@ -40,6 +42,12 @@ const Container = styled.div`
         padding: 0 1rem;
         font-size: 1.2em;
       }
+    }
+  }
+
+  @media (hover: hover) {
+    li a:hover {
+      color: var(--lightred);
     }
   }
 `
@@ -53,20 +61,28 @@ const Contact = ({ location }) => {
           <p>Interested in working together? I'd love to hear from you. </p>
           <ul>
             <li>
-              <FontAwesomeIcon className="contact-icon" icon={faEnvelope} />
-              <span className="contact-text">Email</span>
+              <a className="email" href="mailto:neil.berg14@gmail.com">
+                <FontAwesomeIcon className="contact-icon" icon={faEnvelope} />
+                <span className="contact-text">Email</span>
+              </a>
             </li>
             <li>
-              <FontAwesomeIcon className="contact-icon" icon={faGithub} />
-              <span className="contact-text">Github</span>
+              <a href="https://github.com/neil-berg">
+                <FontAwesomeIcon className="contact-icon" icon={faGithub} />
+                <span className="contact-text">Github</span>
+              </a>
             </li>
             <li>
-              <FontAwesomeIcon className="contact-icon" icon={faTwitter} />
-              <span className="contact-text">Twitter</span>
+              <a href="https://twitter.com/_neilberg">
+                <FontAwesomeIcon className="contact-icon" icon={faTwitter} />
+                <span className="contact-text">Twitter</span>
+              </a>
             </li>
             <li>
-              <FontAwesomeIcon className="contact-icon" icon={faLinkedin} />
-              <span className="contact-text">LinkedIn</span>
+              <a href="https://www.linkedin.com/in/neil-berg-43135b55/">
+                <FontAwesomeIcon className="contact-icon" icon={faLinkedin} />
+                <span className="contact-text">LinkedIn</span>
+              </a>
             </li>
           </ul>
         </Container>

@@ -28,9 +28,16 @@ const NextLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  transition: color 0.2s linear;
 
   .link-icon {
     margin: 0 0.5rem;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--lightred);
+    }
   }
 `
 
@@ -39,9 +46,16 @@ const PrevLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  transition: color 0.2s linear;
 
   .link-icon {
     margin: 0 0.5rem;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      color: var(--lightred);
+    }
   }
 `
 

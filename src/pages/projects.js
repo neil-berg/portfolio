@@ -81,6 +81,7 @@ const Container = styled.div`
         a {
           color: var(--black);
           border-bottom: 1px var(--black) solid;
+          transition: color 0.2s linear;
         }
       }
     }

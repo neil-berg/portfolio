@@ -19,6 +19,7 @@ const StyledFooter = styled.footer`
     color: var(--white);
     font-size: 1.25em;
     padding: 1em 0;
+    transition: color 0.2s linear;
   }
 
   ul {
@@ -31,6 +32,14 @@ const StyledFooter = styled.footer`
       color: var(--white);
       font-size: 1.5em;
       padding: 1em;
+      transition: color 0.2s linear;
+    }
+  }
+
+  @media (hover: hover) {
+    .email:hover,
+    li a:hover {
+      color: var(--lightred);
     }
   }
 `

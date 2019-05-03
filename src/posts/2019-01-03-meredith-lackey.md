@@ -4,7 +4,7 @@ date: "2019-01-03"
 description: "A sleek and minimal filmmaker's portfolio built in React"
 ---
 
-## Project Review: Meredith Lackey
+## Meredith Lackey
 
 **January 3, 2019**
 
@@ -22,9 +22,9 @@ Meredith shared several vintage and modern movie posters that she wanted to inco
 
 The use of thumbnails to create borders in these posters was immediately appealing and aligned naturally with Meredith's film catalogue. The striking solid red landing backdrop in the second poster was another feature we wanted to include in the site.
 
-We ended up using the red from the second poster (#e62020) and paired it with a deep black (#140101) for text and soft white (#fff9f1) for active links and page/image margins. The result is a bold and minimal showcase of Meredith and her work:
+We ended up using the red color from the second poster (#e62020) and paired it with a deep black (#140101) for text and soft white (#fff9f1) for active and hover states and for page/image margins. The result is a bold and minimal showcase of Meredith and her work:
 
-![Meredith Lackey App Overview](./post-assets/meredith-lackey-overview2.gif)
+![Meredith Lackey App Overview](./post-assets/meredith-lackey-overview.gif)
 
 ###Creating the side gallery
 
@@ -234,4 +234,4 @@ class Work extends React.Component {
 }
 ```
 
-Simple as that! I'm currently learning [react-spring](https://www.react-spring.io/) and plan to use that package for future animations and transitions.
+Simple as that! I'm also learning [react-spring](https://www.react-spring.io/) and plan to use that package for future animations and transitions.

@@ -42,10 +42,10 @@ export const StyledPost = styled.div`
     transition: all 0.25s linear;
   }
 
-  @media screen and (min-width: 650px) {
+  @media (hover: hover) {
     a:hover {
-      color: grey;
-      border-bottom: 1px grey solid;
+      color: var(--lightred);
+      border-bottom: 1px var(--lightred) solid;
     }
   }
 `

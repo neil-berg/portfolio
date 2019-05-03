@@ -38,7 +38,7 @@ const StyledHeader = styled.header`
         color: var(--white);
         font-size: 1.3em;
         &:hover {
-          color: var(--grey);
+          color: grey;
         }
       }
 

@@ -139,6 +139,9 @@ const About = ({ location }) => {
               <li>
                 <span className="strong">Terminal: </span>iterm2 + Z-shell
               </li>
+              <li>
+                <span className="strong">Design + prototyping: </span>Figma
+              </li>
             </ul>
           </section>
 
