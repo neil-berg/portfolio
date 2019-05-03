@@ -58,6 +58,10 @@ a {
   text-decoration: none;
   -webkit-text-decoration-skip: objects;
 }
+a.gatsby-resp-image-link,
+a.gatsby-resp-image-link:hover {
+  border: none;
+}
 a:active,
 a:hover {
   outline-width: 0;
