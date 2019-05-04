@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 
 import { StyledPost } from "../styles/post.css"
-import SEO from "../components/SEO"
 import Layout from "../components/layout"
 
 export const query = graphql`
@@ -78,7 +77,7 @@ const BlogTemplate = props => {
   const { previous, next } = props.pageContext
   return (
     <Layout location={props.location}>
-      <SEO title={props.data.markdownRemark.frontmatter.title} />
+      {/* <SEO title={props.data.markdownRemark.frontmatter.title} /> */}
 
       <StyledPost
         dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
