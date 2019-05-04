@@ -8,7 +8,6 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-page-transitions`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-source-filesystem`,

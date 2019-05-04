@@ -1,11 +1,9 @@
 import React from "react"
 import styled from "styled-components"
 
-import PageTransition from "gatsby-plugin-page-transitions"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { StyledLink } from "../styles/link.css"
 import { data } from "../data/projectData"
 import { createSlug } from "../helper"
 import MovieManiaBackdrop from "../images/movie-mania-backdrop.jpg"
@@ -122,9 +120,7 @@ const Projects = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="Projects" />
-      <PageTransition>
-        <div>{projectList}</div>
-      </PageTransition>
+      <div>{projectList}</div>
     </Layout>
   )
 }

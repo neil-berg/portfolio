@@ -2,7 +2,6 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 
-import PageTransition from "gatsby-plugin-page-transitions"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
@@ -66,11 +65,9 @@ const Blog = ({ location }) => {
   return (
     <Layout location={location}>
       <SEO title="Blog" />
-      <PageTransition>
-        <Container>
-          <ul>{postList}</ul>
-        </Container>
-      </PageTransition>
+      <Container>
+        <ul>{postList}</ul>
+      </Container>
     </Layout>
   )
 }

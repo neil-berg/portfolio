@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import styled from "styled-components"
-import PageTransition from "gatsby-plugin-page-transitions"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faLongArrowAltRight,
@@ -80,35 +79,34 @@ const BlogTemplate = props => {
   return (
     <Layout location={props.location}>
       <SEO title={props.data.markdownRemark.frontmatter.title} />
-      <PageTransition>
-        <StyledPost
-          dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
-        />
-        <Pagination>
-          <li className="next">
-            {next && (
-              <NextLink to={`/blog/${next.fields.slug}`} rel="next">
-                <span className="link-text">{next.frontmatter.title}</span>
-                <FontAwesomeIcon
-                  className="link-icon"
-                  icon={faLongArrowAltRight}
-                />
-              </NextLink>
-            )}
-          </li>
-          <li className="previous">
-            {previous && (
-              <PrevLink to={`/blog/${previous.fields.slug}`} rel="prev">
-                <FontAwesomeIcon
-                  className="link-icon"
-                  icon={faLongArrowAltLeft}
-                />
-                <span className="link-text">{previous.frontmatter.title}</span>
-              </PrevLink>
-            )}
-          </li>
-        </Pagination>
-      </PageTransition>
+
+      <StyledPost
+        dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
+      />
+      <Pagination>
+        <li className="next">
+          {next && (
+            <NextLink to={`/blog/${next.fields.slug}`} rel="next">
+              <span className="link-text">{next.frontmatter.title}</span>
+              <FontAwesomeIcon
+                className="link-icon"
+                icon={faLongArrowAltRight}
+              />
+            </NextLink>
+          )}
+        </li>
+        <li className="previous">
+          {previous && (
+            <PrevLink to={`/blog/${previous.fields.slug}`} rel="prev">
+              <FontAwesomeIcon
+                className="link-icon"
+                icon={faLongArrowAltLeft}
+              />
+              <span className="link-text">{previous.frontmatter.title}</span>
+            </PrevLink>
+          )}
+        </li>
+      </Pagination>
     </Layout>
   )
 }
