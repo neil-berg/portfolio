@@ -16,6 +16,7 @@ const Layout = ({ children, location, showFooter = true }) => (
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   location: PropTypes.object.isRequired,
+  showFooter: PropTypes.bool,
 }
 
 export default Layout

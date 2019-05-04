@@ -78,8 +78,8 @@ const Container = styled.div`
 
   @media (hover: hover) {
     a:hover {
-      color: var(--grey);
-      border-bottom: 1px var(--grey) solid;
+      color: var(--lightred);
+      border-bottom: 1px var(--lightred) solid;
     }
   }
 `

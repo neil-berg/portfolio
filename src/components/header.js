@@ -1,6 +1,6 @@
 import React from "react"
-import { Link, graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 
 import SmallNav from "./smallnav"
 import { StyledLink } from "../styles/link.css"
@@ -129,6 +129,10 @@ const Header = ({ location }) => {
       <SmallNav location={location} />
     </div>
   )
+}
+
+Header.propTypes = {
+  location: PropTypes.object.isRequired,
 }
 
 export default Header

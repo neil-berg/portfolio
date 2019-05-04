@@ -1,12 +1,12 @@
 ---
 title: "Project Review: Meredith Lackey"
-date: "2019-01-03"
+date: "2019-02-07"
 description: "A sleek and minimal filmmaker's portfolio built in React"
 ---
 
 ## Meredith Lackey
 
-**January 3, 2019**
+**February 7, 2019**
 
 Meredith Lackey is a talented filmmaker based in Los Angeles, who recently had her latest film Cablestreet premier at the Sundance Film Festival. We collaborated to create a sleek portfolio for her that is built in React.
 

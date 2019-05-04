@@ -68,9 +68,6 @@ const Blog = ({ location }) => {
       <SEO title="Blog" />
       <PageTransition>
         <Container>
-          <h2 style={{ textAlign: "center", color: "var(--white)" }}>
-            Berg's Words
-          </h2>
           <ul>{postList}</ul>
         </Container>
       </PageTransition>

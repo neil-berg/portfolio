@@ -1,12 +1,12 @@
 ---
 title: "A Counter Three Ways"
-date: "2019-04-15"
+date: "2019-01-06"
 description: "A simple counter app served three ways: vanilla JS, React, and React-Redux"
 ---
 
 ## A Counter Served Three Ways
 
-**April 15, 2019**
+**January 6, 2019**
 
 When learning new languages, frameworks, and other tools to build apps, I find it helpful to have side-by-side code comparisons of how to execute a given task. It doesn't have to be fancy, a simple counter app will do.
 

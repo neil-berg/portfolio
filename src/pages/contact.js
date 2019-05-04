@@ -61,7 +61,7 @@ const Contact = ({ location }) => {
           <p>Interested in working together? I'd love to hear from you. </p>
           <ul>
             <li>
-              <a className="email" href="mailto:neil.berg14@gmail.com">
+              <a className="email" href="mailto:neil@neilberg.dev">
                 <FontAwesomeIcon className="contact-icon" icon={faEnvelope} />
                 <span className="contact-text">Email</span>
               </a>

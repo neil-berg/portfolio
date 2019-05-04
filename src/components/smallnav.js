@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import PropTypes from "prop-types"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { library } from "@fortawesome/fontawesome-svg-core"
 import {
@@ -112,6 +113,10 @@ const SmallNav = ({ location }) => {
       <ul>{navList}</ul>
     </Nav>
   )
+}
+
+SmallNav.propTypes = {
+  location: PropTypes.object.isRequired,
 }
 
 export default SmallNav

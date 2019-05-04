@@ -1,12 +1,12 @@
 ---
 title: "Project Review: News Flash"
-date: "2019-03-15"
+date: "2019-04-19"
 description: "React App build on the New York Times API to cruise the latest news, top stories, best sellers, and movie reviews."
 ---
 
 ## News Flash
 
-**March 15, 2019**
+**April 19, 2019**
 
 I read the New York Times online constantly, it serves worldclass journalism and excellent short-form writing all day long. They also have a generous team of developers who maintain a public and data-rich API.
 
