@@ -23,7 +23,7 @@ const Container = styled.div`
   background-size: cover;
 
   p {
-    font-size: 2em;
+    font-size: 1.75em;
     text-align: center;
     color: var(--white);
     transform: translateY(-25px);
@@ -31,6 +31,12 @@ const Container = styled.div`
 
   p:first-child {
     padding-bottom: 2rem;
+  }
+
+  @media screen and (min-width: 650px) {
+    p {
+      font-size: 2em;
+    }
   }
 `
 
