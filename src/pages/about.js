@@ -1,16 +1,14 @@
 import React from "react"
 import styled from "styled-components"
-import { Link } from "gatsby"
+import { Link, graphql, useStaticQuery } from "gatsby"
+import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Avatar from "../images/square_avatar.png"
 
-const Img = styled.img`
+const StyledImg = styled(Img)`
   display: block;
-  width: 250px;
-  height: auto;
-  margin: 0 auto;
+  min-width: 250px;
   border-radius: 50%;
 `
 
@@ -25,6 +23,12 @@ const Container = styled.div`
     p {
       font-size: 1.2em;
     }
+  }
+
+  .bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   a {
@@ -66,7 +70,7 @@ const Container = styled.div`
 
   @media screen and (min-width: 650px) {
     .bio {
-      display: flex;
+      flex-direction: row;
       align-items: center;
 
       .text {
@@ -84,13 +88,27 @@ const Container = styled.div`
 `
 
 const About = ({ location }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      file(relativePath: { eq: "images/square_avatar.png" }) {
+        childImageSharp {
+          fixed(width: 250) {
+            ...GatsbyImageSharpFixed
+          }
+        }
+      }
+    }
+  `)
   return (
     <Layout location={location}>
       <SEO title="About" />
 
       <Container>
         <section className="bio">
-          <Img src={Avatar} alt="Profile Headshot of Neil Berg" />
+          <StyledImg
+            fixed={data.file.childImageSharp.fixed}
+            alt="Avatar of Neil Berg"
+          />
           <div className="text">
             <h2>Bio</h2>
             <p>
