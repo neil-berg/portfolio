@@ -8,9 +8,9 @@ description: "A sleek and minimal filmmaker's portfolio built in React"
 
 **February 7, 2019**
 
-Meredith Lackey is a talented filmmaker based in Los Angeles, who recently had her latest film Cablestreet premier at the Sundance Film Festival. We collaborated to create a sleek portfolio for her that is built in React.
+Meredith Lackey is a filmmaker based in Los Angeles who recently had her latest film Cablestreet premier at the Sundance Film Festival. We collaborated to create a [sleek portfolio](https://mlackey-demo.netlify.com/) for her that is built in React.
 
-[View the portfolio](https://mlackey-demo.netlify.com/)
+[View full code](https://github.com/neil-berg/mlackey)
 
 ### Design
 
@@ -37,7 +37,7 @@ This React app has three general components:
 `SideGallery` needs to know two values to get initialized:
 
 1. What is the viewport height when the app first mounts?
-2. Is the content next to `SideGallery` (i.e. height of `NavBar` + height of main content) taller or shorter than the initial viewport height?
+2. Is the content next to `SideGallery` (i.e. height of `NavBar` + height of main content) taller or shorter than the viewport height?
 
 If the viewport height is taller than the combined height of `NavBar` and the content beneath it, then we know that `SideGallery` should vertically span 100% of the viewport height (aka 100vh).
 
@@ -85,7 +85,7 @@ class Work extends React.Component {
 }
 ```
 
-We then pass `galleryHeight` down as a prop to the `SideGallery` component to set its height (more on that below). Based on the height, we can now determine the number of thumbnail images to display within the gallery. A helper function called `numImages` is created to calculate this quantity:
+We then pass `galleryHeight` down as a prop to the `SideGallery` component to set its height (more on that below). The number of thumbnail images to display within the gallery are then computed based on this height. A helper function called `numImages` is created to calculate this quantity:
 
 **helper.js**
 
@@ -103,11 +103,11 @@ export const numImages = (galleryHeight) => {
 };
 ```
 
-Each thumbnail is a fixed size of 50px x 50px. The total _possible_ number of images is then the rounded-down ratio of the gallery height to each image height (50px). We also need to account for at least a 10px margin between each possible image, equal to `(possibleImages - 1) * 10`. One is subtracted from the number of possible images in this equation since every image minus the last one needs a margin-bottom of at least 10px. (Note: There's already a 10px soft-white margin along the entire gallery.)
+Each thumbnail is a fixed size of 50px x 50px. The total _possible_ number of images is then the rounded-down ratio of the gallery height to each image height (50px). We also need to account for at least a 10px spacing between each possible image, equal to `(possibleImages - 1) * 10`. One is subtracted from the number of possible images in this equation since every image minus the last one needs a margin-bottom of at least 10px. (Note: There's already a 10px soft-white margin along the entire gallery.)
 
-We then translate the total margin spacing needed in the gallery to an equivalent number of images. This is the rounded-up value of the total margin spacing divided by the image size. By subtracting that value from the total possible number of images, we have the correct number of images - accounting for margins - in the gallery.
+The total spacing needed in the gallery is then translated to an equivalent number of excess images that need to be removed from the initial image count. This is the rounded-up value of the total margin spacing divided by the image size. By subtracting that value from the total possible number of images, we have the correct number of images - accounting for margins - in the gallery.
 
-Returning to the `SideGallery` component, we now have all the information needed to populate the gallery with thumbnail images. Since we have to dynamically pull in thumbnails, we can't simply [import the images](https://facebook.github.io/create-react-app/docs/adding-images-fonts-and-files) from a path inside /src. Instead, we need to store the thumbnails in in thr app's /public directory and dynamically create `<img>` tags for each of them.
+Returning to the `SideGallery` component, all the information is now gathered to populate the gallery with thumbnail images. Since thumbnais have to be dynamically pulled in, we can't simply [import the images](https://facebook.github.io/create-react-app/docs/adding-images-fonts-and-files) from a path inside /src. Instead, thumbnails are stored in the app's /public directory and placed in `<img>` tags inside of a `map` statement.
 
 <!-- prettier-ignore -->
 ```
@@ -169,13 +169,13 @@ The final piece of the side gallery is styling it so that:
 
 A [styled component](https://www.styled-components.com/) called `ImageContainer` is used to accomplish this.
 
-Since each thumbnail image is 50px, we set the width of `ImageContainer` to 50px, and include a 10px soft-white margin around the container.
+Since each thumbnail image is 50px, the width of `ImageContainer` is fixed to 50px. A 10px soft-white margin is also placed around the container.
 
-Its height is dictated by the value of `galleryHeight` stored in state, passed to `SideGallery` as a prop, and further passed as a prop to the styled component `ImageContainer`.
+The container's height is dictated by the value of `galleryHeight` stored in state, passed to `SideGallery` as a prop, and further passed as a prop to the styled component `ImageContainer`.
 
-To pin the gallery to the left of the page, we'll position it absolutely in the upper left corner.
+To pin the gallery to the left of the page, it is positioned absolutely in the upper left corner.
 
-Finally, we'll use [flex-box](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) in the column-direction to center each image along the cross-axis (rows in this case) and apply equal spacing between each image along the main-axis (columns in this case).
+Finally, [flex-box](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) is used in the column-direction to center each image along the cross-axis (rows in this case) and apply equal spacing between images along the main-axis (columns in this case).
 
 <!-- prettier-ignore -->
 ```javascript
