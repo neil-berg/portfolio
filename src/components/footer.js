@@ -11,14 +11,15 @@ const StyledFooter = styled.footer`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   border-top: 1px grey solid;
+  height: 110px;
+  padding: 1rem;
 
   .email {
     text-decoration: none;
     color: var(--white);
     font-size: 1.25em;
-    padding: 1em 0;
     transition: color 0.2s linear;
   }
 
@@ -31,7 +32,7 @@ const StyledFooter = styled.footer`
     li a {
       color: var(--white);
       font-size: 1.5em;
-      padding: 1em;
+      padding: 0 1em;
       transition: color 0.2s linear;
     }
   }
