@@ -53,17 +53,29 @@ const Footer = () => {
       </a>
       <ul className="social">
         <li>
-          <a href="https://github.com/neil-berg">
+          <a
+            href="https://github.com/neil-berg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon className="social-icon" icon={faGithub} />
           </a>
         </li>
         <li>
-          <a href="https://twitter.com/_neilberg">
+          <a
+            href="https://twitter.com/_neilberg"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon className="social-icon" icon={faTwitter} />
           </a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/neil-berg-43135b55/">
+          <a
+            href="https://www.linkedin.com/in/neil-berg-43135b55/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <FontAwesomeIcon className="social-icon" icon={faLinkedin} />
           </a>
         </li>

@@ -38,7 +38,7 @@ Here's the HTML for the counter. Two buttons with classes of either `decrement` 
 
 #### JavaScript
 
-Making use of the Document methods [querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) and [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector), variables are first decalred for the buttons, count span, and total click span based on their classes.
+Making use of the Document methods [querySelectorAll](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) and [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector), variables are first declared for the buttons, count span, and total click span based on their classes.
 
 <!-- prettier-ignore -->
 ```javascript

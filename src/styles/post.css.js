@@ -8,7 +8,6 @@ export const StyledPost = styled.div`
   h2 {
     text-align: center;
     padding-bottom: 1rem;
-    text-decoration: underline;
   }
 
   h3 {

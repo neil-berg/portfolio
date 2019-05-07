@@ -52,13 +52,30 @@ const Container = styled.div`
     }
   }
 
-  .technical {
+  .technical,
+  .education {
     ul {
       list-style-type: square;
       margin-left: 1.25rem;
     }
   }
 
+  .experience {
+    ul {
+      li {
+        padding: 0;
+        margin: 1rem 0;
+        p {
+          margin: 0;
+          padding: 0;
+          font-size: 1em;
+        }
+        p.years {
+          padding-left: 1.5rem;
+        }
+      }
+    }
+  }
   h2 {
     border-bottom: 1px grey solid;
   }
@@ -125,36 +142,23 @@ const About = ({ location }) => {
         </section>
 
         <section className="technical">
-          <h2>Technical stack</h2>
+          <h2>Technical skills</h2>
           <p>
-            I'm always learning and open to new technologies. Here's what I'm
+            Always learning and open to new technologies, here's what I'm
             currently using:
           </p>
           <ul>
             <li>
-              <span className="strong">JavaScript: </span>ES5/6+, React, Redux,
-              React-Router, Gatsby, D3
+              <span className="strong">Languages: </span>JavaScript, Python,
+              HTML/CSS
             </li>
             <li>
-              <span className="strong">HTML/CSS: </span>HTML5, CSS3, CSS Grid,
-              Flexbox, Styled Components, Material UI
+              <span className="strong">JS frameworks/libraries </span>React,
+              Redux, React-Router, Gatsby, D3
             </li>
             <li>
-              <span className="strong">Python: </span>Pandas, Numpy, Scipy,
-              Matplotlib, Xarray, Cartopy
-            </li>
-            <li>
-              <span className="strong">Database:</span> Firebase
-            </li>
-            <li>
-              <span className="strong">Debugging: </span> Chrome and Firefox
-              Developer Tools
-            </li>
-            <li>
-              <span className="strong">Text editor: </span> VS Code and vim
-            </li>
-            <li>
-              <span className="strong">Terminal: </span>iterm2 + Z-shell
+              <span className="strong">Python libraries: </span>Pandas, Numpy,
+              Matplotlib, Xarray
             </li>
             <li>
               <span className="strong">Design + prototyping: </span>Figma
@@ -163,7 +167,7 @@ const About = ({ location }) => {
         </section>
 
         <section className="communication">
-          <h2>Communication is key</h2>
+          <h2>Communication skills</h2>
           <p>
             I have communicated complex technical and quantitative topics to a
             range of audiences, from{" "}
@@ -232,6 +236,43 @@ const About = ({ location }) => {
             </a>
             .
           </p>
+        </section>
+        <section className="education">
+          <h2>Education</h2>
+          <ul>
+            <li>PhD Atmospheric and Oceanic Sciences, UCLA</li>
+            <li>MS Atmospheric and Oceanic Sciences, UCLA</li>
+            <li>BS Atmospheric and Oceanic Sciences, UW-Madison</li>
+          </ul>
+        </section>
+        <section className="experience">
+          <h2>Experience</h2>
+          <ul>
+            <li>
+              <p className="title">Freelance web developer</p>
+              <p className="years">2018 - current</p>
+            </li>
+            <li>
+              <p className="title">
+                Co-Associate Director, UCLA Center for Climate Science
+              </p>
+              <p className="years">2017 - current</p>
+            </li>
+            <li>
+              <p className="title">Associate Physical Scientist, RAND</p>
+              <p className="years">2015 - 2017</p>
+            </li>
+            <li>
+              <p className="title">
+                Atmospheric and Data Scientist, Vertum Partners
+              </p>
+              <p className="years">2011 - 2014</p>
+            </li>
+            <li>
+              <p className="title">Graduate Student Researcher, UCLA</p>
+              <p className="years">2009 - 2015</p>
+            </li>
+          </ul>
         </section>
       </Container>
     </Layout>

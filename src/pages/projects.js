@@ -26,6 +26,7 @@ const Container = styled.div`
   h2 {
     font-size: 2.25em;
     text-align: center;
+    border-bottom: 2px solid var(--lightred);
   }
 
   ul {
