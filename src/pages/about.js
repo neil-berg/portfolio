@@ -96,6 +96,7 @@ const Container = styled.div`
     }
   }
 
+  // If touch on device is enabled
   @media (hover: hover) {
     a:hover {
       color: var(--lightred);
@@ -107,7 +108,7 @@ const Container = styled.div`
 const About = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "images/square_avatar.png" }) {
+      file(relativePath: { eq: "images/profile-avatar.jpg" }) {
         childImageSharp {
           fixed(width: 250) {
             ...GatsbyImageSharpFixed
@@ -124,7 +125,7 @@ const About = ({ location }) => {
         <section className="bio">
           <StyledImg
             fixed={data.file.childImageSharp.fixed}
-            alt="Avatar of Neil Berg"
+            alt="Profile avatar of Neil Berg"
           />
           <div className="text">
             <h2>Bio</h2>
@@ -153,7 +154,7 @@ const About = ({ location }) => {
               HTML/CSS
             </li>
             <li>
-              <span className="strong">JS frameworks/libraries </span>React,
+              <span className="strong">JS frameworks/libraries: </span>React,
               Redux, React-Router, Gatsby, D3
             </li>
             <li>
