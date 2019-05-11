@@ -1,7 +1,7 @@
 ---
-title: "Regular expressions for regular people"
+title: "Regular Expressions for Regular People"
 date: "2019-05-28"
-description: Explanations and recipies for useful regular expressions
+description: Explanations and recipes for useful regular expressions
 ---
 
 ## Regular Expressions for Regular People
@@ -75,6 +75,8 @@ There are two ways to test a regular expressions:
 'Los Angeles, California'.replace(/California/, 'CA')
 // "Los Angeles, CA"
 ```
+
+Finally, there is a wonderful online tool called [Regular Expressions 101](https://regex101.com/) that allows for interactive testing of patterns. Explanations are also provided for why matches occurred.
 
 ### Flags
 
@@ -209,7 +211,7 @@ In addition to letters and digits, regular expressions can also be composed with
 
 ### Multiple patterns with "or" operator
 
-The OR operator in regular expressions is defined by the pipe `|`. This allows for a positive match to occur if at least one of multiple patterns are found. One common use of OR in regular expressions is validating area code formats of ### _or_ (###):
+The OR operator in regular expressions is defined by the pipe `|`. This allows for a positive match to occur if at least one of multiple patterns are found.
 
 <!-- prettier-ignore -->
 ```javascript
@@ -293,21 +295,106 @@ Capture groups can also used to replace repeating words in a sentence.
 
 <!-- prettier-ignore -->
 ```javascript
-'My name is is Neil'.replace(/(\w+)\s\1/, '$1');
+'My name name is is Neil'.replace(/(\w+)\s\1/g, '$1');
 // "My name is Neil"
 ```
 
-We first match a word (capture group 1), followed by a space, followed by the value of capture group 1. Then that entire matched text ("is is") is replaced with `$1`, which is the value of capture group 1 ("is").
+The regular expression matches all occurrences of one or more word characters (capture group) followed by a space followed by the value of that capture group. Since the global flag is used, this matches "name name" and "is is". "name" is the value of the capture group in the first match and "is" is the value of the capture group in the second match. `\1` references the value of the capture group inside the regular expression, while `'$1'` references the capture group as the second argument to the `replace` method. Thus, the matched text of "name name" and "is is" is replaced with "name" and "is", respectively.
 
-### Lookaheads
-
-Lookaheads allow for a match only when one pattern is followed (or not) by another pattern. There are two flavors of lookaheads:
-
-1. "Positive lookaheads" using `pattern1(?=pattern2)`:
+Similarly, capture groups can be used to rearrange words in a sentence.
 
 <!-- prettier-ignore -->
 ```javascript
-/\w+\s(?=Berg)/.test('Neil Berg');
+'James Bond'.replace(/(\w+)\s(\w+)/, 'My name is $2, $1 $2');
+// "My name is Bond, James Bond"
+```
+
+The matched text is "James Bond", where "James" is the value of capture group 1 and "Bond" is the value of capture group 2. We replace that matched text with "My name is" followed by the value of capture group 2, a comma, and then the values of capture groups 1 and 2.
+
+### Lookaheads
+
+Lookaheads allow for a match only when one pattern is followed ("positive lookahead") or is not followed ("negative lookahead") by another pattern. Positive lookaheads are created with `pattern1(?=pattern2)` and negative lookaheads are created with `pattern1(?!pattern2)`.
+
+The following examples also introduce the `.` wildcard, which enables a match on any character.
+
+<!-- prettier-ignore -->
+```javascript
+/(.)+(?=Berg)/.test('Neil Berg');
 // True
-// "Berg" follows one or more word characters (Neil) and a whitespace
+// "Berg" follows any one or more characters (Neil )
+```
+
+<!-- prettier-ignore -->
+```javascript
+/(.)+(?!Berg)/.test('Neil Diamond');
+// True
+// "Berg" does not follow any one or more characters
+```
+
+### Example: Password Validation
+
+Suppose we enact the following password rules for a user login:
+
+- must include at least 1 number
+- must include lower and uppercase letters
+- must inclued at least 1 special character (!@#\$%^&)
+- must be at least 8 characters long
+
+These conditions can be represented by the following regular expression:
+
+`/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}/`
+
+Four positive lookaheads are used to check whether anywhere in the text is followed by any character zero or more times and a:
+
+1. digit: `(?=.*\d)`
+2. lowercase letter: `(?=.*[a-z])`
+3. uppercase letter: `(?=.*[A-Z])`
+4. special character: `(?=.*[!@#$%^&*])`
+
+Finally, the text must be at least 8 characters long `.{8,}`
+
+Interestingly, Javascript is not even needed to test regular expressions on text, date, search, url, tel, email, and password inputs in HTML. These inputs can accept a [pattern attribute](https://www.w3schools.com/tags/att_input_pattern.asp) containing a regular expression that is used to checked against form submission. Once the regular expression is matched, the form be submitted.
+
+Let's create a username/password form where the password input has a pattern attribute. A title attribute can also be included that will be shown if a user tries to submit before passing the pattern check.
+
+```html
+<div class="form-container">
+  <form>
+    <label for="username">Username: </label>
+    <input type="text" id="username"required>
+    <label for="password">Password: </label>
+    <input
+      type="text"
+      id="password"
+      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
+      title="Must contain at least one number, uppercase letter,
+      lowercase letter, and special character, and be at least 8
+      or more characters long"
+      required>
+    <input type="submit" id ="submit" value="Submit">
+  <form>
+</div>
+```
+
+![Regex password validation](./post-assets/regex-password.gif)
+
+OK, I also added an event listener to the password input that tests the regular expression after each keyup. Once the validation is true, the submit button changes from grey to green:
+
+<!-- prettier-ignore -->
+```javascript
+const submit = document.getElementById('submit');
+const password = document.getElementById('password');
+
+function validate() {
+  const re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}/;
+  if (re.test(password.value)) {
+    submit.style.background = '#039b1c';
+    submit.style.color = '#F3F3F3';
+  } else {
+    submit.style.background = '#ccc';
+    submit.style.color = "black";
+  }
+}
+
+password.addEventListener('keyup', validate);
 ```
