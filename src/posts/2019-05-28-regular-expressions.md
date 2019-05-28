@@ -8,7 +8,7 @@ description: Explanations and recipes for useful regular expressions
 
 **May 28, 2019**
 
-Equally elegant and mysterious, regular expressions are a critical tool for input validation, string manipulations, and a host of other tasks. Their syntax can be daunting at first, but there is a clear logic between the slashes, and I find that it's best revealed through stepping through a handful of examples.
+Equally elegant and mysterious, regular expressions are a critical tool for input validation, string manipulations, and a host of other tasks. Their syntax can be daunting at first, but there is a clear logic between the slashes, and I find that it's best revealed by stepping through a handful of examples.
 
 As such, this post covers the creation and application of some common uses of regular expressions in JavaScript. It is intended for regular people. By that I mean people like me, people who are not RegExperts, but commonfolk who only occasionally need to reach for them.
 
@@ -87,8 +87,8 @@ Flags can be attached to patterns that modify the search parameters. Common flag
 
 <!-- prettier-ignore -->
 ```javascript
-'one hat two hat red had blue hat'.match(/hat/g)
-// ["hat", "hat", "hat"]
+'one hat two hat red hat blue hat'.match(/hat/g)
+// ["hat", "hat", "hat", "hat]
 ```
 
 <!-- prettier-ignore -->
@@ -299,7 +299,7 @@ Capture groups can also used to replace repeating words in a sentence.
 // "My name is Neil"
 ```
 
-The regular expression matches all occurrences of one or more word characters (capture group) followed by a space followed by the value of that capture group. Since the global flag is used, this matches "name name" and "is is". "name" is the value of the capture group in the first match and "is" is the value of the capture group in the second match. `\1` references the value of the capture group inside the regular expression, while `'$1'` references the capture group as the second argument to the `replace` method. Thus, the matched text of "name name" and "is is" is replaced with "name" and "is", respectively.
+The regular expression matches all occurrences of one or more word characters (capture group) followed by a space followed by the value of that capture group. Since the global flag is used, this matches "name name" and "is is". "name" is the value of the capture group in the first match and "is" is the value of the capture group in the second match. `\1` references the value of the capture group inside the regular expression, while `'$1'` references the capture group as the second argument to the `replace` method. Thus, the matched text of "name name" and "is is" are replaced with "name" and "is", respectively.
 
 Similarly, capture groups can be used to rearrange words in a sentence.
 
@@ -344,12 +344,12 @@ These conditions can be represented by the following regular expression:
 
 `/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}/`
 
-Four positive lookaheads are used to check whether anywhere in the text is followed by any character zero or more times and a:
+Four positive lookaheads are used to check whether the following conditions anywhere in the text are followed by any character zero or more times:
 
-1. digit: `(?=.*\d)`
-2. lowercase letter: `(?=.*[a-z])`
-3. uppercase letter: `(?=.*[A-Z])`
-4. special character: `(?=.*[!@#$%^&*])`
+- a digit: `(?=.*\d)`
+- a lowercase letter: `(?=.*[a-z])`
+- an uppercase letter: `(?=.*[A-Z])`
+- a special character: `(?=.*[!@#$%^&*])`
 
 Finally, the text must be at least 8 characters long `.{8,}`
 
@@ -361,24 +361,24 @@ Let's create a username/password form where the password input has a pattern att
 <div class="form-container">
   <form>
     <label for="username">Username: </label>
-    <input type="text" id="username"required>
+    <input type="text" id="username" required>
     <label for="password">Password: </label>
     <input
-      type="text"
+      type="password"
       id="password"
       pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*]).{8,}"
       title="Must contain at least one number, uppercase letter,
       lowercase letter, and special character, and be at least 8
       or more characters long"
       required>
-    <input type="submit" id ="submit" value="Submit">
+    <input type="submit" id="submit" value="Submit">
   <form>
 </div>
 ```
 
 ![Regex password validation](./post-assets/regex-password.gif)
 
-OK, I also added an event listener to the password input that tests the regular expression after each keyup. Once the validation is true, the submit button changes from grey to green:
+I also added an event listener to the password input that tests the regular expression after each keyup. Once the validation is true, the submit button changes from grey to green:
 
 <!-- prettier-ignore -->
 ```javascript
