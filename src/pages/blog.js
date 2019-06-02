@@ -5,25 +5,25 @@ import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Container = styled.div`
+const BlogWrapper = styled.div`
   padding: 1rem;
 
-  ul {
+  .blog__list {
     list-style-type: none;
     max-width: 800px;
     margin: 0 auto;
+  }
 
-    li {
-      padding: 1rem 0;
+  .blog__post {
+    padding: 1rem 0;
+  }
 
-      h2 {
-        font-size: 1.5em;
-      }
+  .blog__post-title {
+    font-size: 1.5em;
+  }
 
-      p.date-read {
-        padding: 0.25rem 0 1rem 0;
-      }
-    }
+  .blog__post-date-readtime {
+    padding: 0.25rem 0 1rem 0;
   }
 `
 
@@ -51,23 +51,25 @@ const Blog = ({ location }) => {
   `)
   const postList = data.allMarkdownRemark.edges.map((edge, i) => {
     return (
-      <li key={i}>
-        <Link to={`/blog/${edge.node.fields.slug}`}>
-          <h2>{edge.node.frontmatter.title}</h2>
+      <li key={i} className="blog__post">
+        <Link className="blog__post-link" to={`/blog/${edge.node.fields.slug}`}>
+          <h2 className="blog__post-title">{edge.node.frontmatter.title}</h2>
         </Link>
-        <p className="date-read">
+        <p className="blog__post-date-readtime">
           {edge.node.frontmatter.date} | {edge.node.timeToRead} mins{" "}
         </p>
-        <p className="description">{edge.node.frontmatter.description}</p>
+        <p className="blog__post-description">
+          {edge.node.frontmatter.description}
+        </p>
       </li>
     )
   })
   return (
     <Layout location={location}>
       <SEO title="Blog" />
-      <Container>
-        <ul>{postList}</ul>
-      </Container>
+      <BlogWrapper className="blog">
+        <ul className="blog__list">{postList}</ul>
+      </BlogWrapper>
     </Layout>
   )
 }
