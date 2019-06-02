@@ -14,69 +14,60 @@ const StyledHeader = styled.header`
   z-index: 999;
   background: var(--black);
 
-  h1 {
+  .header__name {
     color: var(--white);
     flex: 1;
     text-align: center;
   }
 
-  .slash {
+  .header__name-slash {
     color: var(--lightred);
     transition: color 0.2s linear;
   }
 
-  .nav-large {
+  .nav--large {
     display: none;
+  }
 
-    ul {
+  .nav__menu--large {
       display: flex;
-      list-style-type: none;
+      list-style-type: none
+  }
 
-      li {
+  .nav__item--large--selected, .nav__item--large--unselected {
         padding: 0 0.5rem 0.25rem 0.5rem;
         margin: 0 0.5rem;
         color: var(--white);
         font-size: 1.3em;
-        &:hover {
-          color: var(--lightred);
-        }
       }
 
-      li.selected {
+  .nav__item--large--selected {
         color: var(--lightred);
       }
     }
   }
 
-  .nav-small {
-    display: block;
-    width: 100vw;
-
-    ul {
-      display: flex;
-      list-style-type: none;
-    }
-  }
-
   @media screen and (min-width: 650px) {
-    h1 {
+    .header__name {
       text-align: left;
     }
 
-    .nav-large {
+    .nav--large {
       display: block;
     }
   }
 
   @media (hover: hover) {
-    h1 {
-      &:hover {
-        color: var(--lightred);
-      }
+    .header__name:hover {
+      color: var(--lightred);
+    }
 
-      &:hover .slash {
-        color: var(--white);
+    .header__name:hover .header__name-slash {
+      color: var(--white);
       }
+    
+    .nav__item--large--unselected:hover {
+      color: var(--lightred);
     }
   }
 `
@@ -105,25 +96,29 @@ const Header = ({ location }) => {
     return (
       <li
         key={idx}
-        className={item.path.split("/")[1] === currentPath ? "selected" : ""}
+        className={`nav__item--large--${
+          item.path.split("/")[1] === currentPath ? "selected" : "unselected"
+        }`}
       >
-        <StyledLink to={item.path}>{item.name}</StyledLink>
+        <StyledLink className="nav__link--large" to={item.path}>
+          {item.name}
+        </StyledLink>
       </li>
     )
   })
   return (
     <div style={{ width: "100vw", background: "var(--black)" }}>
-      <StyledHeader>
-        <h1>
-          <StyledLink to="/">
+      <StyledHeader className="header">
+        <h1 className="header__name">
+          <StyledLink className="header__link" to="/">
             neil
-            <span className="slash"> / </span>
+            <span className="header__name-slash"> / </span>
             berg
           </StyledLink>
         </h1>
 
-        <nav className="nav-large">
-          <ul>{renderNavList}</ul>
+        <nav className="nav--large">
+          <ul className="nav__menu--large">{renderNavList}</ul>
         </nav>
       </StyledHeader>
       <SmallNav location={location} />
