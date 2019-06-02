@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Image from "../images/palm-trees.jpg"
 
-const Container = styled.div`
+const LandingWrapper = styled.div`
   // Small screens: Height of container is
   // based on 100vh minus height of header (65px)
   // navbar (63px) and footer (110)px
@@ -18,13 +18,13 @@ const Container = styled.div`
   background-position: bottom 20%;
   background-size: cover;
 
-  p {
+  .landing__text {
     font-size: 1.5em;
     text-align: center;
     color: var(--white);
   }
 
-  p:first-child {
+  .landing__text:first-child {
     padding-bottom: 2rem;
   }
 
@@ -35,7 +35,7 @@ const Container = styled.div`
     height: calc(100vh - 65px - 110px);
     background-position: bottom;
 
-    p {
+    .landing__text {
       font-size: 2em;
     }
   }
@@ -44,11 +44,11 @@ const Container = styled.div`
   @media screen and (max-height: 570px) {
     padding: 1rem;
 
-    p {
+    .landing__text {
       font-size: 1.25em;
     }
 
-    p:first-child {
+    .landing__text:first-child {
       padding-bottom: 0.75rem;
     }
   }
@@ -57,10 +57,14 @@ const Container = styled.div`
 const Home = ({ location }) => (
   <Layout location={location} showFooter={true}>
     <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
-    <Container>
-      <p>Hi. I'm a front end developer based in Los Angeles.</p>
-      <p>I like making fast, elegant, and resilient web products.</p>
-    </Container>
+    <LandingWrapper>
+      <p className="landing__text">
+        Hi. I'm a front end developer based in Los Angeles.
+      </p>
+      <p className="landing__text">
+        I like making fast, elegant, and resilient web products.
+      </p>
+    </LandingWrapper>
   </Layout>
 )
 
