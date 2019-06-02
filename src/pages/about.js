@@ -6,23 +6,17 @@ import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const StyledImg = styled(Img)`
-  display: block;
-  min-width: 250px;
-  border-radius: 50%;
-`
-
-const Container = styled.div`
+const AboutWrapper = styled.div`
   padding: 1rem;
   max-width: 800px;
   margin: 0 auto;
 
-  section {
+  .bio__text-container,
+  .tech-skills,
+  .comm-skills,
+  .education,
+  .experience {
     padding: 0.5rem 0;
-
-    p {
-      font-size: 1.2em;
-    }
   }
 
   .bio {
@@ -31,58 +25,68 @@ const Container = styled.div`
     align-items: center;
   }
 
-  a {
+  .bio__avatar {
+    display: block;
+    min-width: 250px;
+    border-radius: 50%;
+  }
+
+  .bio__text,
+  .tech-skills__text,
+  .comm-skills__text {
+    font-size: 1.2em;
+    padding: 0.5rem 0;
+    line-height: 1.3em;
+  }
+
+  .comm-skills__link {
     color: var(--white);
     padding-bottom: 2px;
     border-bottom: 1px var(--white) solid;
     transition: all 0.25s linear;
   }
 
-  ul {
-    list-style-type: none;
-
-    li {
-      line-height: 1em;
-      font-size: 1.2em;
-      padding: 0.5rem;
-
-      .strong {
-        font-weight: bold;
-      }
-    }
+  .tech-skills__list,
+  .education__list,
+  .experience__list {
+    list-style-type: square;
+    margin-left: 1.25rem;
   }
 
-  .technical,
-  .education {
-    ul {
-      list-style-type: square;
-      margin-left: 1.25rem;
-    }
+  .tech-skills__item,
+  .education__item,
+  .experience__item {
+    line-height: 1em;
+    font-size: 1.2em;
+    padding: 0.5rem;
   }
 
-  .experience {
-    ul {
-      li {
-        padding: 0;
-        margin: 1rem 0;
-        p {
-          margin: 0;
-          padding: 0;
-          font-size: 1em;
-        }
-        p.years {
-          padding-left: 1.5rem;
-        }
-      }
-    }
+  .strong {
+    font-weight: bold;
   }
-  h2 {
+
+  .experience__item {
+    padding: 0;
+    margin: 1rem 0;
+  }
+
+  .experience__item-title,
+  .experience__item-years {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+  }
+
+  .experience__item-years {
+    padding-left: 1.5rem;
+  }
+
+  .bio__header,
+  .tech-skills__header,
+  .comm-skills__header,
+  .education__header,
+  .experience__header {
     border-bottom: 1px grey solid;
-  }
-
-  p {
-    padding: 0.5rem 0;
-    line-height: 1.3em;
   }
 
   @media screen and (min-width: 650px) {
@@ -90,7 +94,7 @@ const Container = styled.div`
       flex-direction: row;
       align-items: center;
 
-      .text {
+      .bio__text-container {
         padding-left: 2.5rem;
       }
     }
@@ -98,7 +102,7 @@ const Container = styled.div`
 
   // If touch on device is enabled
   @media (hover: hover) {
-    a:hover {
+    .comm-skills__link:hover {
       color: var(--lightred);
       border-bottom: 1px var(--lightred) solid;
     }
@@ -121,15 +125,16 @@ const About = ({ location }) => {
     <Layout location={location}>
       <SEO title="About" />
 
-      <Container>
+      <AboutWrapper className="about">
         <section className="bio">
-          <StyledImg
+          <Img
+            className="bio__avatar"
             fixed={data.file.childImageSharp.fixed}
             alt="Profile avatar of Neil Berg"
           />
-          <div className="text">
-            <h2>Bio</h2>
-            <p>
+          <div className="bio__text-container">
+            <h2 className="bio__header">Bio</h2>
+            <p className="bio__text">
               I'm an LA-based front end developer. Building on a career in
               climate science where I specialized in geospatial data analytics
               and visualizations, I decided to blend my love of coding and
@@ -142,37 +147,38 @@ const About = ({ location }) => {
           </div>
         </section>
 
-        <section className="technical">
-          <h2>Technical skills</h2>
-          <p>
+        <section className="tech-skills">
+          <h2 className="tech-skills__header">Technical skills</h2>
+          <p className="tech-skills__text">
             Always learning and open to new technologies, here's what I'm
             currently using:
           </p>
-          <ul>
-            <li>
+          <ul className="tech-skills__list">
+            <li className="tech-skills__item">
               <span className="strong">Languages: </span>JavaScript, Python,
               HTML/CSS
             </li>
-            <li>
+            <li className="tech-skills__item">
               <span className="strong">JS frameworks/libraries: </span>React,
               Redux, React-Router, Gatsby, D3
             </li>
-            <li>
+            <li className="tech-skills__item">
               <span className="strong">Python libraries: </span>Pandas, Numpy,
               Matplotlib, Xarray
             </li>
-            <li>
+            <li className="tech-skills__item">
               <span className="strong">Design + prototyping: </span>Figma
             </li>
           </ul>
         </section>
 
-        <section className="communication">
-          <h2>Communication skills</h2>
-          <p>
+        <section className="comm-skills">
+          <h2 className="comm-skills__header">Communication skills</h2>
+          <p className="comm-skills__text">
             I have communicated complex technical and quantitative topics to a
             range of audiences, from{" "}
             <a
+              className="comm-skills__link"
               href="https://www.rand.org/pubs/working_papers/WR1140.html"
               target="_blank"
               rel="noopener noreferrer"
@@ -182,6 +188,7 @@ const About = ({ location }) => {
             </a>
             to{" "}
             <a
+              className="comm-skills__link"
               href="https://www.rand.org/pubs/perspectives/PE243.html"
               target="_blank"
               rel="noopener noreferrer"
@@ -190,10 +197,14 @@ const About = ({ location }) => {
             </a>{" "}
             across the country.
           </p>
-          <p>
-            Alongside my <Link to="/blog">personal blog</Link> on web
-            development, I created and teach a{" "}
+          <p className="comm-skills__text">
+            Alongside my{" "}
+            <Link className="comm-skills__link" to="/blog">
+              personal blog
+            </Link>{" "}
+            on web development, I created and teach a{" "}
             <a
+              className="comm-skills__link"
               href="https://github.com/neil-berg/climate-data-analyses"
               target="_blank"
               rel="noopener noreferrer"
@@ -202,9 +213,10 @@ const About = ({ location }) => {
             </a>{" "}
             using Python for undergraduate students at UCLA.
           </p>
-          <p>
+          <p className="comm-skills__text">
             Additionally, I have published{" "}
             <a
+              className="comm-skills__link"
               href="https://scholar.google.com/citations?user=SDOdTI8AAAAJ&hl=en"
               target="_blank"
               rel="noopener noreferrer"
@@ -213,6 +225,7 @@ const About = ({ location }) => {
             </a>{" "}
             and have appeared in national media outlets such as{" "}
             <a
+              className="comm-skills__link"
               href="https://www.scpr.org/programs/take-two/2019/01/16/19327/"
               target="_blank"
               rel="noopener noreferrer"
@@ -221,6 +234,7 @@ const About = ({ location }) => {
             </a>
             , the{" "}
             <a
+              className="comm-skills__link"
               href="https://www.latimes.com/local/lanow/la-me-ln-sierra-nevada-snowpack-20181211-story.html"
               target="_blank"
               rel="noopener noreferrer"
@@ -229,6 +243,7 @@ const About = ({ location }) => {
             </a>
             , and{" "}
             <a
+              className="comm-skills__link"
               href="https://mashable.com/article/california-rain-wildfire-season-2018/?utm_cid=hp-n-1#M3xRHynuQiqz"
               target="_blank"
               rel="noopener noreferrer"
@@ -239,43 +254,53 @@ const About = ({ location }) => {
           </p>
         </section>
         <section className="education">
-          <h2>Education</h2>
-          <ul>
-            <li>PhD Atmospheric and Oceanic Sciences, UCLA</li>
-            <li>MS Atmospheric and Oceanic Sciences, UCLA</li>
-            <li>BS Atmospheric and Oceanic Sciences, UW-Madison</li>
+          <h2 className="education__header">Education</h2>
+          <ul className="education__list">
+            <li className="education__item">
+              PhD Atmospheric and Oceanic Sciences, UCLA
+            </li>
+            <li className="education__item">
+              MS Atmospheric and Oceanic Sciences, UCLA
+            </li>
+            <li className="education__item">
+              BS Atmospheric and Oceanic Sciences, UW-Madison
+            </li>
           </ul>
         </section>
         <section className="experience">
-          <h2>Experience</h2>
-          <ul>
-            <li>
-              <p className="title">Freelance web developer</p>
-              <p className="years">2018 - current</p>
+          <h2 className="experience__header">Experience</h2>
+          <ul className="experience__list">
+            <li className="experience__item">
+              <p className="experience__item-title">Freelance web developer</p>
+              <p className="experience__item-years">2018 - current</p>
             </li>
-            <li>
-              <p className="title">
+            <li className="experience__item">
+              <p className="experience__item-title">
                 Co-Associate Director, UCLA Center for Climate Science
               </p>
-              <p className="years">2017 - current</p>
+              <p className="experience__item-years">2017 - current</p>
             </li>
-            <li>
-              <p className="title">Associate Physical Scientist, RAND</p>
-              <p className="years">2015 - 2017</p>
+            <li className="experience__item">
+              <p className="experience__item-title">
+                Associate Physical Scientist, RAND
+              </p>
+              <p className="experience__item-years">2015 - 2017</p>
             </li>
-            <li>
-              <p className="title">
+            <li className="experience__item">
+              <p className="experience__item-title">
                 Atmospheric and Data Scientist, Vertum Partners
               </p>
-              <p className="years">2011 - 2014</p>
+              <p className="experience__item-years">2011 - 2014</p>
             </li>
-            <li>
-              <p className="title">Graduate Student Researcher, UCLA</p>
-              <p className="years">2009 - 2015</p>
+            <li className="experience__item">
+              <p className="experience__item-title">
+                Graduate Student Researcher, UCLA
+              </p>
+              <p className="experience__item-years">2009 - 2015</p>
             </li>
           </ul>
         </section>
-      </Container>
+      </AboutWrapper>
     </Layout>
   )
 }
