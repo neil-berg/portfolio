@@ -14,10 +14,10 @@ import { StyledLink } from "../styles/link.css"
 
 library.add(faCode, faComments, faUserAstronaut, faPhone)
 
-const Nav = styled.nav`
+const SmallNavWrapper = styled.nav`
   width: 100vw;
 
-  ul {
+  .nav__menu--small {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -25,32 +25,33 @@ const Nav = styled.nav`
     border-top: 1px var(--grey) solid;
     border-bottom: 1px var(--grey) solid;
     background: var(--black);
+  }
 
-    li {
-      flex: 1;
-      color: var(--grey);
-    }
+  .nav__item--small {
+    flex: 1;
+    color: var(--grey);
+  }
 
-    li a {
-      padding: 0.75rem 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+  .nav__link--small {
+    padding: 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-      .link-icon {
-        font-size: 1.25rem;
-        color: var(--grey);
-      }
+  .nav__link-icon {
+    font-size: 1.25rem;
+    color: var(--grey);
+  }
 
-      .link-icon.selected {
-        color: var(--white);
-      }
+  .nav__link-icon--selected {
+    font-size: 1.25rem;
+    color: var(--white);
+  }
 
-      .link-text.selected {
-        font-weight: bold;
-        color: var(--white);
-      }
-    }
+  .nav__link-text--selected {
+    font-weight: bold;
+    color: var(--white);
   }
 
   @media screen and (min-width: 650px) {
@@ -84,21 +85,21 @@ const SmallNav = ({ location }) => {
   ]
   const navList = navItems.map((item, idx) => {
     return (
-      <li key={idx}>
-        <StyledLink to={item.path}>
+      <li className="nav__item--small" key={idx}>
+        <StyledLink className="nav__link--small" to={item.path}>
           <FontAwesomeIcon
             className={
               item.path.split("/")[1] === currentPath
-                ? "link-icon selected"
-                : "link-icon"
+                ? "nav__link-icon--selected"
+                : "nav__link-icon"
             }
             icon={item.icon}
           />
           <span
             className={
               item.path.split("/")[1] === currentPath
-                ? "link-text selected"
-                : "link-text"
+                ? "nav__link-text--selected"
+                : "nav__link-text"
             }
           >
             {item.name}
@@ -109,9 +110,9 @@ const SmallNav = ({ location }) => {
   })
 
   return (
-    <Nav>
-      <ul>{navList}</ul>
-    </Nav>
+    <SmallNavWrapper className="nav__menu">
+      <ul className="nav__menu--small">{navList}</ul>
+    </SmallNavWrapper>
   )
 }
 
