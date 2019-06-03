@@ -10,7 +10,7 @@ import MovieManiaBackdrop from "../images/movie-mania-backdrop.jpg"
 import NewsFlashBackdrop from "../images/news-flash-backdrop.jpg"
 import MeredithLackeyBackdrop from "../images/meredith-lackey-backdrop.jpg"
 
-const Container = styled.div`
+const ProjectWrapper = styled.article`
   border-top: 0;
   border-bottom: 1px grey solid;
   display: flex;
@@ -23,67 +23,78 @@ const Container = styled.div`
     border-bottom: 0;
   }
 
-  h2 {
+  .project__title {
     font-size: 2.25em;
     text-align: center;
     border-bottom: 2px solid var(--lightred);
   }
 
-  ul {
+  .project__tool-list {
     list-style-type: none;
     text-align: center;
     padding: 1.5rem;
     line-height: 1.5rem;
-
-    li {
-      display: inline;
-      margin: 0;
-      padding: 0 0.5rem;
-      border-right: 1px var(--white) solid;
-    }
-
-    li:last-child {
-      border-right: 0;
-    }
   }
 
-  .links {
+  .project__tool-item {
+    display: inline;
+    margin: 0;
+    padding: 0 0.5rem;
+    border-right: 1px var(--white) solid;
+  }
+
+  .project__tool-item:last-child {
+    border-right: 0;
+  }
+
+  .project__links-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 200px;
-    a {
-      color: var(--white);
-      padding-bottom: 2px;
-      border-bottom: 1px var(--white) solid;
-    }
+  }
+
+  .project__link {
+    color: var(--white);
+    padding-bottom: 2px;
+    border-bottom: 1px var(--white) solid;
   }
 
   @media screen and (min-width: 650px) {
-    
     &:first-child {
       border-top: 1px grey solid;
     }
+  }
 
+  @media (hover: hover) {
     &:hover {
-      background-image: linear-gradient(to right, transparent, var(--white), var(--white), transparent 100%),
-       url(${props => props.background});
+      background-image: linear-gradient(
+          to right,
+          transparent,
+          var(--white),
+          var(--white),
+          transparent 100%
+        ),
+        url(${props => props.background});
       background-position: bottom;
       background-size: cover;
-
-      li {
-        color: var(--black);
-        border-right: 1px var(--black) solid;
-      }
-
-      .links {
-        a {
-          color: var(--black);
-          border-bottom: 1px var(--black) solid;
-          transition: color 0.2s linear;
-        }
-      }
     }
+
+    &:hover .project__tool-item {
+      color: var(--black);
+      border-right: 1px var(--black) solid;
+    }
+
+    &:hover .project__tool-item:last-child {
+      border-right: 0;
+    }
+
+    &:hover .project__link {
+      color: var(--black);
+      border-bottom: 1px var(--black) solid;
+      transition: color 0.2s linear;
+    }
+  }
 `
 
 const Projects = ({ location }) => {
@@ -97,31 +108,46 @@ const Projects = ({ location }) => {
     }
 
     return (
-      <Container
+      <ProjectWrapper
+        className="project"
         key={idx}
         background={backgrounds[project.title] || MovieManiaBackdrop}
       >
-        <a href={project.path} target="_blank" rel="noopener noreferrer">
-          <h2>{project.title}</h2>
+        <a
+          className="project__url"
+          href={project.path}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2 className="project__title">{project.title}</h2>
         </a>
-        <ul>
+        <ul className="project__tool-list">
           {project.tools.map((tool, idx) => (
-            <li key={idx}>{tool}</li>
+            <li className="project__tool-item" key={idx}>
+              {tool}
+            </li>
           ))}
         </ul>
-        <div className="links">
-          <a href={project.repoPath} target="_blank" rel="noopener noreferrer">
+        <div className="project__links-container">
+          <a
+            className="project__link"
+            href={project.repoPath}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             view code
           </a>
-          <Link to={slug}>learn more</Link>
+          <Link className="project__link" to={slug}>
+            learn more
+          </Link>
         </div>
-      </Container>
+      </ProjectWrapper>
     )
   })
   return (
     <Layout location={location}>
       <SEO title="Projects" />
-      <div>{projectList}</div>
+      <section className="projects">{projectList}</section>
     </Layout>
   )
 }

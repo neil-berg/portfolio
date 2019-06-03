@@ -16,30 +16,30 @@ const StyledFooter = styled.footer`
   height: 110px;
   padding: 1rem;
 
-  .email {
+  .footer__link-email {
     text-decoration: none;
     color: var(--white);
     font-size: 1.25em;
     transition: color 0.2s linear;
   }
 
-  ul {
+  .footer__list-social {
     display: flex;
     align-items: center;
     list-style-type: none;
     padding-bottom: 0.5em;
+  }
 
-    li a {
-      color: var(--white);
-      font-size: 1.5em;
-      padding: 0 1em;
-      transition: color 0.2s linear;
-    }
+  .footer__link-social {
+    color: var(--white);
+    font-size: 1.5em;
+    padding: 0 1em;
+    transition: color 0.2s linear;
   }
 
   @media (hover: hover) {
-    .email:hover,
-    li a:hover {
+    .footer__link-email:hover,
+    .footer__link-social:hover {
       color: var(--lightred);
     }
   }
@@ -48,35 +48,41 @@ const StyledFooter = styled.footer`
 const Footer = () => {
   return (
     <StyledFooter>
-      <a className="email" href="mailto:neil.berg14@gmail.com">
+      <a className="footer__link-email" href="mailto:neil.berg14@gmail.com">
         Email
       </a>
-      <ul className="social">
-        <li>
+      <ul className="footer__list-social">
+        <li className="footer__social-item">
           <a
+            className="footer__link-social"
             href="https://github.com/neil-berg"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FontAwesomeIcon className="social-icon" icon={faGithub} />
+            <FontAwesomeIcon className="footer__social-icon" icon={faGithub} />
           </a>
         </li>
-        <li>
+        <li className="footer__social-item">
           <a
+            className="footer__link-social"
             href="https://twitter.com/_neilberg"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FontAwesomeIcon className="social-icon" icon={faTwitter} />
+            <FontAwesomeIcon className="footer__social-icon" icon={faTwitter} />
           </a>
         </li>
-        <li>
+        <li className="footer__social-item">
           <a
+            className="footer__link-social"
             href="https://www.linkedin.com/in/neil-berg-43135b55/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <FontAwesomeIcon className="social-icon" icon={faLinkedin} />
+            <FontAwesomeIcon
+              className="footer__icon-social"
+              icon={faLinkedin}
+            />
           </a>
         </li>
       </ul>
