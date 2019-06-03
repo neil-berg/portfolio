@@ -11,41 +11,41 @@ import {
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Container = styled.div`
+const ContactWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
 
-  p {
+  .contact__intro {
     font-size: 1.2em;
     margin-top: 1rem;
   }
 
-  ul {
+  .contact__list {
     list-style-type: none;
     margin-top: 2rem;
+  }
 
-    li a {
-      color: var(--white);
-      padding: 1rem 0;
-      display: flex;
-      align-items: center;
-      transition: color 0.2s linear;
+  .contact__link {
+    color: var(--white);
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s linear;
+  }
 
-      .contact-icon {
-        font-size: 1.5em;
-      }
+  .contact__link-icon {
+    font-size: 1.5em;
+  }
 
-      .contact-text {
-        padding: 0 1rem;
-        font-size: 1.2em;
-      }
-    }
+  .contact__link-text {
+    padding: 0 1rem;
+    font-size: 1.2em;
   }
 
   @media (hover: hover) {
-    li a:hover {
+    .contact__link:hover {
       color: var(--lightred);
     }
   }
@@ -56,35 +56,49 @@ const Contact = ({ location }) => {
     <Layout location={location} showFooter={false}>
       <SEO title="Contact" />
 
-      <Container>
-        <p>Interested in working together? I'd love to hear from you. </p>
-        <ul>
-          <li>
-            <a className="email" href="mailto:neil@neilberg.dev">
-              <FontAwesomeIcon className="contact-icon" icon={faEnvelope} />
-              <span className="contact-text">Email</span>
+      <ContactWrapper className="contact">
+        <p className="contact__intro">
+          Interested in working together? I'd love to hear from you.{" "}
+        </p>
+        <ul className="contact__list">
+          <li className="contact__item">
+            <a className="contact__link" href="mailto:neil@neilberg.dev">
+              <FontAwesomeIcon
+                className="contact__link-icon"
+                icon={faEnvelope}
+              />
+              <span className="contact__link-text">Email</span>
+            </a>
+          </li>
+          <li className="contact__item">
+            <a className="contact__link" href="https://github.com/neil-berg">
+              <FontAwesomeIcon className="contact__link-icon" icon={faGithub} />
+              <span className="contact__link-text">Github</span>
+            </a>
+          </li>
+          <li className="contact__item">
+            <a className="contact__link" href="https://twitter.com/_neilberg">
+              <FontAwesomeIcon
+                className="contact__link-icon"
+                icon={faTwitter}
+              />
+              <span className="contact__link-text">Twitter</span>
             </a>
           </li>
           <li>
-            <a href="https://github.com/neil-berg">
-              <FontAwesomeIcon className="contact-icon" icon={faGithub} />
-              <span className="contact-text">Github</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/_neilberg">
-              <FontAwesomeIcon className="contact-icon" icon={faTwitter} />
-              <span className="contact-text">Twitter</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/neil-berg-43135b55/">
-              <FontAwesomeIcon className="contact-icon" icon={faLinkedin} />
-              <span className="contact-text">LinkedIn</span>
+            <a
+              className="contact__link"
+              href="https://www.linkedin.com/in/neil-berg-43135b55/"
+            >
+              <FontAwesomeIcon
+                className="contact__link-icon"
+                icon={faLinkedin}
+              />
+              <span className="contact__link-text">LinkedIn</span>
             </a>
           </li>
         </ul>
-      </Container>
+      </ContactWrapper>
     </Layout>
   )
 }
