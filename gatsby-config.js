@@ -32,8 +32,11 @@ module.exports = {
             options: {
               classPrefix: "language-",
               inlineCodeMarker: null,
-              aliases: {},
-              showLineNumber: false,
+              aliases: {
+                sh: "bash",
+                js: "javascript",
+              },
+              showLineNumbers: true,
               noInlineHighlight: false,
             },
           },

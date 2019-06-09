@@ -110,7 +110,7 @@ kbd,
 pre,
 samp {
   font-family: monospace, monospace;
-  font-size: 1em;
+  font-size: 0.1em;
 }
 figure {
   margin: 1em 40px;
@@ -473,6 +473,21 @@ th:last-child,
 td:last-child {
   padding-right: 0;
 }
+
+/* Prism code line numbers */
+.gatsby-highlight {
+  background-color: #fdf6e3;
+  border-radius: 0.3em;
+  margin: 0.5em 0;
+  padding: 0em 0.5em;
+  overflow: auto;
+}
+
+.gatsby-highlight pre[class*="language-"].line-numbers {
+  padding: 0 0 0 2.8em;
+  overflow: initial;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
