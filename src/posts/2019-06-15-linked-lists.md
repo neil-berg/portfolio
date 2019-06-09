@@ -1,5 +1,5 @@
 ---
-title: "Leaping into Linked Lists"
+title: "Leaping Into Linked Lists"
 date: "2019-06-16"
 description: Structuring and working with singly and doubly linked lists
 ---
