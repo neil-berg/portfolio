@@ -138,10 +138,10 @@ const About = ({ location }) => {
               I'm an LA-based front end developer. Building on a career in
               climate science where I specialized in geospatial data analytics
               and visualizations, I decided to blend my love of coding and
-              communication with my interests in design and style, and pursue
-              new opportunities in web development. Creating spaces in our
-              digital world that are accessible, enjoyable, and reliable has
-              become a passion ever since. Yoga and guitar balance out my
+              communication with my interests in design and style, and dive into
+              web development. Creating spaces in our digital world that are
+              accessible, enjoyable, and reliable has become a passion ever
+              since. Practicing yoga, playing guitar, and cooking balance out my
               computer time.
             </p>
           </div>
