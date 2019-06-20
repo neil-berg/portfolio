@@ -501,6 +501,13 @@ td:last-child {
   overflow: initial;
 }
 
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em 0.2em;
+  border-radius: 0.1em;
+  font-size: 0.8em;
+}
+
 @media only screen and (max-width: 480px) {
   html {
     font-size: 100%;
