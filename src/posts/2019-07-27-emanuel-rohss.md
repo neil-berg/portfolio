@@ -390,12 +390,231 @@ The code snippet above shows how all the sourced data from Airtable is on the `d
 
 #### Flexbox gallery
 
+When a user enters into a project page, a gallery appears that contains small previews of each image for that project. There are two major components to building this gallery:
+
+1. Enforcing a uniform height of each gallery image while preserving the image ratio
+2. Creating a responsive container so that images flow naturally within the gallery based on viewport size
+
+Luckily, Gatsby Images store image aspect ratios and is accessible by including the `aspectRatio` property in the GraphQL query via the Sharp image processing. This can be seen in the previous section's GraphQL query for images in `project-template.js`.
+
+After extracting the image nodes from the GraphQL query, we map each image into a container with a fixed height and variable width based on the image's aspect ratio. I chose heights of 150px for small screens and 250px for larger screens, which seemed to create a nicely responsive gallery for a range of viewports.
+
+**/src/templates/project-template.js**
+
+<!-- prettier-ignore -->
+```javascript
+import React from 'react'
+import { graphql, Link } from 'gatsby'
+import Img from "gatsby-image"
+import styled from "styled-components"
+
+export const query = graphql`
+  // GraphQL query as seen above
+  // Response is injected as a 'data' prop into component
+`
+
+const ProjectTemplate = props => {
+
+  // Extract images from data prop
+  const images = props.data.allAirtable.nodes[0].data.Images;
+
+  // Map images into an ImageCard with fixed heights of
+  // 150px for small screens and 250px for larger screens
+  // and variable widths based on image aspect ratio
+    const renderImageList = images.map(image => {
+    const aspectRatio = image.data.attachment.localFiles[0].childImageSharp.fluid.aspectRatio;
+    const widthSmall = 150 * aspectRatio;
+    const widthLarge = 250 * aspectRatio;
+
+    return (
+      <ImageCard
+        className="image-card"
+        widthSmall={widthSmall}
+        widthLarge={widthLarge}
+        key={image.id}
+        data-id={image.id}
+      >
+        <figure className="image">
+          <Img
+            alt={image.data.image_title}
+            fluid={image.data.attachment.localFiles[0].childImageSharp.fluid}
+          />
+        </figure>
+      </ImageCard>
+    )
+  })
+
+  return (
+    <>
+      // Additional JSX
+      <section className="image-list">
+        {renderImageList}
+      </section>
+    </>
+  )
+
+const ImageCard = styled.div`
+  height: 150px;
+  width: ${props => props.widthSmall}px;
+  display: inline-block;
+  margin: 0.5rem;
+  cursor: zoom-in;
+
+  @media screen and (min-width: 800px) {
+    height: 250px;
+    width: ${props => props.widthLarge}px;
+  }
+`
+}
+```
+
+Using styled-components, we pass down `widthSmall` and `widthLarge` to the `ImageCard` component, which sets the card's width based on screensize with a breakpoint at 800px.
+
+With each image now created with standardized heights, only a few lines of CSS are needed on the overall gallery (i.e. `<section className="image-list">`) to have the images flow nicely:
+
+<!-- prettier-ignore -->
+```css
+.image-list {
+  display: flex;
+  min-height: 200px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+```
+
+Flexbox is a perfect tool for this feature. We only need to define a minimum height on the section and tell the flexed container to wrap children elements to new rows when they can no longer fit on a single line. Lastly, all content inside of the flexed container is centered along the main axis (rows in this case) using `justify-content: center`.
+
+### TODO: add gif showing responsive gallery when all images are uploaded.
+
 #### Portals in Gatsby/React
 
-#### Modal and Carousel Components
+We also wanted users to have the ability to click on an image in the gallery to reveal a close-up version of that image inside of a modal. Once inside the modal, the close-up image is in fact one item of an infinite carousel that users click/swipe through.
 
-### Continuous Deployment on Netlify
+[Portals](https://reactjs.org/docs/portals.html) are required in React apps to render a component (e.g., a Modal) that is _not_ mounted into the DOM as a child of the nearest parent node. For instance, we'll want to use a Portal to mount a modal component atop the DOM node heirarchy so that it can be displayed on top of the entire app and not be "stuck" inside of a nearest parent container.
 
-#### Linking to GitHub
+Portals require a new div to be created in the `index.html` file as a sibling to the overall app container. However, Gatsby builds the `index.html` file when generating the site - unlike the case of bootstrapping a React app with create-react-app - so we can't manually insert a new div element for the portal. No fear, there's a plugin to accomplish this called [gatsby-plugin-portal](https://www.gatsbyjs.org/packages/gatsby-plugin-portal/), which can be installed with:
 
-#### Build Commands and Environmental Variables
+`npm install --save gatsby-plugin-portal`
+
+and configured in `gatsby-config.js` according to the documentation. The docs also provide the JSX for the Portal component.
+
+In the end, the DOM looks like:
+
+```
+html
+  head
+  body
+    div#___gatsby (where main Gatsby app lives)
+    div#portal (where children of the Portal get mounted)
+
+```
+
+Now the Portal component can be included in each project page, which receives a child Modal component that can be triggered by any gallery image.
+
+**src/templates/project-template.js**
+
+<!-- prettier-ignore -->
+```javascript
+import React from 'react';
+
+import Layout from '../components/lauyout";
+import Portal from '../components/Portal";
+import Modal from '../components/Modal";
+
+// GraphQL query as discussed above
+// ...
+
+const ProjectTemplate = props => {
+  return (
+    <>
+      <Layout>
+        // Additional JSX for project pages
+      </Layout>
+      <Portal>
+        <Modal />
+      </Portal>
+    </>
+  )
+};
+
+export default ProjectTemplate;
+
+```
+
+#### Modal Component
+
+The Modal component is passed 3 props that are maintained by local state inside of the `project-template` component:
+
+1. `showModal` - boolean (initially false) indicating whether the Modal should be shown or not
+2. `setShowModal` - a function controlling the value of showModal
+3. `modalImages` - an array (initially empty) of images for a given project that will be shown in the carousel of the modal
+
+When a user clicks on a gallery image, `showModal` is set to `true` via `setShowModal` and the array of gallery images is re-ordered so that the clicked image comes first. These re-ordered images are then set to be `modalImages`. All of this happens on a click event attached to the `section` containing the gallery, which is delegated to child images in the section.
+
+The Modal is comprised of 4 elements:
+
+1. An overall container
+2. A semi-transparent backdrop
+3. A carousel wrapper/card
+4. The Carousel component
+5. Close button
+
+**/src/components/Modal**
+
+<!-- prettier-ignore -->
+```javascript
+import React from 'react';
+import styled from 'styled-components';
+
+import Carousel from './Carousel';
+
+const Modal = ({ showModal, setShowModal, modalImages }) => {
+
+  return (
+    <div className="container">
+      <div 
+        className="backdrop" 
+        aria-modal="true" 
+        role="dialog" 
+        onClick={e => {
+          if (e.target.classList.contains('backdrop')) {
+            setShowModal(false);
+          }
+        }}>
+        <div className="card">
+          <Carousel modalImages={modalImages} />
+          <div>
+            <button 
+              className="card__button"
+              onClick={() => setShowModal(false)}
+            >
+            Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+```
+
+The backdrop is fixed to the upper left corner, spans the entire screen, and centers its children elements (the Carousel component):
+
+<!-- prettier-ignore -->
+```css
+.backdrop {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgab(0, 0, 0, 0.85);
+  overflow: hidden;
+}
+```
+
+#### Carousel Component
