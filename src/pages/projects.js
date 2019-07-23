@@ -10,6 +10,7 @@ import MovieManiaBackdrop from "../images/movie-mania-backdrop.jpg"
 import NewsFlashBackdrop from "../images/news-flash-backdrop.jpg"
 import MeredithLackeyBackdrop from "../images/meredith-lackey-backdrop.jpg"
 import ChowNowBackdrop from "../images/chow-now-backdrop.jpg"
+import EmanuelRohssBackdrop from "../images/emanuel-rohss-backdrop.jpg"
 
 const ProjectWrapper = styled.article`
   border-top: 0;
@@ -107,6 +108,7 @@ const Projects = ({ location }) => {
       "News Flash": NewsFlashBackdrop,
       "Meredith Lackey": MeredithLackeyBackdrop,
       "Chow Now": ChowNowBackdrop,
+      "Emanuel Röhss": EmanuelRohssBackdrop,
     }
 
     return (

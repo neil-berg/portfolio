@@ -8,13 +8,13 @@ description: A blazing-fast, image-optimized artist portfolio built with Gatsby,
 
 **July 27, 2019**
 
-Emanuel Röhss is a talent artist based in Los Angeles and was seeking a new design and increased performance for his image-heavy online portfolio.
+Emanuel Röhss is an LA-based artist and was seeking a new design with high performance for his image-heavy online portfolio.
 
-Given [Gatsby's image optimization features](https://www.gatsbyjs.org/docs/working-with-images/), [plugin ecosystem ](https://www.gatsbyjs.org/plugins/) for sourcing of 3rd party APIs, built-in [GraphQL interface](https://www.gatsbyjs.org/docs/querying-with-graphql/), and ability to seamlessly [deploy continuously on Netlify](https://www.gatsbyjs.org/docs/deploying-to-netlify/), it was an easy call to go with this framework for [Emanuel's site](https://emanuel-rohss-demo1.netlify.com/).
+Given [Gatsby's image optimization features](https://www.gatsbyjs.org/docs/working-with-images/), [plugin ecosystem](https://www.gatsbyjs.org/plugins/) for sourcing 3rd party APIs, built-in [GraphQL interface](https://www.gatsbyjs.org/docs/querying-with-graphql/), and ability to seamlessly [deploy continuously on Netlify](https://www.gatsbyjs.org/docs/deploying-to-netlify/), it was an easy call to go with this framework for [Emanuel's site](https://emanuel-rohss-demo1.netlify.com/).
 
 ### Airtable as a Headless CMS
 
-[Airtable](https://guide.airtable.com/introduction-to-databases/) is a cloud-based database product allowing user to create custom relational tables and access the content via APIs. The free-tier option allows for 1,200 records a 2GB in the database, plenty for a personal project (even with dozens of heavy images like an artist portfolio). The developer experience for Airtable is wonderful. It's easy to get a new database created, organized, and made accessible to your site. The following sections will cover all of these topics, and make sure you checkout the YouTube video below for additional knowledge.
+[Airtable](https://guide.airtable.com/introduction-to-databases/) is a cloud-based database product allowing users to create custom relational tables and access its content via APIs. The free-tier option allows for 1,200 records and 2GB in the database, plenty for a personal project (even with dozens of large-sized images). The developer experience for Airtable is wonderful. It's easy to get a new database created, organized, and made accessible to your site. The following sections will cover all of these topics, and make sure you checkout the YouTube video below for additional knowledge.
 
  <iframe
   title="Use Airtable as a CMS for Gatsby — Learn With Jason"
@@ -58,9 +58,9 @@ The same schema exists for records in the Videos base, only with video order, vi
 
 #### Connecting Airtable to Gatsby
 
-Each base comes with a built-in API from Airtable along with custom documentation on how to access and query data from a given base. Authentication is token-based, using a `BASE_ID` and `API_KEY`. With those values in hand, we can install a Gatsby plugin called "Gatsby Source Airtable" that will enable GraphQL queries on the data in our Airtable bases.
+Each base comes with a built-in API from Airtable along with custom documentation on how to access and query data from a given base. Authentication is token-based, using a `BASE_ID` and `API_KEY`. With those values in hand, we can install a Gatsby plugin called [gatsby-source-airtable](https://www.gatsbyjs.org/packages/gatsby-source-airtable/) that will enable GraphQL queries on the data in our Airtable bases.
 
-The "Gatsby Source Filesystem" plugin is also required for the Airtable sourcing to work when attachments are one of the fields in a table. Finally, we'll leverage the Sharp image-processing plugin for sleek blur-up and lazy-loading effects.
+The [gatsby-source-filesystem](https://www.gatsbyjs.org/packages/gatsby-source-filesystem/) plugin is also required for the Airtable sourcing to work when attachments are one of the fields in a table. Finally, we'll include the Sharp image-processing plugins for sleek blur-up and lazy-loading effects.
 
 `npm install --save gatsby-source-filesystem`
 
@@ -68,11 +68,13 @@ The "Gatsby Source Filesystem" plugin is also required for the Airtable sourcing
 
 `npm install --save gatsby-transformer-sharp gatsby-plugin-sharp`
 
-We'll also want to install the `dotenv` package so that we can store the Airtables tokens in a `.env` file instead of directly in visible code.
+The `dotenv` package is also installed so that the Airtable tokens can be stored in a `.env` file instead of directly in visible code.
 
 `npm install dotenv`
 
-Once installed, the tables can be configured in the `gatsby-config.js` file:
+Once all the packages are installed, the tables can be configured in the `gatsby-config.js` file:
+
+**gatsby-config.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -126,15 +128,15 @@ There are two primary queries of data from Airtable in this site:
 
 1. The landing page that displays a title and cover photo for each project
 
-   - This is pulling fields from all projects in the Projects table (e.g. project title and cover photo)
+   - Pulling project titles and cover photos from the Projects table
 
 2. Specific project pages that include a gallery of images/videos for that project
 
-   - This is pulling linked data from a specified project in the Project's table (e.g., images and videos linked to a project)
+   - Pulling linked images and videos from a specified project in the Project's table
 
 The landing page query occurs in `src/pages/index.js` and uses the built-in `graphql` function from Gatsby. Exporting a graphql query in a Gatsby page component automatically inserts the result of the query as a `data` prop into the component.
 
-Building the GraphQL query is easiest through the GraphiQL Explorer feature, accesible at `http://localhost:8000/___graphql`. One way to tap into the Projects table is by querying all tables in the base, filtering for "Projects", and sorting the projects in ascending order. Once inside Project, we then traverse the nodes in that graph (i.e., each project) to retrieve corresponding cover photos, titles, press releases, and slugs.
+Building the GraphQL query is easiest through the GraphiQL Explorer feature, accesible at `http://localhost:8000/___graphql`. One way to tap into the Projects table is by querying all tables in the base, filtering for "Projects", and sorting the projects in ascending order. Once inside the Projects table, we then traverse the nodes in that graph (i.e., each project) to retrieve corresponding cover photos, titles, press releases, and slugs.
 
 **/src/pages/index.js**
 
@@ -186,19 +188,21 @@ const IndexPage = ({ data }) => {
 export default IndexPage;
 ```
 
-Note how attached images are queried here using ImageSharp nodes from the Sharp image processing library. We specify that each `cover_photo`, which are available on the `localFiles` nodes, is a fluid image that is responsive to its container up to a width of 800px and will blur-up to focus using [Webp](https://using-gatsby-image.gatsbyjs.org/prefer-webp/).
+Note how attached images are queried using ImageSharp nodes from the Sharp image processing library. We specify that each `cover_photo`, which is available on the `localFiles` node, is a fluid image that is responsive to its container up to a width of 800px and will blur-up to focus using [Webp](https://using-gatsby-image.gatsbyjs.org/prefer-webp/).
 
-Since the contents of this query are injected into the component as a "data" prop, we can destructure that prop out and then access its nested properties in the JSX.
+Since the contents of this query are injected into the component as a `data` prop, we can destructure that prop out and then access its nested properties in the JSX.
+
+**/src/pages/index.js**
 
 <!-- prettier-ignore -->
 ```javascript
-import React from 'react';
-import { Link, graphql } from 'gatsby';
-import Img from 'gatsby-image';
-import styled from 'styled-components;
+import React from 'react'
+import { Link, graphql } from 'gatsby'
+import Img from 'gatsby-image'
+import styled from 'styled-components
 
-import Layout from '../components/layout';
-import SEO from '../components/seo';
+import Layout from '../components/layout'
+import SEO from '../components/seo'
 
 export const query = graphql`
   // GraphQL query from above
@@ -232,7 +236,7 @@ const ProjectWrapper = styled.div`
 export default IndexPage;
 ```
 
-The GraphQL query tells us exactly how to retrieve nested properties since it mimics the query structure itself! And note how the Gatsby Image component is created by passing it an `alt` attribute equal to the cover photo's title and `fluid` attribute equal to the `fluid` property of that cover photo.
+The GraphQL query mimics the object structure of the response, making it very easy to know how to extract a given property. Also note how the Gatsby Image component, `<Img />`, is created by passing it an `alt` attribute equal to the cover photo's title and `fluid` attribute equal to the `fluid` property of that cover photo.
 
 The end result is a landing page with a list of project title's and cover photos:
 
@@ -244,7 +248,7 @@ The end result is a landing page with a list of project title's and cover photos
 
 #### Gatsby Node API
 
-As referenced in the previous section, there's a second major query of data that happens in this site - the query used to generate individual project pages when a user clicks on any cover image on the landing page. This query and the process of creating new project pages requires the [Gatsby Node API](https://www.gatsbyjs.org/docs/node-apis/), which can be utilized in the "gatsby-node.js" file.
+As referenced in the previous section, there's a second major query of data that happens in this site - the query used to generate individual project pages when a user clicks on any cover image on the landing page. This query and the process of creating new project pages requires the [Gatsby Node API](https://www.gatsbyjs.org/docs/node-apis/), which can be utilized in the `gatsby-node.js` file.
 
 The key to this process is [createPages](https://www.gatsbyjs.org/docs/node-apis/#createPages) in the Gatsby Node API. This method tells plugins to add pages based on sourced nodes from Airtable (or any other data source). The two-step process is:
 
@@ -253,7 +257,7 @@ The key to this process is [createPages](https://www.gatsbyjs.org/docs/node-apis
 2. Map nodes to unique pages based on their slug and by providing a component template for all the content of that page
    - Use the `actions` method - an object containing functions - also made available from the `createPages` API to translate each node to a page
 
-**src/gatsby-node.js**
+**gatsby-node.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -311,11 +315,9 @@ exports.createPages = async ({ actions, graphql }) => {
 }
 ```
 
-#### Page template component
+#### Page Template Component
 
-The second major query of data in this site occurs in `/src/templates/project-template.js`, which is slug-specific. In other words, once we create the framework of a new project page (i.e., all the code in `gatbsby-node.js`), we then need to source all the images and videos for that project.
-
-One amazing aspect of GraphQL is its ability to ingest variables that can be used in its queries. In our case, we are querying Airtable for nodes attached to a project's slug. `slug` is a string passed down to `project-template.js` from the context object in `createPage` in `gatsby-node.js`, which is then ingested into the GraphQL query for that specific page.
+The second major query of data in this site occurs in `/src/templates/project-template.js`, which is trigged by a specific `slug` variable passed to the GraphQL query in the component template via the context object in `createPage` in `gatsby-node.js`. Content across the tables is filtered for where the `slug` field name equals the value of the `slug` variable passed to it. This allows us to retrieve just the images and videos for a given project on their unique pages.
 
 **/src/templates/project-template.js**
 
@@ -324,6 +326,7 @@ One amazing aspect of GraphQL is its ability to ingest variables that can be use
 import React from 'react'
 import { graphql, Link } from 'gatsby'
 
+// Filter by project slug variable
 export const query = graphql`
   query($slug: String!) {
     allAirtable(filter: { data: { slug: { eq: $slug } } }) {
@@ -393,11 +396,11 @@ The code snippet above shows how all the sourced data from Airtable is on the `d
 When a user enters into a project page, a gallery appears that contains small previews of each image for that project. There are two major components to building this gallery:
 
 1. Enforcing a uniform height of each gallery image while preserving the image ratio
-2. Creating a responsive container so that images flow naturally within the gallery based on viewport size
+2. Creating a responsive container so that images resize and flow naturally within the gallery based on viewport size
 
-Luckily, Gatsby Images store image aspect ratios and is accessible by including the `aspectRatio` property in the GraphQL query via the Sharp image processing. This can be seen in the previous section's GraphQL query for images in `project-template.js`.
+Luckily, image aspect ratios are accessible by including the `aspectRatio` property in the GraphQL query via the Sharp image processing package. This can be seen in the previous section's GraphQL query for images in `project-template.js`.
 
-After extracting the image nodes from the GraphQL query, we map each image into a container with a fixed height and variable width based on the image's aspect ratio. I chose heights of 150px for small screens and 250px for larger screens, which seemed to create a nicely responsive gallery for a range of viewports.
+After extracting the image nodes from the GraphQL query, we map each image into a container with a fixed height and varying width based on the image's aspect ratio. I chose heights of 150px for small screens and 250px for larger screens, which seemed to create a nicely responsive gallery for a range of viewports.
 
 **/src/templates/project-template.js**
 
@@ -422,9 +425,9 @@ const ProjectTemplate = props => {
   // 150px for small screens and 250px for larger screens
   // and variable widths based on image aspect ratio
     const renderImageList = images.map(image => {
-    const aspectRatio = image.data.attachment.localFiles[0].childImageSharp.fluid.aspectRatio;
-    const widthSmall = 150 * aspectRatio;
-    const widthLarge = 250 * aspectRatio;
+    const aspectRatio = image.data.attachment.localFiles[0].childImageSharp.fluid.aspectRatio
+    const widthSmall = 150 * aspectRatio
+    const widthLarge = 250 * aspectRatio
 
     return (
       <ImageCard
@@ -482,13 +485,13 @@ With each image now created with standardized heights, only a few lines of CSS a
 }
 ```
 
-Flexbox is a perfect tool for this feature. We only need to define a minimum height on the section and tell the flexed container to wrap children elements to new rows when they can no longer fit on a single line. Lastly, all content inside of the flexed container is centered along the main axis (rows in this case) using `justify-content: center`.
+Flexbox is a perfect tool for this feature. We only need to define a minimum height on the section and tell the flexed container to wrap children elements to new rows when they can no longer fit on a single row. Lastly, all content inside of the flexed container is centered along the main axis (rows in this case) using `justify-content: center`.
 
 ### TODO: add gif showing responsive gallery when all images are uploaded.
 
 #### Portals in Gatsby/React
 
-We also wanted users to have the ability to click on an image in the gallery to reveal a close-up version of that image inside of a modal. Once inside the modal, the close-up image is in fact one item of an infinite carousel that users click/swipe through.
+We also wanted users to have the ability to click on an image in the gallery to reveal a close-up version of that image inside of a modal. Once inside the modal, the close-up image is in fact one item of an infinite carousel that users can click/swipe through.
 
 [Portals](https://reactjs.org/docs/portals.html) are required in React apps to render a component (e.g., a Modal) that is _not_ mounted into the DOM as a child of the nearest parent node. For instance, we'll want to use a Portal to mount a modal component atop the DOM node heirarchy so that it can be displayed on top of the entire app and not be "stuck" inside of a nearest parent container.
 
@@ -496,7 +499,7 @@ Portals require a new div to be created in the `index.html` file as a sibling to
 
 `npm install --save gatsby-plugin-portal`
 
-and configured in `gatsby-config.js` according to the documentation. The docs also provide the JSX for the Portal component.
+and configured in `gatsby-config.js` according to the documentation. The docs also provide the JSX for a reusable Portal component, which is used in this site too.
 
 In the end, the DOM looks like:
 
@@ -509,7 +512,7 @@ html
 
 ```
 
-Now the Portal component can be included in each project page, which receives a child Modal component that can be triggered by any gallery image.
+Now the generic Portal component can be included in each project page, which receives a child Modal component that is opened by clicking on any gallery image.
 
 **src/templates/project-template.js**
 
@@ -551,7 +554,7 @@ The Modal component is passed 3 props that are maintained by local state inside 
 
 When a user clicks on a gallery image, `showModal` is set to `true` via `setShowModal` and the array of gallery images is re-ordered so that the clicked image comes first. These re-ordered images are then set to be `modalImages`. All of this happens on a click event attached to the `section` containing the gallery, which is delegated to child images in the section.
 
-The Modal is comprised of 4 elements:
+The Modal is comprised of 5 elements:
 
 1. An overall container
 2. A semi-transparent backdrop
@@ -559,7 +562,7 @@ The Modal is comprised of 4 elements:
 4. The Carousel component
 5. Close button
 
-**/src/components/Modal**
+**/src/components/Modal.js**
 
 <!-- prettier-ignore -->
 ```javascript
@@ -602,6 +605,8 @@ The backdrop is fixed to the upper left corner, spans the entire screen, and cen
 
 <!-- prettier-ignore -->
 ```css
+// Styling for backdrop portion of the Modal component
+
 .backdrop {
   position: fixed;
   left: 0;
@@ -618,3 +623,138 @@ The backdrop is fixed to the upper left corner, spans the entire screen, and cen
 ```
 
 #### Carousel Component
+
+The Carousel component is made possible thanks to the nifty [react-swipe](https://www.npmjs.com/package/react-swipe) package, which provides a component named `ReactSwipe` that allows users to swipe to next/previous items based on an array of children items in the component. In our case, `modalImages` are these children items, which are passed a prop to `Carousel.js` from `Modal.js`, as seen in the code snippet above. The react-swipe docs provide an excellent example for how to wire up the component, and I only slightly modified it for our purposes here:
+
+**/src/components/Carousel.js**
+
+<!-- prettier-ignore -->
+```javascript
+import React, { useEffect, useRef } from "react"
+import ReactSwipe from "react-swipe"
+
+const Carousel = ({ modalImages }) => {
+  let reactSwipeEl
+
+  // Create images with captions that will displayed on hover
+  const images = modalImages.map(image => (
+    <figure key={image.id}>
+      <div>
+        <img
+          srcSet={image.fluid.srcSet}
+          alt={image.title}
+          onClick={() => reactSwipeEl.next()}
+        />
+        <figcaption>
+          <p>{image.title}</p>
+          <p>{image.year}</p>
+          <p>{image.materials}</p>
+          <p>{image.view}</p>
+          <p>{image.location}</p>
+          <p>{image.dimensions}</p>
+        </figcaption>
+      </div>
+    </figure>
+  ))
+
+  return (
+    <CarouselContainer>
+      <button onClick={() => reactSwipeEl.prev()}>
+        Previous
+      </button>
+      <ReactSwipe
+        childCount={images.length}
+        swipeOptions={{}}
+        ref={el => (reactSwipeEl = el)}
+      >
+        {images}
+      </ReactSwipe>
+      <button onClick={() => reactSwipeEl.next()}>
+        Next
+      </button>
+    </CarouselContainer>
+  )
+}
+```
+
+On a desktop, users can navigate through the carousel by clicking on the previous or next buttons, which trigger a click event to built-in `prev()` and `next()` methods on the react-swipe element.
+
+One last feature we wanted to implement on the carousel was the ability to also navigate to previous/next images using the left and right arrow keys, respectively. Accomplishing this is a two-step process:
+
+1. Create a Ref to the Carousel container that can be focused when the component mounts
+2. Attach key down events to the container that trigger the built-in `prev()` and `next()` methods when the left or right arrow is pressed.
+
+**/src/components/Carousel.js**
+
+<!-- prettier-ignore -->
+```javascript
+import React, { useEffect, useRef } from "react"
+import ReactSwipe from "react-swipe"
+
+const Carousel = ({ modalImages }) => {
+
+  // Focus <CarouselContainer> on mount to allow for
+  // arrow left and arrow right keys to toggle images
+  const carouselRef = useRef(null)
+  useEffect(() => {
+    carouselRef.current.focus()
+  }, [])
+  
+  let reactSwipeEl
+
+  // Create images with captions that will displayed on hover
+  const images = modalImages.map(image => (
+    <figure key={image.id}>
+      <div>
+        <img
+          srcSet={image.fluid.srcSet}
+          alt={image.title}
+          onClick={() => reactSwipeEl.next()}
+        />
+        <figcaption>
+          <p>{image.title}</p>
+          <p>{image.year}</p>
+          <p>{image.materials}</p>
+          <p>{image.view}</p>
+          <p>{image.location}</p>
+          <p>{image.dimensions}</p>
+        </figcaption>
+      </div>
+    </figure>
+  ))
+
+  return (
+    <CarouselContainer
+      ref={carouselRef}
+      tabIndex="0"
+      onKeyDown={e => {
+        if (e.key === "ArrowLeft") {
+          reactSwipeEl.prev()
+        } else if (e.key === "ArrowRight") {
+          reactSwipeEl.next()
+        }
+      }}
+    >
+      <button onClick={() => reactSwipeEl.prev()}>
+        Previous
+      </button>
+      <ReactSwipe
+        childCount={images.length}
+        swipeOptions={{}}
+        ref={el => (reactSwipeEl = el)}
+      >
+        {images}
+      </ReactSwipe>
+      <button onClick={() => reactSwipeEl.next()}>
+        Next
+      </button>
+    </CarouselContainer>
+  )
+}
+```
+
+Voilà!
+
+![Carousel demo](./post-assets/emanuel-carousel-demo.gif)
+
+<figcaption>Swipeable carousel of project images</figcaption>
