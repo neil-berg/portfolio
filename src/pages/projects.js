@@ -102,6 +102,7 @@ const ProjectWrapper = styled.article`
 const Projects = ({ location }) => {
   const projectList = data.map((project, idx) => {
     const slug = createSlug(project)
+    console.log(slug);
 
     const backgrounds = {
       "Movie Mania": MovieManiaBackdrop,

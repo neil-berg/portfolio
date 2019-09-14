@@ -10,7 +10,7 @@ description: A blazing-fast, image-optimized artist portfolio built with Gatsby,
 
 Emanuel Röhss is an LA-based artist and was seeking a new design with high performance for his image-heavy online portfolio.
 
-Given [Gatsby's image optimization features](https://www.gatsbyjs.org/docs/working-with-images/), [plugin ecosystem](https://www.gatsbyjs.org/plugins/) for sourcing 3rd party APIs, built-in [GraphQL interface](https://www.gatsbyjs.org/docs/querying-with-graphql/), and ability to seamlessly [deploy continuously on Netlify](https://www.gatsbyjs.org/docs/deploying-to-netlify/), it was an easy call to go with this framework for [Emanuel's site](https://emanuel-rohss-demo1.netlify.com/).
+Given [Gatsby's image optimization features](https://www.gatsbyjs.org/docs/working-with-images/), [plugin ecosystem](https://www.gatsbyjs.org/plugins/) for sourcing 3rd party APIs, built-in [GraphQL interface](https://www.gatsbyjs.org/docs/querying-with-graphql/), and ability to seamlessly [deploy continuously on Netlify](https://www.gatsbyjs.org/docs/deploying-to-netlify/), it was an easy call to go with this framework for [Emanuel's site](https://emanuelrohss.com/).
 
 ### Airtable as a Headless CMS
 
