@@ -145,7 +145,7 @@ Building the GraphQL query is easiest through the GraphiQL Explorer feature, acc
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
-import styled from 'styled-components;
+import styled from 'styled-components';
 
 import Layout from '../components/layout';
 import SEO from '../components/seo';
@@ -387,8 +387,6 @@ export default ProjectTemplate;
 
 The code snippet above shows how all the sourced data from Airtable is on the `data` property on the components `props`. Additionally, all properties from the context object passed to this page can be accessed by the `pageContext` property, for instance, `props.pageContext.pressRelease`.
 
-## TODO: add gif showing project page once all data is in Airtable
-
 ### Image Gallery and Modal Carousel
 
 #### Flexbox gallery
@@ -400,7 +398,7 @@ When a user enters into a project page, a gallery appears that contains small pr
 
 Luckily, image aspect ratios are accessible by including the `aspectRatio` property in the GraphQL query via the Sharp image processing package. This can be seen in the previous section's GraphQL query for images in `project-template.js`.
 
-After extracting the image nodes from the GraphQL query, we map each image into a container with a fixed height and varying width based on the image's aspect ratio. I chose heights of 150px for small screens and 250px for larger screens, which seemed to create a nicely responsive gallery for a range of viewports.
+After extracting the image nodes from the GraphQL query, we map each image into a container with a fixed height and varying width based on the image's aspect ratio. I chose a height 250px for larger screens, which changes to 100% width on small screens, which seemed to create a nicely responsive gallery for a range of viewports.
 
 **/src/templates/project-template.js**
 
@@ -457,21 +455,21 @@ const ProjectTemplate = props => {
   )
 
 const ImageCard = styled.div`
-  height: 150px;
-  width: ${props => props.widthSmall}px;
+  width: 100%;
+  height: auto;
   display: inline-block;
-  margin: 0.5rem;
+  margin-bottom: 4rem;
   cursor: zoom-in;
 
   @media screen and (min-width: 800px) {
     height: 250px;
     width: ${props => props.widthLarge}px;
+    margin: 0.5rem;
   }
 `
-}
 ```
 
-Using styled-components, we pass down `widthSmall` and `widthLarge` to the `ImageCard` component, which sets the card's width based on screensize with a breakpoint at 800px.
+Using styled-components, we pass down `widthLarge` to the `ImageCard` component, which sets the card's width based on screensize with a breakpoint at 800px.
 
 With each image now created with standardized heights, only a few lines of CSS are needed on the overall gallery (i.e. `<section className="image-list">`) to have the images flow nicely:
 
@@ -487,7 +485,9 @@ With each image now created with standardized heights, only a few lines of CSS a
 
 Flexbox is a perfect tool for this feature. We only need to define a minimum height on the section and tell the flexed container to wrap children elements to new rows when they can no longer fit on a single row. Lastly, all content inside of the flexed container is centered along the main axis (rows in this case) using `justify-content: center`.
 
-### TODO: add gif showing responsive gallery when all images are uploaded.
+![Gallery demo](./post-assets/emanuel-gallery-demo.gif)
+
+<figcaption>Responsive image gallery using flexbox</figcaption>
 
 #### Portals in Gatsby/React
 
