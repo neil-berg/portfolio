@@ -1,5 +1,20 @@
 export const data = [
   {
+    title: "Emanuel Röhss",
+    date: "2019-07-27",
+    tools: [
+      "react",
+      "gatsby",
+      "graphql",
+      "airtable",
+      "react-spring",
+      "react-swipe",
+      "styled components",
+    ],
+    path: "https://emanuelrohss.com",
+    repoPath: "https://github.com/neil-berg/emanuel-rohss",
+  },
+  {
     title: "Chow Now",
     date: "2019-06-19",
     tools: [

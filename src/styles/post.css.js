@@ -5,6 +5,13 @@ export const StyledPost = styled.div`
   margin: 0 auto;
   padding: 1rem;
 
+  iframe {
+    display: block;
+    margin: 1rem auto;
+    width: 340px;
+    height: 191.25px;
+  }
+
   img {
     display: block;
     margin: 0 auto;
@@ -60,6 +67,14 @@ export const StyledPost = styled.div`
     a:hover {
       color: var(--lightred);
       border-bottom: 1px var(--lightred) solid;
+    }
+  }
+
+  // Adjust iframe size for larger screens
+  @media screen and (min-width: 600px) {
+    iframe {
+      width: 560px;
+      height: 315px;
     }
   }
 `
