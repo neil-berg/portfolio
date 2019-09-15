@@ -21,6 +21,7 @@ export const StyledPost = styled.div`
     text-align: left;
     padding-bottom: 1rem;
     font-size: 2.5em;
+    color: var(--white);
   }
 
   h3 {
@@ -36,8 +37,8 @@ export const StyledPost = styled.div`
 
   p {
     padding: 0.5rem 0;
-    line-height: 1.3em;
-    font-size: 1.1em;
+    line-height: 1.5em;
+    font-size: 1.2em;
   }
 
   ol,

@@ -14,71 +14,26 @@ import { StyledLink } from "../styles/link.css"
 
 library.add(faCode, faComments, faUserAstronaut, faPhone)
 
-const SmallNavWrapper = styled.nav`
-  width: 100vw;
-
-  .nav__menu--small {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px var(--grey) solid;
-    border-bottom: 1px var(--grey) solid;
-    background: var(--black);
-  }
-
-  .nav__item--small {
-    flex: 1;
-    color: var(--grey);
-  }
-
-  .nav__link--small {
-    padding: 0.75rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .nav__link-icon {
-    font-size: 1.25rem;
-    color: var(--grey);
-  }
-
-  .nav__link-icon--selected {
-    font-size: 1.25rem;
-    color: var(--white);
-  }
-
-  .nav__link-text--selected {
-    font-weight: bold;
-    color: var(--white);
-  }
-
-  @media screen and (min-width: 650px) {
-    display: none;
-  }
-`
-
 const SmallNav = ({ location }) => {
   const currentPath = location.pathname.split("/")[1]
   const navItems = [
     {
-      name: "projects",
+      name: "Projects",
       path: "/projects",
       icon: "code",
     },
     {
-      name: "thoughts",
+      name: "Thoughts",
       path: "/blog",
       icon: "comments",
     },
     {
-      name: "about",
+      name: "About",
       path: "/about",
       icon: "user-astronaut",
     },
     {
-      name: "contact",
+      name: "Contact",
       path: "/contact",
       icon: "phone",
     },
@@ -115,6 +70,56 @@ const SmallNav = ({ location }) => {
     </SmallNavWrapper>
   )
 }
+
+const SmallNavWrapper = styled.nav`
+  width: 100vw;
+
+  .nav__menu--small {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px var(--mediumgrey) solid;
+    border-bottom: 2px var(--mediumgrey) solid;
+    border-radius: 0 0 10px 10px;
+    background: var(--darkgrey);
+    box-shadow: 0px 5px 10px rgba(214, 213, 212, 0.25);
+  }
+
+  .nav__item--small {
+    flex: 1;
+    color: var(--lightgrey);
+  }
+
+  .nav__link--small {
+    padding: 0.75rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav__link-icon {
+    font-size: 1rem;
+    color: var(--lightgrey);
+  }
+
+  .nav__link-text {
+    font-size: 1rem;
+    color: var(--lightgrey);
+  }
+
+  .nav__link-icon--selected {
+    color: var(--lightred);
+  }
+
+  .nav__link-text--selected {
+    color: var(--lightred);
+  }
+
+  @media screen and (min-width: 650px) {
+    display: none;
+  }
+`
 
 SmallNav.propTypes = {
   location: PropTypes.object.isRequired,
