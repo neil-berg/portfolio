@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { animated, useSpring } from "react-spring"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons"
 import {
@@ -11,52 +12,24 @@ import {
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const ContactWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem;
-
-  .contact__intro {
-    font-size: 1.2em;
-    margin-top: 1rem;
-  }
-
-  .contact__list {
-    list-style-type: none;
-    margin-top: 2rem;
-  }
-
-  .contact__link {
-    color: var(--white);
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s linear;
-  }
-
-  .contact__link-icon {
-    font-size: 1.5em;
-  }
-
-  .contact__link-text {
-    padding: 0 1rem;
-    font-size: 1.2em;
-  }
-
-  @media (hover: hover) {
-    .contact__link:hover {
-      color: var(--lightred);
-    }
-  }
-`
-
 const Contact = ({ location }) => {
+  // Page animation
+  const animationProps = useSpring({
+    from: {
+      opacity: 0,
+      transform: `scale(0.8)`,
+    },
+    to: {
+      opacity: 1,
+      transform: `scale(1)`,
+    },
+  })
+
   return (
     <Layout location={location} showFooter={false}>
       <SEO title="Contact" />
 
-      <ContactWrapper className="contact">
+      <ContactWrapper style={animationProps} className="contact">
         <p className="contact__intro">
           Interested in working together? I'd love to hear from you.{" "}
         </p>
@@ -102,5 +75,45 @@ const Contact = ({ location }) => {
     </Layout>
   )
 }
+
+const ContactWrapper = styled(animated.div)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+
+  .contact__intro {
+    font-size: 1.2em;
+    margin-top: 1rem;
+  }
+
+  .contact__list {
+    list-style-type: none;
+    margin-top: 2rem;
+  }
+
+  .contact__link {
+    color: var(--white);
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    transition: color 0.2s linear;
+  }
+
+  .contact__link-icon {
+    font-size: 1.5em;
+  }
+
+  .contact__link-text {
+    padding: 0 1rem;
+    font-size: 1.2em;
+  }
+
+  @media (hover: hover) {
+    .contact__link:hover {
+      color: var(--lightred);
+    }
+  }
+`
 
 export default Contact

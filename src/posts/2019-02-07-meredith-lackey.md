@@ -6,7 +6,7 @@ description: "A sleek and minimal filmmaker's portfolio built in React"
 
 ## Meredith Lackey
 
-**February 7, 2019**
+<time datetime="2019-02-07">February 7, 2019</time>
 
 Meredith Lackey is a filmmaker based in Los Angeles who recently had her latest film Cablestreet premier at the Sundance Film Festival. We collaborated to create a [sleek portfolio](https://mlackey-demo.netlify.com/) for her that is built in React.
 

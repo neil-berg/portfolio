@@ -10,52 +10,38 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons"
 
+import { navItems } from "../data/navItems"
+import { colorPalettes } from "../data/colorPalettes"
 import { StyledLink } from "../styles/link.css"
 
 library.add(faCode, faComments, faUserAstronaut, faPhone)
 
 const SmallNav = ({ location }) => {
-  const currentPath = location.pathname.split("/")[1]
-  const navItems = [
-    {
-      name: "Projects",
-      path: "/projects",
-      icon: "code",
-    },
-    {
-      name: "Thoughts",
-      path: "/blog",
-      icon: "comments",
-    },
-    {
-      name: "About",
-      path: "/about",
-      icon: "user-astronaut",
-    },
-    {
-      name: "Contact",
-      path: "/contact",
-      icon: "phone",
-    },
-  ]
+  const currentPage = `/${location.pathname.split("/")[1]}`
+  const colorPalette = colorPalettes[currentPage]
+
   const navList = navItems.map((item, idx) => {
     return (
       <li className="nav__item--small" key={idx}>
         <StyledLink className="nav__link--small" to={item.path}>
           <FontAwesomeIcon
-            className={
-              item.path.split("/")[1] === currentPath
-                ? "nav__link-icon--selected"
-                : "nav__link-icon"
-            }
+            className="nav__link-icon"
             icon={item.icon}
+            style={{
+              color:
+                item.path === currentPage
+                  ? colorPalette.activeLink
+                  : `var(--grey)`,
+            }}
           />
           <span
-            className={
-              item.path.split("/")[1] === currentPath
-                ? "nav__link-text--selected"
-                : "nav__link-text"
-            }
+            className="nav__link-text"
+            style={{
+              color:
+                item.path === currentPage
+                  ? colorPalette.activeLink
+                  : `var(--grey)`,
+            }}
           >
             {item.name}
           </span>
@@ -105,15 +91,9 @@ const SmallNavWrapper = styled.nav`
 
   .nav__link-text {
     font-size: 1rem;
+    font-weight: bold;
+    text-transform: lowercase;
     color: var(--lightgrey);
-  }
-
-  .nav__link-icon--selected {
-    color: var(--blue);
-  }
-
-  .nav__link-text--selected {
-    color: var(--blue);
   }
 
   @media screen and (min-width: 650px) {

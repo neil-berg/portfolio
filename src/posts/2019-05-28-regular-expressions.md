@@ -6,7 +6,7 @@ description: Explanations and recipes for useful regular expressions
 
 ## Regular Expressions for Regular People
 
-**May 28, 2019**
+<time datetime="2019-05-28">May 28, 2019</time>
 
 Equally elegant and mysterious, regular expressions are a critical tool for input validation, string manipulations, and a host of other tasks. Their syntax can be daunting at first, but there is a clear logic between the slashes, and I find that it's best revealed by stepping through a handful of examples.
 

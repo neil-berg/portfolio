@@ -6,7 +6,7 @@ description: A blazing-fast, image-optimized artist portfolio built with Gatsby,
 
 ## Emanuel Röhss
 
-**July 27, 2019**
+<time datetime="2019-07-27">July 27, 2019</time>
 
 Emanuel Röhss is an LA-based artist and was seeking a new design with high performance for his image-heavy online portfolio.
 

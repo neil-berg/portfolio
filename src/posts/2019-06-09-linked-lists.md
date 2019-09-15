@@ -6,7 +6,7 @@ description: Structuring and working with singly and doubly linked lists
 
 ## Leaping Into Linked Lists
 
-**June 09, 2019**
+<time datetime="2019-06-09">June 9, 2019</time>
 
 When working with arrays, _finding_ the point of insertion/deletion is constant in time but _performing_ the insertion/deletion is O(n). This potentially costly operation happens since elements in arrays are allocated contiguously in memory, leading to a reorganization of the structure while performing the insertion/deletion.
 
