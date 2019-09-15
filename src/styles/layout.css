@@ -1,6 +1,6 @@
 :root {
-  --white: #f4f8fa;
-  --oatmeal: #f4ebcb;
+  --white: #ecf5ee;
+  --oatmeal: #ffedaa;
   --black: #292827;
   --darkgrey: #272c35;
   --mediumgrey: #535558;
@@ -10,11 +10,11 @@
   --lightgrey: #d6d5d4;
   --mint: #c5f9b8;
   --yellow: #fff093;
+  --blue: #7a99ec;
 }
 
 html {
   font-family: "Noto Sans", sans-serif;
-  /* font-family: "Inconsolata", sans-serif; */
   color: var(--white);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;

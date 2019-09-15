@@ -69,13 +69,13 @@ const StyledHeader = styled.header`
   background: #272c35;
 
   .header__name {
-    color: var(--white);
+    color: var(--oatmeal);
     flex: 1;
     text-align: center;
   }
 
   .header__name-slash {
-    color: var(--lightred);
+    color: var(--blue);
     transition: color 0.2s linear;
   }
 
@@ -117,11 +117,11 @@ const StyledHeader = styled.header`
     }
 
     .header__name:hover .header__name-slash {
-      color: var(--white);
+      color: var(--oatmeal);
       }
     
     .nav__item--large--unselected:hover {
-      color: var(--white);
+      color: var(--oatmeal);
     }
   }
 `

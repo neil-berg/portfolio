@@ -25,7 +25,7 @@ export const StyledPost = styled.div`
   }
 
   h3 {
-    color: var(--lightred);
+    color: var(--temp);
     padding: 0.5rem 0;
     border-bottom: 1px grey solid;
   }

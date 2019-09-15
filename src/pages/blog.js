@@ -117,7 +117,7 @@ const BlogWrapper = styled.div`
 
   .blog__post-description {
     color: var(--white);
-    border-left: 3px var(--oatmeal) solid;
+    border-left: 3px var(--blue) solid;
     padding-left: 1rem;
     margin-left: 2px;
   }

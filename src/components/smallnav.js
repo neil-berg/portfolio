@@ -109,11 +109,11 @@ const SmallNavWrapper = styled.nav`
   }
 
   .nav__link-icon--selected {
-    color: var(--lightred);
+    color: var(--blue);
   }
 
   .nav__link-text--selected {
-    color: var(--lightred);
+    color: var(--blue);
   }
 
   @media screen and (min-width: 650px) {
