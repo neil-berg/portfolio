@@ -21,6 +21,44 @@ export const query = graphql`
     }
   }
 `
+const BlogTemplate = props => {
+  const { previous, next } = props.pageContext
+
+  return (
+    <Layout location={props.location}>
+      {/* <SEO title={props.data.markdownRemark.frontmatter.title} /> */}
+
+      <StyledPost
+        dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
+      />
+      <Pagination>
+        <li className="next">
+          {next && (
+            <NextLink to={`/blog/${next.fields.slug}`} rel="next">
+              <span className="link-text">{next.frontmatter.title}</span>
+              <FontAwesomeIcon
+                className="link-icon"
+                icon={faLongArrowAltRight}
+              />
+            </NextLink>
+          )}
+        </li>
+        <li className="previous">
+          {previous && (
+            <PrevLink to={`/blog/${previous.fields.slug}`} rel="prev">
+              <FontAwesomeIcon
+                className="link-icon"
+                icon={faLongArrowAltLeft}
+              />
+              <span className="link-text">{previous.frontmatter.title}</span>
+            </PrevLink>
+          )}
+        </li>
+      </Pagination>
+    </Layout>
+  )
+}
+
 const NextLink = styled(Link)`
   color: inherit;
   display: flex;
@@ -72,42 +110,5 @@ const Pagination = styled.ul`
     text-align: left;
   }
 `
-
-const BlogTemplate = props => {
-  const { previous, next } = props.pageContext
-  return (
-    <Layout location={props.location}>
-      {/* <SEO title={props.data.markdownRemark.frontmatter.title} /> */}
-
-      <StyledPost
-        dangerouslySetInnerHTML={{ __html: props.data.markdownRemark.html }}
-      />
-      <Pagination>
-        <li className="next">
-          {next && (
-            <NextLink to={`/blog/${next.fields.slug}`} rel="next">
-              <span className="link-text">{next.frontmatter.title}</span>
-              <FontAwesomeIcon
-                className="link-icon"
-                icon={faLongArrowAltRight}
-              />
-            </NextLink>
-          )}
-        </li>
-        <li className="previous">
-          {previous && (
-            <PrevLink to={`/blog/${previous.fields.slug}`} rel="prev">
-              <FontAwesomeIcon
-                className="link-icon"
-                icon={faLongArrowAltLeft}
-              />
-              <span className="link-text">{previous.frontmatter.title}</span>
-            </PrevLink>
-          )}
-        </li>
-      </Pagination>
-    </Layout>
-  )
-}
 
 export default BlogTemplate

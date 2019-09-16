@@ -52,10 +52,6 @@ module.exports = {
             family: "Noto Sans",
             variants: [`400`, `700`],
           },
-          {
-            family: "Inconsolata",
-            variants: [`400`],
-          },
         ],
       },
     },

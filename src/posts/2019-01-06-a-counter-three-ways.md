@@ -6,7 +6,7 @@ description: "A simple counter app served three ways: vanilla JS, React, and Rea
 
 ## A Counter Served Three Ways
 
-**January 6, 2019**
+<time datetime="2019-01-06">January 6, 2019</time>
 
 When learning new languages, frameworks, and other tools to build apps, I find it helpful to have side-by-side code comparisons of how to execute a given task. It doesn't have to be fancy, a simple counter app will do.
 

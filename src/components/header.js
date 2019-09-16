@@ -3,26 +3,77 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 
 import SmallNav from "./smallnav"
+import { colorPalettes } from "../data/colorPalettes"
+import { navItems } from "../data/navItems"
 import { StyledLink } from "../styles/link.css"
+
+const Header = ({ location }) => {
+  const currentPage = `/${location.pathname.split("/")[1]}`
+  const colorPalette = colorPalettes[currentPage]
+
+  const renderNavList = navItems.map((item, idx) => {
+    return (
+      <li
+        key={idx}
+        className="nav__item--large"
+        style={{
+          color:
+            item.path === currentPage ? colorPalette.activeLink : `var(--grey)`,
+        }}
+      >
+        <StyledLink className="nav__link--large" to={item.path}>
+          {item.name}
+        </StyledLink>
+      </li>
+    )
+  })
+  return (
+    <div style={{ width: "100vw" }}>
+      <StyledHeader colorPalette={colorPalette} className="header">
+        <h1 className="header__name">
+          <StyledLink className="header__link" to="/">
+            <span className="header__firstname">neil</span>
+            <span className="header__slash"> / </span>
+            <span className="header__lastname">berg</span>
+          </StyledLink>
+        </h1>
+
+        <nav className="nav--large">
+          <ul className="nav__menu--large">{renderNavList}</ul>
+        </nav>
+      </StyledHeader>
+      <SmallNav location={location} />
+    </div>
+  )
+}
 
 const StyledHeader = styled.header`
   display: flex;
   align-items: baseline;
-  padding: 0.5rem 1rem;
+  padding: 1rem 0;
   max-width: 800px;
   margin: 0 auto;
   z-index: 999;
-  background: var(--black);
+  background: var(--darkgrey);
 
   .header__name {
-    color: var(--white);
     flex: 1;
     text-align: center;
   }
 
-  .header__name-slash {
-    color: var(--lightred);
-    transition: color 0.2s linear;
+  .header__firstname {
+    color: ${props => props.colorPalette.firstName};
+    transition: color 0.3s ease;
+  }
+
+  .header__lastname {
+    color: ${props => props.colorPalette.lastName};
+    transition: color 0.3s ease;
+  }
+
+  .header__slash {
+    color: ${props => props.colorPalette.slash};
+    transition: color 0.3s ease;
   }
 
   .nav--large {
@@ -30,21 +81,15 @@ const StyledHeader = styled.header`
   }
 
   .nav__menu--large {
-      display: flex;
-      list-style-type: none
+    display: flex;
+    list-style-type: none;
   }
 
-  .nav__item--large--selected, .nav__item--large--unselected {
-        padding: 0 0.5rem 0.25rem 0.5rem;
-        margin: 0 0.5rem;
-        color: var(--white);
-        font-size: 1.3em;
-      }
-
-  .nav__item--large--selected {
-        color: var(--lightred);
-      }
-    }
+  .nav__item--large {
+    padding: 0 0.5rem 0.25rem 0.5rem;
+    margin: 0 0.5rem;
+    font-size: 1.2em;
+    font-weight: bold;
   }
 
   @media screen and (min-width: 650px) {
@@ -57,74 +102,30 @@ const StyledHeader = styled.header`
     }
   }
 
+  @media screen and (max-width: 800px) {
+    padding: 0.5rem 1rem;
+  }
+
   @media (hover: hover) {
-    .header__name:hover {
-      color: var(--lightred);
+    .header__name:hover .header__firstname {
+      color: ${props => props.colorPalette.firstNameHover};
+    }
+    .header__name:hover .header__slash {
+      color: ${props => props.colorPalette.slashHover};
+    }
+    .header__name:hover .header__lastname {
+      color: ${props => props.colorPalette.lastNameHover};
     }
 
-    .header__name:hover .header__name-slash {
+    .header__name:hover .link__slash {
       color: var(--white);
-      }
-    
-    .nav__item--large--unselected:hover {
-      color: var(--lightred);
+    }
+
+    .nav__link--large:hover {
+      color: var(--white);
     }
   }
 `
-
-const Header = ({ location }) => {
-  const currentPath = location.pathname.split("/")[1]
-  const navItems = [
-    {
-      name: "projects",
-      path: "/projects",
-    },
-    {
-      name: "thoughts",
-      path: "/blog",
-    },
-    {
-      name: "about",
-      path: "/about",
-    },
-    {
-      name: "contact",
-      path: "/contact",
-    },
-  ]
-  const renderNavList = navItems.map((item, idx) => {
-    return (
-      <li
-        key={idx}
-        className={`nav__item--large--${
-          item.path.split("/")[1] === currentPath ? "selected" : "unselected"
-        }`}
-      >
-        <StyledLink className="nav__link--large" to={item.path}>
-          {item.name}
-        </StyledLink>
-      </li>
-    )
-  })
-  return (
-    <div style={{ width: "100vw", background: "var(--black)" }}>
-      <StyledHeader className="header">
-        <h1 className="header__name">
-          <StyledLink className="header__link" to="/">
-            neil
-            <span className="header__name-slash"> / </span>
-            berg
-          </StyledLink>
-        </h1>
-
-        <nav className="nav--large">
-          <ul className="nav__menu--large">{renderNavList}</ul>
-        </nav>
-      </StyledHeader>
-      <SmallNav location={location} />
-    </div>
-  )
-}
 
 Header.propTypes = {
   location: PropTypes.object.isRequired,

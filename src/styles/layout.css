@@ -1,18 +1,20 @@
 :root {
-  --white: #f6f3ea;
-  --oatmeal: #f4ebcb;
+  --white: #ecf5ee;
+  --oatmeal: #ffedaa;
   --black: #292827;
+  --darkgrey: #272c35;
+  --mediumgrey: #535558;
   --red: #f9423a;
   --lightred: #f7a194;
   --grey: #a5a4a0;
   --lightgrey: #d6d5d4;
   --mint: #c5f9b8;
   --yellow: #fff093;
+  --blue: #7a99ec;
 }
 
 html {
-  /* font-family: "Noto Sans", sans-serif; */
-  font-family: "Inconsolata", sans-serif;
+  font-family: "Noto Sans", sans-serif;
   color: var(--white);
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -54,6 +56,7 @@ template {
   display: none;
 }
 a {
+  color: inherit;
   background-color: transparent;
   text-decoration: none;
   -webkit-text-decoration-skip: objects;
@@ -213,7 +216,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  background: var(--black);
+  background: var(--darkgrey);
   font-weight: normal;
   word-wrap: break-word;
   font-kerning: normal;
@@ -272,7 +275,7 @@ h5 {
 h6 {
   margin: 0;
   padding: 0;
-  font-family: Inconsolata, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+  font-family: Noto Sans, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
     Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   text-rendering: optimizeLegibility;
   font-size: 0.78405rem;
@@ -503,7 +506,7 @@ td:last-child {
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-  padding: 0.1em 0.2em;
+  padding: 0.2em 0.25em;
   border-radius: 0.1em;
   font-size: 0.8em;
 }

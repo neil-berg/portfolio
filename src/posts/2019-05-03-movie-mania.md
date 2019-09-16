@@ -6,7 +6,7 @@ description: React/Redux web app to scan new releases, trending movies, and top 
 
 ## Movie Mania
 
-**May 3, 2019**
+<time datetime="2019-05-03">May 3, 2019</time>
 
 Have you visited [IMDB](https://www.imdb.com/) lately? There's a ton of great content, but it can be overwhelming at times, especially if you are simply looking to check out the details of a movie. With a goal of creating a site that provides easier access to movie information, alongside a desire to sharpen my Redux knowledge, I decided to build [Movie Mania](https://movie-mania.netlify.com/).
 

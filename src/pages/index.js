@@ -59,7 +59,7 @@ const Home = ({ location }) => (
     <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
     <LandingWrapper>
       <p className="landing__text">
-        Hi. I'm a front end developer based in Los Angeles.
+        Hi. I'm a full-stack developer based in Los Angeles.
       </p>
       <p className="landing__text">
         I like making fast, elegant, and resilient web products.

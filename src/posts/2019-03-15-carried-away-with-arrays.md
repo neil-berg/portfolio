@@ -6,7 +6,7 @@ description: "Deep dive into the amazing array capabilities of JavaScript"
 
 ## Carried Away With Arrays
 
-**March 15, 2019**
+<time datetime="2019-03-15">March 15, 2019</time>
 
 Arrays are one of my favorite data structures in JavaScript (and Python). They can store all sorts of goodies: numbers, strings, objects, more arrays, and so forth. JavaScript has a wealth of methods for dealing with the [Array object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array). In this post, we'll examine a few of them to demonstrate the power and usefullness of arrays.
 

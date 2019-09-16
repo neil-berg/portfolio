@@ -6,7 +6,7 @@ description: "React App build on the New York Times API to cruise the latest new
 
 ## News Flash
 
-**April 19, 2019**
+<time datetime="2019-04-19">April 19, 2019</time>
 
 I read the New York Times online constantly, it serves worldclass journalism and excellent short-form writing all day long. They also have a generous team of developers who maintain a public and data-rich API.
 
