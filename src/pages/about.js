@@ -46,7 +46,7 @@ const About = ({ location }) => {
           <div className="bio__text-container">
             <h2 className="bio__header">Bio</h2>
             <p className="bio__text">
-              I'm an LA-based front end developer. Building on a career in
+              I'm an LA-based full-stack developer. Building on a career in
               climate science where I specialized in geospatial data analytics
               and visualizations, I decided to blend my love of coding and
               communication with my interests in design and style, and dive into
@@ -71,7 +71,25 @@ const About = ({ location }) => {
             </li>
             <li className="tech-skills__item">
               <span className="strong">JS frameworks/libraries: </span>React,
-              Redux, React-Router, Gatsby, D3
+              Node, Express, React, Gatsby
+            </li>
+            <li className="tech-skills__item">
+              <span className="strong">Databases and data management: </span>
+              Redux, React Context, MongoDB, Mongoose, Firebase
+            </li>
+            <li className="tech-skills__item">
+              <span className="strong">APIs: </span>REST, GraphQL, Postman
+            </li>
+            <li className="tech-skills__item">
+              <span className="strong">CMS: </span>Contentful, Airtable
+            </li>
+            <li className="tech-skills__item">
+              <span className="strong">Styling and animations: </span>
+              Styled-components, React-spring
+            </li>
+            <li className="tech-skills__item">
+              <span className="strong">Hosting/Deployment: </span>Netlify,
+              Heroku
             </li>
             <li className="tech-skills__item">
               <span className="strong">Python libraries: </span>Pandas, Numpy,
@@ -182,6 +200,12 @@ const About = ({ location }) => {
           <h2 className="experience__header">Experience</h2>
           <ul className="experience__list">
             <li className="experience__item">
+              <p className="experience__item-title">
+                Full-stack software engineer @ Polycade
+              </p>
+              <p className="experience__item-years">2019 - current</p>
+            </li>
+            <li className="experience__item">
               <p className="experience__item-title">Freelance web developer</p>
               <p className="experience__item-years">2018 - current</p>
             </li>
@@ -189,7 +213,7 @@ const About = ({ location }) => {
               <p className="experience__item-title">
                 Co-Associate Director, UCLA Center for Climate Science
               </p>
-              <p className="experience__item-years">2017 - current</p>
+              <p className="experience__item-years">2017 - 2019</p>
             </li>
             <li className="experience__item">
               <p className="experience__item-title">
@@ -244,16 +268,13 @@ const AboutWrapper = styled(animated.div)`
   .bio__text,
   .tech-skills__text,
   .comm-skills__text {
-    font-size: 1.2em;
+    font-size: 1em;
+    line-height: 1.45em;
     padding: 0.5rem 0;
-    line-height: 1.3em;
   }
 
   .comm-skills__link {
-    color: var(--white);
-    padding-bottom: 2px;
-    border-bottom: 1px var(--white) solid;
-    transition: all 0.25s linear;
+    color: var(--blue);
   }
 
   .tech-skills__list,
@@ -266,8 +287,8 @@ const AboutWrapper = styled(animated.div)`
   .tech-skills__item,
   .education__item,
   .experience__item {
-    line-height: 1em;
-    font-size: 1.2em;
+    font-size: 1em;
+    line-height: 1.45em;
     padding: 0.5rem;
   }
 

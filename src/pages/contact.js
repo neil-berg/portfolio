@@ -13,15 +13,56 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 
 const Contact = ({ location }) => {
-  // Page animation
-  const animationProps = useSpring({
+  // Animations for each contact link
+  const emailAnimationProps = useSpring({
     from: {
       opacity: 0,
-      transform: `scale(0.8)`,
+      transform: `translate3d(-50px, -50px, 0)`,
+      color: "var(--white)",
     },
     to: {
       opacity: 1,
-      transform: `scale(1)`,
+      transform: `translate3d(0, 0, 0)`,
+      color: "var(--white)",
+    },
+  })
+
+  const githubAnimationProps = useSpring({
+    from: {
+      opacity: 0,
+      transform: `translate3d(50px, -50px, 0)`,
+      color: "var(--white)",
+    },
+    to: {
+      opacity: 1,
+      transform: `translate3d(0, 0, 0)`,
+      color: "var(--oatmeal)",
+    },
+  })
+
+  const twitterAnimationProps = useSpring({
+    from: {
+      opacity: 0,
+      transform: `translate3d(-50px, 50px, 0)`,
+      color: "var(--white)",
+    },
+    to: {
+      opacity: 1,
+      transform: `translate3d(0, 0, 0)`,
+      color: "var(--blue)",
+    },
+  })
+
+  const linkedinAnimationProps = useSpring({
+    from: {
+      opacity: 0,
+      transform: `translate3d(50px, 50px, 0)`,
+      color: "var(--white)",
+    },
+    to: {
+      opacity: 1,
+      transform: `translate3d(0, 0, 0)`,
+      color: "var(--lightred)",
     },
   })
 
@@ -29,12 +70,12 @@ const Contact = ({ location }) => {
     <Layout location={location} showFooter={false}>
       <SEO title="Contact" />
 
-      <ContactWrapper style={animationProps} className="contact">
+      <ContactWrapper className="contact">
         <p className="contact__intro">
           Interested in working together? I'd love to hear from you.{" "}
         </p>
         <ul className="contact__list">
-          <li className="contact__item">
+          <animated.li className="contact__item" style={emailAnimationProps}>
             <a className="contact__link" href="mailto:neil@neilberg.dev">
               <FontAwesomeIcon
                 className="contact__link-icon"
@@ -42,26 +83,38 @@ const Contact = ({ location }) => {
               />
               <span className="contact__link-text">Email</span>
             </a>
-          </li>
-          <li className="contact__item">
-            <a className="contact__link" href="https://github.com/neil-berg">
+          </animated.li>
+          <animated.li className="contact__item" style={githubAnimationProps}>
+            <a
+              className="contact__link"
+              href="https://github.com/neil-berg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FontAwesomeIcon className="contact__link-icon" icon={faGithub} />
               <span className="contact__link-text">Github</span>
             </a>
-          </li>
-          <li className="contact__item">
-            <a className="contact__link" href="https://twitter.com/_neilberg">
+          </animated.li>
+          <animated.li className="contact__item" style={twitterAnimationProps}>
+            <a
+              className="contact__link"
+              href="https://twitter.com/_neilberg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <FontAwesomeIcon
                 className="contact__link-icon"
                 icon={faTwitter}
               />
               <span className="contact__link-text">Twitter</span>
             </a>
-          </li>
-          <li>
+          </animated.li>
+          <animated.li className="contact__item" style={linkedinAnimationProps}>
             <a
               className="contact__link"
               href="https://www.linkedin.com/in/neil-berg-43135b55/"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <FontAwesomeIcon
                 className="contact__link-icon"
@@ -69,7 +122,7 @@ const Contact = ({ location }) => {
               />
               <span className="contact__link-text">LinkedIn</span>
             </a>
-          </li>
+          </animated.li>
         </ul>
       </ContactWrapper>
     </Layout>
@@ -93,11 +146,9 @@ const ContactWrapper = styled(animated.div)`
   }
 
   .contact__link {
-    color: var(--white);
     padding: 1rem 0;
     display: flex;
     align-items: center;
-    transition: color 0.2s linear;
   }
 
   .contact__link-icon {
@@ -107,12 +158,6 @@ const ContactWrapper = styled(animated.div)`
   .contact__link-text {
     padding: 0 1rem;
     font-size: 1.2em;
-  }
-
-  @media (hover: hover) {
-    .contact__link:hover {
-      color: var(--lightred);
-    }
   }
 `
 
