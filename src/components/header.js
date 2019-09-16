@@ -8,8 +8,13 @@ import { navItems } from "../data/navItems"
 import { StyledLink } from "../styles/link.css"
 
 const Header = ({ location }) => {
+  // All defined pages have a color palette
+  // For 404 pages, just use the index.js palette
+  const paths = Object.keys(colorPalettes)
   const currentPage = `/${location.pathname.split("/")[1]}`
-  const colorPalette = colorPalettes[currentPage]
+  const colorPalette = paths.includes(currentPage)
+    ? colorPalettes[currentPage]
+    : colorPalettes["/"]
 
   const renderNavList = navItems.map((item, idx) => {
     return (
