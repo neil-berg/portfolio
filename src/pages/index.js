@@ -1,31 +1,118 @@
-import React from "react"
+import React, { useRef, useState, useEffect, useCallback } from "react"
 import styled from "styled-components"
+import { animated, useTransition } from "react-spring"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Image from "../images/palm-trees.jpg"
+
+const Home = ({ location }) => {
+  const ref = useRef([])
+  const [items, set] = useState([])
+  const transitions = useTransition(items, null, {
+    from: {
+      opacity: 0,
+      height: 0,
+      innerHeight: 0,
+      transform: "perspective(600px) rotateX(0deg)",
+      color: "#a5a4a0",
+    },
+    enter: [
+      {
+        opacity: 1,
+        height: 60,
+        innerHeight: 60,
+      },
+      {
+        transform: "perspective(600px) rotateX(180deg)",
+        color: "#ffedaa",
+      },
+      {
+        transform: "perspective(600px) rotateX(0deg)",
+      },
+    ],
+    leave: [
+      { color: "#7a99ec" },
+      { innerHeight: 0 },
+      { opacity: 0, height: 0 },
+    ],
+    update: { color: "#f7a194" },
+  })
+
+  const reset = useCallback(() => {
+    ref.current.map(clearTimeout)
+    ref.current = []
+    set([])
+    ref.current.push(setTimeout(() => set(["Hello", "&", "Welcome"]), 0))
+    ref.current.push(setTimeout(() => set(["Hello", "Welcome"]), 3000))
+    ref.current.push(
+      setTimeout(
+        () =>
+          set(["Hello", "Full stack", "Developer", "Based in LA", "Welcome"]),
+        6000
+      )
+    )
+  }, [])
+
+  useEffect(() => void reset(), [])
+
+  return (
+    <Layout location={location} showFooter={true}>
+      <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
+      <LandingWrapper>
+        <div className="animation-container">
+          {transitions.map(({ item, props: { innerHeight, ...rest }, key }) => (
+            <animated.div
+              className="transitions-item"
+              key={key}
+              style={rest}
+              onClick={reset}
+            >
+              <animated.div className="item-container">{item}</animated.div>
+            </animated.div>
+          ))}
+        </div>
+      </LandingWrapper>
+    </Layout>
+  )
+}
 
 const LandingWrapper = styled.div`
   // Small screens: Height of container is
   // based on 100vh minus height of header (65px)
   // navbar (63px) and footer (110)px
-
-  padding: 3rem 0.25rem;
   height: calc(100vh - 65px - 63px - 110px);
-  // Photo by Corey Agopian on Unsplash
-  background-image: linear-gradient(var(--lightred) 35%, transparent),
-    url(${Image});
-  background-position: bottom 20%;
-  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
 
-  .landing__text {
-    font-size: 1.5em;
-    text-align: center;
-    color: var(--white);
+  .animation-container {
+    max-width: 400px;
   }
 
-  .landing__text:first-child {
-    padding-bottom: 2rem;
+  .item-container {
+    overflow: "hidden",
+    height: innerHeight,
+    margin: 0 auto;
+  }
+
+  .transitions-item {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 3.5em;
+    font-weight: 800;
+    text-transform: lowercase;
+    will-change: transform, opacity, height;
+    white-space: nowrap;
+    cursor: pointer;
+    line-height: 60px;
   }
 
   @media screen and (min-width: 650px) {
@@ -33,39 +120,11 @@ const LandingWrapper = styled.div`
     // based on 100vh minus height of header (65px)
     // and footer (110)px
     height: calc(100vh - 65px - 110px);
-    background-position: bottom;
 
-    .landing__text {
-      font-size: 2em;
-    }
-  }
-
-  // Phones on their side / small heights
-  @media screen and (max-height: 570px) {
-    padding: 1rem;
-
-    .landing__text {
-      font-size: 1.25em;
-    }
-
-    .landing__text:first-child {
-      padding-bottom: 0.75rem;
-    }
+    // .transitions-item {
+    //   font-size: 5em;
+    // }
   }
 `
-
-const Home = ({ location }) => (
-  <Layout location={location} showFooter={true}>
-    <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
-    <LandingWrapper>
-      <p className="landing__text">
-        Hi. I'm a full-stack developer based in Los Angeles.
-      </p>
-      <p className="landing__text">
-        I like making fast, elegant, and resilient web products.
-      </p>
-    </LandingWrapper>
-  </Layout>
-)
 
 export default Home
