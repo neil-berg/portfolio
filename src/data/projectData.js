@@ -1,5 +1,20 @@
 export const data = [
   {
+    title: "Erica Mahinay",
+    date: "2019-09-22",
+    tools: [
+      "react",
+      "gatsby",
+      "graphql",
+      "contentful",
+      "react-spring",
+      "nuka carousel",
+      "styled components",
+    ],
+    path: "https://ericamahinay.studio",
+    repoPath: "https://github.com/neil-berg/erica-mahinay",
+  },
+  {
     title: "Emanuel Röhss",
     date: "2019-07-27",
     tools: [

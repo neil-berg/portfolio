@@ -1,5 +1,5 @@
 ---
-title: "Project Review: News Flash"
+title: "News Flash"
 date: "2019-04-19"
 description: "React App build on the New York Times API to cruise the latest news, top stories, best sellers, and movie reviews."
 ---

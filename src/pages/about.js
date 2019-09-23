@@ -131,7 +131,7 @@ const About = ({ location }) => {
             <Link className="comm-skills__link" to="/blog">
               personal blog
             </Link>{" "}
-            on web development, I created and teach a{" "}
+            on web development, I created and taught a{" "}
             <a
               className="comm-skills__link"
               href="https://github.com/neil-berg/climate-data-analyses"
@@ -182,59 +182,6 @@ const About = ({ location }) => {
             .
           </p>
         </section>
-        <section className="education">
-          <h2 className="education__header">Education</h2>
-          <ul className="education__list">
-            <li className="education__item">
-              PhD Atmospheric and Oceanic Sciences, UCLA
-            </li>
-            <li className="education__item">
-              MS Atmospheric and Oceanic Sciences, UCLA
-            </li>
-            <li className="education__item">
-              BS Atmospheric and Oceanic Sciences, UW-Madison
-            </li>
-          </ul>
-        </section>
-        <section className="experience">
-          <h2 className="experience__header">Experience</h2>
-          <ul className="experience__list">
-            <li className="experience__item">
-              <p className="experience__item-title">
-                Full-stack software engineer @ Polycade
-              </p>
-              <p className="experience__item-years">2019 - current</p>
-            </li>
-            <li className="experience__item">
-              <p className="experience__item-title">Freelance web developer</p>
-              <p className="experience__item-years">2018 - current</p>
-            </li>
-            <li className="experience__item">
-              <p className="experience__item-title">
-                Co-Associate Director, UCLA Center for Climate Science
-              </p>
-              <p className="experience__item-years">2017 - 2019</p>
-            </li>
-            <li className="experience__item">
-              <p className="experience__item-title">
-                Associate Physical Scientist, RAND
-              </p>
-              <p className="experience__item-years">2015 - 2017</p>
-            </li>
-            <li className="experience__item">
-              <p className="experience__item-title">
-                Atmospheric and Data Scientist, Vertum Partners
-              </p>
-              <p className="experience__item-years">2011 - 2014</p>
-            </li>
-            <li className="experience__item">
-              <p className="experience__item-title">
-                Graduate Student Researcher, UCLA
-              </p>
-              <p className="experience__item-years">2009 - 2015</p>
-            </li>
-          </ul>
-        </section>
       </AboutWrapper>
     </Layout>
   )
@@ -247,9 +194,7 @@ const AboutWrapper = styled(animated.div)`
 
   .bio__text-container,
   .tech-skills,
-  .comm-skills,
-  .education,
-  .experience {
+  .comm-skills {
     padding: 0.5rem 0;
   }
 
@@ -277,16 +222,12 @@ const AboutWrapper = styled(animated.div)`
     color: var(--blue);
   }
 
-  .tech-skills__list,
-  .education__list,
-  .experience__list {
+  .tech-skills__list {
     list-style-type: square;
     margin-left: 1.25rem;
   }
 
-  .tech-skills__item,
-  .education__item,
-  .experience__item {
+  .tech-skills__item {
     font-size: 1em;
     line-height: 1.45em;
     padding: 0.5rem;
@@ -296,27 +237,9 @@ const AboutWrapper = styled(animated.div)`
     font-weight: bold;
   }
 
-  .experience__item {
-    padding: 0;
-    margin: 1rem 0;
-  }
-
-  .experience__item-title,
-  .experience__item-years {
-    margin: 0;
-    padding: 0;
-    font-size: 1em;
-  }
-
-  .experience__item-years {
-    padding-left: 1.5rem;
-  }
-
   .bio__header,
   .tech-skills__header,
-  .comm-skills__header,
-  .education__header,
-  .experience__header {
+  .comm-skills__header {
     color: var(--lightred);
     border-bottom: 1px grey solid;
   }
