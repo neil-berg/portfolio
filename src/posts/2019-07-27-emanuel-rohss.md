@@ -1,5 +1,5 @@
 ---
-title: "Project Review: Emanuel Röhss"
+title: "Emanuel Röhss"
 date: "2019-07-27"
 description: A blazing-fast, image-optimized artist portfolio built with Gatsby, Airtable, and GraphQL
 ---

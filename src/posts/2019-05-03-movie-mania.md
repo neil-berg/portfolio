@@ -1,5 +1,5 @@
 ---
-title: "Project Review: Movie Mania"
+title: "Movie Mania"
 date: "2019-05-03"
 description: React/Redux web app to scan new releases, trending movies, and top rated films of all time
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Project Review: Meredith Lackey"
+title: "Meredith Lackey"
 date: "2019-02-07"
 description: "A sleek and minimal filmmaker's portfolio built in React"
 ---
