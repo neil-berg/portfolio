@@ -492,11 +492,30 @@ td:last-child {
 
 /* Prism code line numbers */
 .gatsby-highlight {
-  background-color: #fdf6e3;
+  background-color: #faf6ec;
   border-radius: 0.3em;
   margin: 0.5em 0;
-  padding: 0em 0.5em;
+  padding: 1em;
   overflow: auto;
+}
+
+.gatsby-highlight-code-line {
+  background-color: hsl(224, 95%, 96%);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1.1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
+  border-left: 0.25em solid #f7a194;
+}
+
+.gatsby-highlight pre[class*="language-"] {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  overflow: initial;
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
 }
 
 .gatsby-highlight pre[class*="language-"].line-numbers {
@@ -507,8 +526,8 @@ td:last-child {
 /* Inline code */
 :not(pre) > code[class*="language-"] {
   padding: 0.2em 0.25em;
-  border-radius: 0.1em;
-  font-size: 0.8em;
+  border-radius: 0.25em;
+  font-size: 1em;
 }
 
 @media only screen and (max-width: 480px) {
