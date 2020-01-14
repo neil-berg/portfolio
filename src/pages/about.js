@@ -6,6 +6,7 @@ import Img from "gatsby-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import { skills } from '../data/skills';
 
 const About = ({ location }) => {
   const data = useStaticQuery(graphql`
@@ -51,7 +52,7 @@ const About = ({ location }) => {
               and visualizations, I decided to blend my love of coding and
               communication with my interests in design and style, and dive into
               web development. Creating spaces in our digital world that are
-              accessible, enjoyable, and reliable has become a passion ever
+              fast, engaging, and reliable has become a passion ever
               since. Practicing yoga, playing guitar, and cooking balance out my
               computer time.
             </p>
@@ -62,49 +63,24 @@ const About = ({ location }) => {
           <h2 className="tech-skills__header">Technical skills</h2>
           <p className="tech-skills__text">
             Always learning and open to new technologies, here's what I'm
-            currently using:
+            currently using or have recent experience with:
           </p>
-          <ul className="tech-skills__list">
-            <li className="tech-skills__item">
-              <span className="strong">Languages: </span>JavaScript, Python,
-              HTML/CSS
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">JS frameworks/libraries: </span>React,
-              Node, Express, React, Gatsby
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">Databases and data management: </span>
-              Redux, React Context, MongoDB, Mongoose, Firebase
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">APIs: </span>REST, GraphQL, Postman
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">CMS: </span>Contentful, Airtable
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">Styling and animations: </span>
-              Styled-components, React-spring
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">Hosting/Deployment: </span>Netlify,
-              Heroku
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">Python libraries: </span>Pandas, Numpy,
-              Matplotlib, Xarray
-            </li>
-            <li className="tech-skills__item">
-              <span className="strong">Design + prototyping: </span>Figma
-            </li>
-          </ul>
+          <div className="tech-skills-category-container">
+            {Object.keys(skills).map(category => (
+              <div className="tech-skills-category">
+                <h5 className="tech-skills-category__header">{category}</h5>
+                <ul className="tech-skills-category__list">
+                  {skills[category].map(skill => <li className="tech-skills-category__list-item">{skill}</li>)}
+                </ul>
+              </div>
+            ))}
+          </div>
         </section>
 
         <section className="comm-skills">
           <h2 className="comm-skills__header">Communication skills</h2>
           <p className="comm-skills__text">
-            I have communicated complex technical and quantitative topics to a
+            I have spoken and written about complex technical and quantitative topics to a
             range of audiences, from{" "}
             <a
               className="comm-skills__link"
@@ -222,15 +198,38 @@ const AboutWrapper = styled(animated.div)`
     color: var(--blue);
   }
 
-  .tech-skills__list {
-    list-style-type: square;
-    margin-left: 1.25rem;
+  .tech-skills-category-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
-  .tech-skills__item {
+  .tech-skills-category {
+    width: 100%;
+    border-top: 1px solid var(--mediumgrey);
+    padding: .75em;
+    /* margin: 0.25rem; */
+  }
+
+  .tech-skills-category__header {
+    text-align: center;
     font-size: 1em;
-    line-height: 1.45em;
-    padding: 0.5rem;
+    padding-bottom: 0.5em;
+    color: var(--oatmeal);
+  }
+
+  .tech-skills-category__list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tech-skills-category__list-item {
+    font-size: 0.9em;
+    text-align: center;
+    color: var(--white);
   }
 
   .strong {
@@ -252,6 +251,15 @@ const AboutWrapper = styled(animated.div)`
       .bio__text-container {
         padding-left: 2.5rem;
       }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+     .tech-skills-category {
+      width: 248px;
+      margin: 4px;
+      border-top: 1px solid var(--mediumgrey);
+      padding: 0.25em;
     }
   }
 
