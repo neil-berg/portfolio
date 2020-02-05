@@ -70,6 +70,7 @@ export const StyledPost = styled.div`
 
     li {
       line-height: 1.3em;
+      margin-bottom: 1.5rem;
     }
   }
 
