@@ -1,5 +1,5 @@
 export const skills = {
-    "Languages": ["JavaScript, Python, HTML/CSS, SQL, bash/linux"],
+    "Languages": ["JavaScript/TypeScript, Python, HTML/CSS, SQL, bash/linux"],
     "JS Frameworks & Libraries": ["React, Node, Redux, Gatsby, Express, Koa"],
     "Database": ["PostgreSQL, MongoDB, Firebase, Mongoose, Knex"],
     "Cloud": ["AWS (S3, EC2), Google StackDriver, Google Big Query"],
