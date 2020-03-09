@@ -87,6 +87,8 @@ const SmallNavWrapper = styled.nav`
   .nav__link-icon {
     font-size: 1rem;
     color: var(--lightgrey);
+    width: 17px;
+    height: 17px;
   }
 
   .nav__link-text {

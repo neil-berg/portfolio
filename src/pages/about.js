@@ -174,6 +174,10 @@ const AboutWrapper = styled(animated.div)`
     padding: 0.5rem 0;
   }
 
+  .tech-skills {
+    margin: 2rem 0;
+  }
+
   .bio {
     display: flex;
     flex-direction: column;
