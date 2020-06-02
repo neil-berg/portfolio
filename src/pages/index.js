@@ -47,7 +47,7 @@ const Home = ({ location }) => {
     ref.current.push(
       setTimeout(
         () =>
-          set(["Hello", "Full stack", "Developer", "Based in LA", "Welcome"]),
+          set(["Hello", "Software", "Engineer", "LA, CA", "Welcome"]),
         6000
       )
     )
@@ -77,9 +77,9 @@ const Home = ({ location }) => {
 }
 
 const LandingWrapper = styled.div`
-  // Small screens: Height of container is
-  // based on 100vh minus height of header (65px)
-  // navbar (63px) and footer (110)px
+  /* Small screens: Height of container is
+  based on 100vh minus height of header (65px)
+  navbar (63px) and footer (110)px */
   height: calc(100vh - 65px - 63px - 110px);
   display: flex;
   flex-direction: column;
@@ -92,8 +92,6 @@ const LandingWrapper = styled.div`
   }
 
   .item-container {
-    overflow: "hidden",
-    height: innerHeight,
     margin: 0 auto;
   }
 
@@ -112,18 +110,17 @@ const LandingWrapper = styled.div`
     will-change: transform, opacity, height;
     white-space: nowrap;
     cursor: pointer;
-    line-height: 60px;
+    line-height: 80px;
+    &:not(:last-of-type) {
+      padding-bottom: 12px;
+    }
   }
 
   @media screen and (min-width: 650px) {
-    // Larger screens: Height of container is
-    // based on 100vh minus height of header (65px)
-    // and footer (110)px
+    /* Larger screens: Height of container is
+    based on 100vh minus height of header (65px)
+    and footer (110)px */
     height: calc(100vh - 65px - 110px);
-
-    // .transitions-item {
-    //   font-size: 5em;
-    // }
   }
 `
 
