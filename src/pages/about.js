@@ -60,7 +60,7 @@ const About = ({ location }) => {
         </section>
 
         <section className="tech-skills">
-          <h2 className="tech-skills__header">Technical skills</h2>
+          <h2 className="tech-skills__header">Tools of choice</h2>
           <p className="tech-skills__text">
             Always learning and open to new technologies, here's what I'm
             currently using or have recent experience with:
@@ -78,7 +78,7 @@ const About = ({ location }) => {
         </section>
 
         <section className="comm-skills">
-          <h2 className="comm-skills__header">Communication skills</h2>
+          <h2 className="comm-skills__header">Writing + talking + teaching</h2>
           <p className="comm-skills__text">
             I have spoken and written about complex technical and quantitative topics to a
             range of audiences, from{" "}
