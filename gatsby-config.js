@@ -45,13 +45,10 @@ module.exports = {
 			},
 		},
 		{
-			resolve: `gatsby-plugin-prefetch-google-fonts`,
+			resolve: `gatsby-plugin-google-fonts`,
 			options: {
 				fonts: [
-					{
-						family: "Noto Sans",
-						variants: [`400`, `700`],
-					},
+					`noto sans\:400,700`
 				],
 			},
 		},
