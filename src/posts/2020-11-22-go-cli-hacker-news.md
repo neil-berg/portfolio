@@ -15,6 +15,8 @@ powerful built-in libraries for parsing command-line flags and making network
 requests, this post describes how to create a simple CLI tool for fetching and
 displaying Hacker News stories.
 
+The full code [can be found here.](https://github.com/neil-berg/gohn)
+
 ### Getting Started
 
 To begin a Go project, a module management file is first created in the project
