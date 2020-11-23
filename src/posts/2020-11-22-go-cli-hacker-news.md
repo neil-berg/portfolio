@@ -20,7 +20,13 @@ The full code [can be found here.](https://github.com/neil-berg/gohn)
 ### Getting Started
 
 To begin a Go project, a module management file is first created in the project
-root with `go mod init`. This produces a `go.mod` file to store information about
+root with `go mod init <repo-location>`:
+
+```bash
+go mod init github.com/neil-berg/gohn
+```
+
+This produces a `go.mod` file to store information about
 modules used in the project.
 
 Then create a main Go file in the project root. It does not need to be called
