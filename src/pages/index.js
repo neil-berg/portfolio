@@ -56,22 +56,8 @@ const Home = ({ location }) => {
   useEffect(() => void reset(), [])
 
   return (
-    <Layout location={location} showFooter={true}>
+    <Layout location={location} showFooter={false}>
       <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
-      <LandingWrapper>
-        <div className="animation-container">
-          {transitions.map(({ item, props: { innerHeight, ...rest }, key }) => (
-            <animated.div
-              className="transitions-item"
-              key={key}
-              style={rest}
-              onClick={reset}
-            >
-              <animated.div className="item-container">{item}</animated.div>
-            </animated.div>
-          ))}
-        </div>
-      </LandingWrapper>
     </Layout>
   )
 }
