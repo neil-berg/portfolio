@@ -33,7 +33,7 @@ const Header = ({ location }) => {
     )
   })
   return (
-    <div style={{ width: "100vw" }}>
+    <>
       <StyledHeader colorPalette={colorPalette} className="header">
         <h1 className="header__name">
           <StyledLink className="header__link" to="/">
@@ -48,21 +48,18 @@ const Header = ({ location }) => {
         </nav>
       </StyledHeader>
       <SmallNav location={location} />
-    </div>
+    </>
   )
 }
 
 const StyledHeader = styled.header`
   display: flex;
   align-items: baseline;
-  padding: 1rem 0;
-  max-width: 800px;
-  margin: 0 auto;
-  z-index: 999;
+  justify-content: center;
+  padding: 1rem;
   background: var(--darkgrey);
 
   .header__name {
-    flex: 1;
     text-align: center;
   }
 
@@ -97,7 +94,8 @@ const StyledHeader = styled.header`
     font-weight: bold;
   }
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: 800px) {
+    justify-content: space-between;
     .header__name {
       text-align: left;
     }
@@ -105,10 +103,6 @@ const StyledHeader = styled.header`
     .nav--large {
       display: block;
     }
-  }
-
-  @media screen and (max-width: 800px) {
-    padding: 0.5rem 1rem;
   }
 
   @media (hover: hover) {

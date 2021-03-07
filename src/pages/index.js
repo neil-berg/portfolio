@@ -1,127 +1,109 @@
-import React, { useRef, useState, useEffect, useCallback } from "react"
+import React from "react"
 import styled from "styled-components"
-import { animated, useTransition } from "react-spring"
+import { Link } from "gatsby"
 
-import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-const Home = ({ location }) => {
-  const ref = useRef([])
-  const [items, set] = useState([])
-  const transitions = useTransition(items, null, {
-    from: {
-      opacity: 0,
-      height: 0,
-      innerHeight: 0,
-      transform: "perspective(600px) rotateX(0deg)",
-      color: "#a5a4a0",
-    },
-    enter: [
-      {
-        opacity: 1,
-        height: 60,
-        innerHeight: 60,
-      },
-      {
-        transform: "perspective(600px) rotateX(180deg)",
-        color: "#ffedaa",
-      },
-      {
-        transform: "perspective(600px) rotateX(0deg)",
-      },
-    ],
-    leave: [
-      { color: "#7a99ec" },
-      { innerHeight: 0 },
-      { opacity: 0, height: 0 },
-    ],
-    update: { color: "#f7a194" },
-  })
-
-  const reset = useCallback(() => {
-    ref.current.map(clearTimeout)
-    ref.current = []
-    set([])
-    ref.current.push(setTimeout(() => set(["Hello", "&", "Welcome"]), 0))
-    ref.current.push(setTimeout(() => set(["Hello", "Welcome"]), 3000))
-    ref.current.push(
-      setTimeout(
-        () =>
-          set(["Hello", "Software", "Engineer", "LA, CA", "Welcome"]),
-        6000
-      )
-    )
-  }, [])
-
-  useEffect(() => void reset(), [])
-
-  return (
-    <Layout location={location} showFooter={true}>
-      <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
-      <LandingWrapper>
-        <div className="animation-container">
-          {transitions.map(({ item, props: { innerHeight, ...rest }, key }) => (
-            <animated.div
-              className="transitions-item"
-              key={key}
-              style={rest}
-              onClick={reset}
-            >
-              <animated.div className="item-container">{item}</animated.div>
-            </animated.div>
-          ))}
-        </div>
-      </LandingWrapper>
-    </Layout>
-  )
+const Classes = {
+  Container: 'landing-name-container',
+  Name: 'landing-name',
+  Nav: 'landing-nav',
+  NavList: 'landing-nav-list',
+  NavListItem: 'landing-nav-list-item',
 }
 
-const LandingWrapper = styled.div`
-  /* Small screens: Height of container is
-  based on 100vh minus height of header (65px)
-  navbar (63px) and footer (110)px */
-  height: calc(100vh - 65px - 63px - 110px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
+const Home = () => {
+  const [animate, setAnimate] = React.useState(false);
+  const [reanimate, setReanimate] = React.useState(false);
+  React.useEffect(() => {
+    setTimeout(() => {setAnimate(true)}, 250)
+    setTimeout(() => {setReanimate(true)}, 500)
+  }, [])
 
-  .animation-container {
-    max-width: 400px;
+  return (
+    <StyledHome animate={animate} reanimate={reanimate}>
+      <SEO title="Home" keywords={[`neil`, `berg`, `developer`]} />
+      <div className={Classes.Container}>
+        <span className={Classes.Name}>Neil Berg</span>
+        <nav className={Classes.Nav}>
+          <ul className={Classes.NavList}>
+            <li className={Classes.NavListItem}>
+              <StyledLink to='/projects'>projects</StyledLink>
+            </li>
+            <li className={Classes.NavListItem}>
+              <StyledLink to='/thoughts'>thoughts</StyledLink>
+            </li>
+            <li className={Classes.NavListItem}>
+              <StyledLink to='/about'>about</StyledLink>
+            </li>
+            <li className={Classes.NavListItem}>
+              <StyledLink to='/contact'>contact</StyledLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </StyledHome>
+  )
+}
+export default Home
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  font-weight: bold;
+`
+
+const StyledHome = styled.div`
+  position: relative;
+  height: 100vh;
+  background: linear-gradient(to right, transparent, rgba(39, 44, 53, 0.8)), url("https://images.unsplash.com/photo-1496504175726-c7b4523c7e81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2180&q=80");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  .${Classes.Container} {
+    position: absolute;
+    right: 20px;
+    top: 20px;
   }
 
-  .item-container {
-    margin: 0 auto;
-  }
-
-  .transitions-item {
-    margin: 0 auto;
-    overflow: hidden;
-    width: 100%;
-    max-width: 300px;
-    color: white;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 3.5em;
-    font-weight: 800;
+  .${Classes.Name} {
     text-transform: lowercase;
-    will-change: transform, opacity, height;
-    white-space: nowrap;
-    cursor: pointer;
-    line-height: 80px;
-    &:not(:last-of-type) {
-      padding-bottom: 12px;
-    }
+    color: var(--yellow);
+    font-size: 36px;
+    font-weight: bold;
   }
 
-  @media screen and (min-width: 650px) {
-    /* Larger screens: Height of container is
-    based on 100vh minus height of header (65px)
-    and footer (110)px */
-    height: calc(100vh - 65px - 110px);
+  .${Classes.NavList} {
+    list-style: none;
+    margin-top: 16px;
+  }
+
+  .${Classes.NavListItem} {
+    width: 100%;
+    text-align: right;
+    text-transform: lowercase;
+    font-size: 18px;
+    margin-bottom: 8px;
+    opacity: ${(props) => props.animate ? 1 : 0};
+    color: ${(props) => props.reanimate ? 'var(--white)' : 'var(--lightred)'};
+    transition-property: color, opacity;
+    transition-duration: 250ms;
+    transition-timing-function: ease-in-out;
+    
+    :nth-of-type(1) {
+      transition-delay: 0ms;
+    }
+    :nth-of-type(2) {
+      transition-delay: 150ms;
+    }
+    :nth-of-type(3) {
+      transition-delay: 300ms;
+    }
+    :nth-of-type(4) {
+      transition-delay: 450ms;
+    }
   }
 `
 
-export default Home

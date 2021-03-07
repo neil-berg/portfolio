@@ -58,8 +58,6 @@ const SmallNav = ({ location }) => {
 }
 
 const SmallNavWrapper = styled.nav`
-  width: 100vw;
-
   .nav__menu--small {
     list-style-type: none;
     display: flex;
@@ -98,7 +96,7 @@ const SmallNavWrapper = styled.nav`
     color: var(--lightgrey);
   }
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: 800px) {
     display: none;
   }
 `
