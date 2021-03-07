@@ -31,7 +31,7 @@ const Home = () => {
               <StyledLink to='/projects'>projects</StyledLink>
             </li>
             <li className={Classes.NavListItem}>
-              <StyledLink to='/thoughts'>thoughts</StyledLink>
+              <StyledLink to='/blog'>thoughts</StyledLink>
             </li>
             <li className={Classes.NavListItem}>
               <StyledLink to='/about'>about</StyledLink>
