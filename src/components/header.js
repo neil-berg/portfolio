@@ -2,7 +2,6 @@ import React from "react"
 import styled from "styled-components"
 import PropTypes from "prop-types"
 
-import SmallNav from "./smallnav"
 import { colorPalettes } from "../data/colorPalettes"
 import { navItems } from "../data/navItems"
 import { StyledLink } from "../styles/link.css"
@@ -33,34 +32,33 @@ const Header = ({ location }) => {
     )
   })
   return (
-    <>
-      <StyledHeader colorPalette={colorPalette} className="header">
-        <h1 className="header__name">
-          <StyledLink className="header__link" to="/">
-            <span className="header__firstname">neil</span>
-            <span className="header__slash"> / </span>
-            <span className="header__lastname">berg</span>
-          </StyledLink>
-        </h1>
+    <StyledHeader colorPalette={colorPalette} className="header">
+      <h1 className="header__name">
+        <StyledLink className="header__link" to="/">
+          <span className="header__firstname">neil</span>
+          <span className="header__slash"> / </span>
+          <span className="header__lastname">berg</span>
+        </StyledLink>
+      </h1>
 
-        <nav className="nav--large">
-          <ul className="nav__menu--large">{renderNavList}</ul>
-        </nav>
-      </StyledHeader>
-      <SmallNav location={location} />
-    </>
+      <nav className="nav">
+        <ul className="nav-list">{renderNavList}</ul>
+      </nav>
+    </StyledHeader>
   )
 }
 
 const StyledHeader = styled.header`
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 1rem;
   background: var(--darkgrey);
+  border-bottom: 1px solid var(--mediumgrey);
 
   .header__name {
-    text-align: center;
+    margin-bottom: 20px;
   }
 
   .header__firstname {
@@ -78,12 +76,11 @@ const StyledHeader = styled.header`
     transition: color 0.3s ease;
   }
 
-  .nav--large {
-    display: none;
-  }
-
-  .nav__menu--large {
+  .nav-list {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 300px;
     list-style-type: none;
   }
 
@@ -94,14 +91,14 @@ const StyledHeader = styled.header`
     font-weight: bold;
   }
 
-  @media screen and (min-width: 800px) {
-    justify-content: space-between;
+  @media screen and (min-width: 500px) {
     .header__name {
       text-align: left;
     }
 
-    .nav--large {
-      display: block;
+    .nav-list {
+      max-width: 500px;
+      justify-content: unset;
     }
   }
 
