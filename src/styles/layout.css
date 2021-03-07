@@ -204,7 +204,6 @@ textarea {
 }
 html {
   box-sizing: border-box;
-  overflow-y: scroll;
 }
 * {
   box-sizing: inherit;
