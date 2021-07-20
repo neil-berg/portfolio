@@ -1,96 +1,81 @@
 import React from "react"
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 import PropTypes from "prop-types"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { library } from "@fortawesome/fontawesome-svg-core"
-import {
-  faCode,
-  faComments,
-  faUserAstronaut,
-  faPhone,
-} from "@fortawesome/free-solid-svg-icons"
 
 import { navItems } from "../data/navItems"
-import { colorPalettes } from "../data/colorPalettes"
 import { StyledLink } from "../styles/link.css"
 
-library.add(faCode, faComments, faUserAstronaut, faPhone)
+const Classes = {
+  Nav: 'small-nav',
+  List: 'small-nav-list',
+  ListItem: 'small-nav-list-item',
+  ListItemLink: 'small-nav-list-item-link',
+  ListItemText: 'small-nav-list-item-text',
+}
 
-const SmallNav = ({ location }) => {
-  const currentPage = `/${location.pathname.split("/")[1]}`
-  const colorPalette = colorPalettes[currentPage]
-
-  const navList = navItems.map((item, idx) => {
-    return (
-      <li className="nav__item--small" key={idx}>
-        <StyledLink className="nav__link--small" to={item.path}>
-          <FontAwesomeIcon
-            className="nav__link-icon"
-            icon={item.icon}
-            style={{
-              color:
-                item.path === currentPage
-                  ? colorPalette.activeLink
-                  : `var(--grey)`,
-            }}
-          />
-          <span
-            className="nav__link-text"
-            style={{
-              color:
-                item.path === currentPage
-                  ? colorPalette.activeLink
-                  : `var(--grey)`,
-            }}
-          >
-            {item.name}
-          </span>
-        </StyledLink>
-      </li>
-    )
-  })
-
+export const SmallNav = ({ showMenu, currentPage }) => {
   return (
-    <SmallNavWrapper className="nav__menu">
-      <ul className="nav__menu--small">{navList}</ul>
-    </SmallNavWrapper>
+    <StyledSmallNav showMenu={showMenu}>
+      <ul className={Classes.List}>
+        {navItems.map((item, idx) => {
+          return (
+            <li className={Classes.ListItem} key={idx}>
+              <StyledLink className={Classes.ListItemLink} to={item.path}>
+                <span
+                  className={Classes.ListItemText}
+                  style={{
+                    color:
+                      item.path === currentPage
+                        ? `var(--yellow)`
+                        : `var(--white)`,
+                  }}
+                >
+                  {item.name}
+                </span>
+              </StyledLink>
+            </li>
+          )
+        })}
+      </ul>
+    </StyledSmallNav>
   )
 }
 
-const SmallNavWrapper = styled.nav`
-  .nav__menu--small {
+const StyledSmallNav = styled.nav`
+  position: absolute;
+  top: 82px;
+  left: 0;
+  display: flex;
+  background: var(--blue);
+  width: 100%;
+  max-width: 100vw;
+  z-index: 3;
+  max-height: 0;
+  overflow-y: hidden;
+  transition: all 400ms ease 0s;
+
+  ${props => props.showMenu && css`
+    padding: 30px 0;
+    max-height: 296px;
+  `}
+  
+  .${Classes.List} {
+    width: 100%;
     list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 2px var(--mediumgrey) solid;
-    border-bottom: 2px var(--mediumgrey) solid;
-    border-radius: 0 0 10px 10px;
-    background: var(--darkgrey);
-    box-shadow: 0px 5px 10px rgba(214, 213, 212, 0.25);
-  }
-
-  .nav__item--small {
-    flex: 1;
-    color: var(--lightgrey);
-  }
-
-  .nav__link--small {
-    padding: 0.75rem 0;
-    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
-  .nav__link-icon {
-    font-size: 1rem;
-    color: var(--lightgrey);
-    width: 17px;
-    height: 17px;
+  .${Classes.ListItem} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
   }
 
-  .nav__link-text {
-    font-size: 1rem;
+  .${Classes.ListItemText} {
+    font-size: 18px;
     font-weight: bold;
     text-transform: lowercase;
     color: var(--lightgrey);
@@ -102,7 +87,6 @@ const SmallNavWrapper = styled.nav`
 `
 
 SmallNav.propTypes = {
-  location: PropTypes.object.isRequired,
+  showMenu: PropTypes.bool.isRequired,
+  currentPage: PropTypes.string.isRequired,
 }
-
-export default SmallNav
