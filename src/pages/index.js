@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import styled, {keyframes} from "styled-components"
 import { Link } from "gatsby"
 
 import SEO from "../components/seo"
@@ -47,6 +47,18 @@ const Home = () => {
 }
 export default Home
 
+const flowAnimation = keyframes`
+  0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+`
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: inherit;
@@ -57,10 +69,9 @@ const StyledLink = styled(Link)`
 const StyledHome = styled.div`
   position: relative;
   height: 100vh;
-  background: linear-gradient(to right, transparent, rgba(39, 44, 53, 0.8)), url("https://images.unsplash.com/photo-1496504175726-c7b4523c7e81?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2180&q=80");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: linear-gradient(-45deg, var(--darkgrey), var(--mediumgrey), var(--blue), var(--lightred));
+	background-size: 400% 400%;
+  animation: ${flowAnimation} 7s ease infinite;
 
   .${Classes.Container} {
     position: absolute;
@@ -71,20 +82,20 @@ const StyledHome = styled.div`
   .${Classes.Name} {
     text-transform: lowercase;
     color: var(--yellow);
-    font-size: 36px;
+    font-size: 44px;
     font-weight: bold;
   }
 
   .${Classes.NavList} {
     list-style: none;
-    margin-top: 16px;
+    margin-top: 24px;
   }
 
   .${Classes.NavListItem} {
     width: 100%;
     text-align: right;
     text-transform: lowercase;
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 8px;
     opacity: ${(props) => props.animate ? 1 : 0};
     color: ${(props) => props.reanimate ? 'var(--white)' : 'var(--lightred)'};
