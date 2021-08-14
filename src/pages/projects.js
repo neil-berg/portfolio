@@ -1,12 +1,29 @@
 import React from "react"
 import styled from "styled-components"
 import { animated, useSpring } from "react-spring"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { library } from "@fortawesome/fontawesome-svg-core"
+import { faCode, faBook } from "@fortawesome/free-solid-svg-icons"
 
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { data } from "../data/projectData"
 import { createSlug } from "../helper"
+
+library.add(faCode, faBook)
+
+const Classes = {
+  TitleLink: "project-card-title-link",
+  TitleLinkText: "project-card-title-link-text",
+  Description: "project-card-description",
+  LinkContainer: "project-card-link-container",
+  CodeLink: "project-card-code-link",
+  CodeLinkText: "project-card-code-link-text",
+  PostLink: "project-card-post-link",
+  PostIcon: "project-card-post-icon",
+  PostLinkText: "project-card-post-link-text",
+}
 
 const Projects = ({ location }) => {
   const animationProps = useSpring({
@@ -24,15 +41,18 @@ const Projects = ({ location }) => {
     const slug = createSlug(project)
 
     return (
-      <ProjectCard className="project" key={idx}>
+      <ProjectCard key={idx}>
         <a
-          className="project__url"
+          className={Classes.TitleLink}
           href={project.path}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <h2 className="project__title">{project.title}</h2>
+          <h2 className={Classes.TitleLinkText}>{project.title}</h2>
         </a>
+        {project.description && (
+          <p className={Classes.Description}>{project.description}</p>
+        )}
         <ul className="project__tool-list">
           {project.tools.map((tool, idx) => (
             <li className="project__tool-item" key={idx}>
@@ -40,18 +60,22 @@ const Projects = ({ location }) => {
             </li>
           ))}
         </ul>
-        <div className="project__links-container">
+        <div className={Classes.LinkContainer}>
           <a
-            className="project__link-view-code"
+            className={Classes.CodeLink}
             href={project.repoPath}
             target="_blank"
             rel="noopener noreferrer"
           >
-            view code
+            <FontAwesomeIcon icon={"code"} />
+            <span className={Classes.CodeLinkText}>View Code</span>
           </a>
-          <Link className="project__link-learn-more" to={slug}>
-            learn more
-          </Link>
+          {project.hasPost && 
+            <Link className={Classes.PostLink} to={slug}>
+              <FontAwesomeIcon className={Classes.PostIcon} icon={"book"} />
+              <span className={Classes.PostLinkText}>Read More</span>
+            </Link>
+          }
         </div>
       </ProjectCard>
     )
@@ -78,94 +102,93 @@ const ProjectContainer = styled(animated.section)`
 `
 
 const ProjectCard = styled.div`
-  border: 1px var(--mediumgrey) solid;
+  background: var(--mediumgrey);
   border-radius: 5px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  /* align-items: flex-start; */
   justify-content: space-between;
-  box-shadow: 2px 5px 10px rgba(255, 237, 170, 0.25);
   transition: all 0.3s ease;
 
-  .project__title {
+  .${Classes.TitleLinkText} {
     color: var(--lightred);
-    font-size: 2.25em;
-    text-align: center;
-    padding: 1rem 0;
-    border-bottom: 1px solid var(--mediumgrey);
-    border-radius: 5px 5px 0 0;
+    font-size: 30px;
     transition: all 0.3s ease;
+  }
+
+  .${Classes.Description} {
+    color: var(--white);
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .${Classes.LinkContainer} {
+    display: flex;
+    align-items: center;
+  }
+
+  .${Classes.CodeLink}, .${Classes.PostLink} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--blue);
+    border: 2px solid var(--blue);
+    padding: 5px 10px;
+    border-radius: 3px;
+    width: 130px;
+    font-size: 14px;
+  }
+
+  .${Classes.CodeLinkText}, .${Classes.PostLinkText} {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+  .${Classes.PostLink} {
+    margin-left: 10px;
+    background: var(--white);
+    border: 2px solid var(--white);
+  }
+
+  .${Classes.PostIcon} {
+    color: var(--blue);
+  }
+
+  .${Classes.PostLinkText} {
+    color: var(--blue);
   }
 
   .project__tool-list {
     list-style-type: none;
     text-align: center;
-    padding: 1.5rem;
-    line-height: 1.5rem;
+    margin: 15px 0;
+    line-height: 20px;
   }
 
   .project__tool-item {
     color: var(--oatmeal);
     display: inline;
     margin: 0;
+    font-size: 13px;
   }
 
   .project__tool-item::after {
-    content: "";
+    content: "+";
     display: inline-block;
     width: 8px;
     height: 8px;
-    border-radius: 50%;
-    background-color: var(--blue);
-    margin: 0 0.65rem;
+    color: var(--blue);
+    margin: 0 5px;
   }
 
   .project__tool-item:last-of-type:after {
-    content: ''
+    content: '';
     display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
     background-color: transparent;
-    margin: 0 0.65rem;
-  }
-
-  .project__links-container {
-    display: flex;
-    align-items: center;
-  }
-
-  .project__link-view-code,
-  .project__link-learn-more {
-    flex: 1;
-    text-align: center;
-    color: var(--lightred);
-    font-weight: bold;
-    padding: 1rem;
-    border-top: 1px var(--mediumgrey) solid;
-    transition: all 0.3s ease;
-  }
-
-  .project__link-view-code {
-    border-right: 1px var(--mediumgrey) solid;
-    border-radius: 0 0 0 5px;
-  }
-
-  .project__link-learn-more {
-    border-radius: 0 0 5px 0;
-  }
-
-  @media (hover: hover) {
-
-    &:hover {
-      box-shadow: 2px 10px 20px rgba(255, 237, 170, 0.25);
-    }
-
-    .project__title:hover,
-    .project__link-view-code:hover,
-    .project__link-learn-more:hover {
-      color: var(--oatmeal);
-      background: var(--lightred);
-    }
+    margin: 0;
   }
 `
 
