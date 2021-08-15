@@ -71,9 +71,6 @@ const Contact = ({ location }) => {
       <SEO title="Contact" />
 
       <ContactWrapper className="contact">
-        <p className="contact__intro">
-          Interested in working together? I'd love to hear from you.{" "}
-        </p>
         <ul className="contact__list">
           <animated.li className="contact__item" style={emailAnimationProps}>
             <a className="contact__link" href="mailto:neil@neilberg.dev">
@@ -134,11 +131,6 @@ const ContactWrapper = styled(animated.div)`
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-
-  .contact__intro {
-    font-size: 1.2em;
-    margin-top: 1rem;
-  }
 
   .contact__list {
     list-style-type: none;
