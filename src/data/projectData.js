@@ -13,6 +13,7 @@ export const data = [
   },
   {
     title: "Chef",
+    description: "Go, Postgres, and React/TypeScript app for managing your recipes",
     date: "2021-03-03",
     tools: [
       "Go",
@@ -28,6 +29,7 @@ export const data = [
   },
   {
     title: "Bull",
+    description: "Node, Mongo, and React/TypeScript app to track stocks and financial news",
     date: "2020-11-03",
     tools: [
       "Finnhub API",
@@ -44,6 +46,7 @@ export const data = [
   },
   {
     title: "Cork",
+    description: "Share and discover natural wines with this Node, Mongo, and React app",
     date: "2019-10-21",
     tools: [
       "Nodejs",
@@ -64,6 +67,7 @@ export const data = [
   },
   {
     title: "Erica Mahinay",
+    description: "React (Gatsby) artist portfolio using Contentful as the CMS",
     date: "2019-09-22",
     tools: [
       "React",
@@ -80,6 +84,7 @@ export const data = [
   },
   {
     title: "Emanuel Röhss",
+    description: "Artist portfolio built in React (Gatsby) and Airtable",
     date: "2019-07-27",
     tools: [
       "React",
@@ -96,6 +101,7 @@ export const data = [
   },
   {
     title: "Chow Now",
+    description: "React-based restaurant finder using the Yelp API",
     date: "2019-06-19",
     tools: [
       "React",
@@ -113,6 +119,7 @@ export const data = [
   },
   {
     title: "Movie Mania",
+    description: "React/Redux app to search for movies using the Movie DB API",
     date: "2019-05-03",
     tools: [
       "React",
@@ -128,6 +135,7 @@ export const data = [
   },
   {
     title: "News Flash",
+    description: "React and Firebase app to search and save New York Times articles",
     date: "2019-04-19",
     tools: [
       "React",
@@ -143,6 +151,7 @@ export const data = [
   },
   {
     title: "Meredith Lackey",
+    description: "Artist portfolio written in React",
     date: "2019-02-07",
     tools: ["React", "Styled components", "React-router", "Netlify"],
     path: "https://mlackey-demo.netlify.com/",
