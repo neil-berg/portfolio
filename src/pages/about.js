@@ -11,7 +11,7 @@ import { skills } from '../data/skills';
 const About = ({ location }) => {
   const data = useStaticQuery(graphql`
     query {
-      file(relativePath: { eq: "images/profile-avatar.jpg" }) {
+      file(relativePath: { eq: "images/profile-headshot.jpg" }) {
         childImageSharp {
           fixed(width: 249) {
             ...GatsbyImageSharpFixed
@@ -47,11 +47,11 @@ const About = ({ location }) => {
           <div className="bio__text-container">
             <h2 className="bio__header">Bio</h2>
             <p className="bio__text">
-              I'm an LA-based full-stack developer. Building on a career in
+              I'm a full-stack software engineer based in Los Angeles. Building on a career in
               climate science where I specialized in geospatial data analytics
               and visualizations, I decided to blend my love of coding and
               communication with my interests in design and style, and dive into
-              web development. Creating spaces in our digital world that are
+              web app development. Creating spaces in our digital world that are
               fast, engaging, and reliable has become a passion ever
               since. Practicing yoga, playing guitar, and cooking balance out my
               computer time.
@@ -78,7 +78,7 @@ const About = ({ location }) => {
         </section>
 
         <section className="comm-skills">
-          <h2 className="comm-skills__header">Misc</h2>
+          <h2 className="comm-skills__header">Communication</h2>
           <p className="comm-skills__text">
             I have spoken and written about complex technical and quantitative topics to a
             range of audiences, from{" "}
